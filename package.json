@@ -1,0 +1,26 @@
+{
+  "name": "ohmni-bid",
+  "version": "1.0.0",
+  "description": "Electrical estimating engine - AI-powered bid generation",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/index.ts",
+    "test": "jest",
+    "lint": "eslint src/**/*.ts"
+  },
+  "keywords": [
+    "electrical",
+    "estimating",
+    "construction",
+    "bidding",
+    "ai"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}
