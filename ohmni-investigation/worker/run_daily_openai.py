@@ -90,7 +90,7 @@ def load_config() -> Dict[str, Any]:
     """Load configuration from environment and sources.yaml."""
     config = {
         "openai_api_key": os.getenv("OPENAI_API_KEY"),
-        "model": os.getenv("OHMNI_OPENAI_MODEL", "gpt-5.2"),
+        "model": os.getenv("OHMNI_OPENAI_MODEL", "gpt-4o"),
         "reasoning_effort": os.getenv("OHMNI_OPENAI_REASONING_EFFORT", "high"),
         "max_sources": int(os.getenv("OHMNI_MAX_SOURCES", "20")),
         "two_stage": os.getenv("OHMNI_TWO_STAGE", "false").lower() == "true",
