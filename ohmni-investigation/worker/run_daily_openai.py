@@ -171,8 +171,8 @@ def call_openai_api(
     config: Dict[str, Any],
     prompts: Dict[str, str]
 ) -> DailyOutput:
-    """Call OpenAI Responses API with structured output."""
-    
+    """Call OpenAI API with structured output."""
+
     # Format run prompt
     run_prompt = prompts["run_template"].format(
         run_date=config["run_date"],
@@ -180,24 +180,52 @@ def call_openai_api(
         watchlist="\n".join([f"- {w['name']}" for w in config["watchlist"]]),
         max_sources=config["max_sources"]
     )
-    
+
+    # Add JSON schema instruction to the prompt
+    json_instruction = """
+
+## CRITICAL: Output Format
+
+You MUST return your response as a valid JSON object with this exact structure:
+{
+  "run_date": "YYYY-MM-DD",
+  "evidence": [...],
+  "entities": [...],
+  "leads": [...],
+  "casebook_markdown": "..."
+}
+
+Each evidence item must have: evidence_id (placeholder), source_url, title, excerpt, summary, relevance_tags, confidence, retrieved_at, published_date, content_hash, archive_path, created_at, updated_at
+
+Each entity must have: entity_id (placeholder), primary_name, aliases, entity_type, jurisdiction, roles, relationships, confidence, created_at, updated_at
+
+Each lead must have: lead_id (placeholder), title, signal_category, summary, evidence_ids, entity_ids, innocent_explanations, next_tests, confidence, status, start_date, end_date, created_at, updated_at
+
+Use placeholder IDs like "ev_placeholder_1", "en_placeholder_1", "ld_placeholder_1" - they will be replaced with deterministic IDs.
+"""
+
     # Build messages
     messages = [
-        {"role": "system", "content": prompts["system"]},
+        {"role": "system", "content": prompts["system"] + json_instruction},
         {"role": "user", "content": run_prompt}
     ]
-    
-    # Call API with structured output
-    completion = client.beta.chat.completions.parse(
+
+    # Call API with JSON mode
+    completion = client.chat.completions.create(
         model=config["model"],
         messages=messages,
-        response_format=DailyOutput,
-        tools=[{"type": "web_search"}]
+        response_format={"type": "json_object"},
+        temperature=0.7,
+        max_tokens=16000
     )
-    
-    # Extract parsed output
-    output = completion.choices[0].message.parsed
-    
+
+    # Parse response
+    response_text = completion.choices[0].message.content
+    response_data = json.loads(response_text)
+
+    # Validate and create DailyOutput
+    output = DailyOutput(**response_data)
+
     return output
 
 
