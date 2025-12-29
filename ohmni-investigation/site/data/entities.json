@@ -1,2 +1,139 @@
-[]
-
+[
+  {
+    "entity_id": "en_1a2b3c4d5e6f7a8b",
+    "primary_name": "U.S. Department of Labor",
+    "aliases": ["DOL", "Department of Labor", "Labor Department"],
+    "entity_type": "government_agency",
+    "jurisdiction": "Federal",
+    "roles": ["funding_source", "oversight", "apprenticeship_registration"],
+    "relationships": [
+      {
+        "entity_id": "en_2b3c4d5e6f7a8b9c",
+        "relationship_type": "funds",
+        "evidence_ids": ["ev_8a3f2c1d9e4b7a6f"]
+      }
+    ],
+    "confidence": 0.95,
+    "created_at": "2025-12-29T06:00:00Z",
+    "updated_at": "2025-12-29T06:00:00Z"
+  },
+  {
+    "entity_id": "en_2b3c4d5e6f7a8b9c",
+    "primary_name": "Electrical Training Alliance",
+    "aliases": ["ETA", "IBEW-NECA Training", "NJATC"],
+    "entity_type": "training_provider",
+    "jurisdiction": "National",
+    "roles": ["training_provider", "apprenticeship_program"],
+    "relationships": [
+      {
+        "entity_id": "en_3c4d5e6f7a8b9c0d",
+        "relationship_type": "operated_by",
+        "evidence_ids": ["ev_4e7f8a9b0c1d2e3f"]
+      },
+      {
+        "entity_id": "en_4d5e6f7a8b9c0d1e",
+        "relationship_type": "operated_by",
+        "evidence_ids": ["ev_4e7f8a9b0c1d2e3f"]
+      }
+    ],
+    "confidence": 0.92,
+    "created_at": "2025-12-29T06:00:00Z",
+    "updated_at": "2025-12-29T06:00:00Z"
+  },
+  {
+    "entity_id": "en_3c4d5e6f7a8b9c0d",
+    "primary_name": "International Brotherhood of Electrical Workers",
+    "aliases": ["IBEW", "IBEW International"],
+    "entity_type": "union",
+    "jurisdiction": "National",
+    "roles": ["labor_union", "training_sponsor"],
+    "relationships": [],
+    "confidence": 0.95,
+    "created_at": "2025-12-29T06:00:00Z",
+    "updated_at": "2025-12-29T06:00:00Z"
+  },
+  {
+    "entity_id": "en_4d5e6f7a8b9c0d1e",
+    "primary_name": "National Electrical Contractors Association",
+    "aliases": ["NECA"],
+    "entity_type": "organization",
+    "jurisdiction": "National",
+    "roles": ["contractor_association", "training_sponsor"],
+    "relationships": [],
+    "confidence": 0.93,
+    "created_at": "2025-12-29T06:00:00Z",
+    "updated_at": "2025-12-29T06:00:00Z"
+  },
+  {
+    "entity_id": "en_5e6f7a8b9c0d1e2f",
+    "primary_name": "Illinois Department of Commerce and Economic Opportunity",
+    "aliases": ["DCEO", "Illinois DCEO"],
+    "entity_type": "government_agency",
+    "jurisdiction": "Illinois",
+    "roles": ["funding_source", "state_oversight"],
+    "relationships": [],
+    "confidence": 0.94,
+    "created_at": "2025-12-29T06:00:00Z",
+    "updated_at": "2025-12-29T06:00:00Z"
+  },
+  {
+    "entity_id": "en_6f7a8b9c0d1e2f3a",
+    "primary_name": "Google",
+    "aliases": ["Google LLC", "Alphabet"],
+    "entity_type": "organization",
+    "jurisdiction": "National",
+    "roles": ["tech_company", "funding_source", "data_center_operator"],
+    "relationships": [],
+    "confidence": 0.90,
+    "created_at": "2025-12-29T06:00:00Z",
+    "updated_at": "2025-12-29T06:00:00Z"
+  },
+  {
+    "entity_id": "en_7a8b9c0d1e2f3a4b",
+    "primary_name": "U.S. Department of Energy",
+    "aliases": ["DOE", "Department of Energy"],
+    "entity_type": "government_agency",
+    "jurisdiction": "Federal",
+    "roles": ["funding_source", "clean_energy_oversight"],
+    "relationships": [],
+    "confidence": 0.94,
+    "created_at": "2025-12-29T06:00:00Z",
+    "updated_at": "2025-12-29T06:00:00Z"
+  },
+  {
+    "entity_id": "en_8b9c0d1e2f3a4b5c",
+    "primary_name": "IBEW Local 701",
+    "aliases": ["Local 701", "DuPage County IBEW"],
+    "entity_type": "union",
+    "jurisdiction": "Illinois",
+    "roles": ["labor_union", "training_provider"],
+    "relationships": [
+      {
+        "entity_id": "en_3c4d5e6f7a8b9c0d",
+        "relationship_type": "affiliate_of",
+        "evidence_ids": []
+      }
+    ],
+    "confidence": 0.88,
+    "created_at": "2025-12-29T06:00:00Z",
+    "updated_at": "2025-12-29T06:00:00Z"
+  },
+  {
+    "entity_id": "en_9c0d1e2f3a4b5c6d",
+    "primary_name": "IBEW Local 134",
+    "aliases": ["Local 134", "Chicago IBEW"],
+    "entity_type": "union",
+    "jurisdiction": "Illinois",
+    "roles": ["labor_union", "training_provider"],
+    "relationships": [
+      {
+        "entity_id": "en_3c4d5e6f7a8b9c0d",
+        "relationship_type": "affiliate_of",
+        "evidence_ids": []
+      }
+    ],
+    "confidence": 0.88,
+    "created_at": "2025-12-29T06:00:00Z",
+    "updated_at": "2025-12-29T06:00:00Z"
+  }
+]

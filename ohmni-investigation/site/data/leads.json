@@ -1,2 +1,74 @@
-[]
-
+[
+  {
+    "lead_id": "ld_1a2b3c4d5e6f7a8b",
+    "title": "Tech Company Funding Concentration in Midwest Data Center Corridor",
+    "signal_category": "funding_opacity",
+    "summary": "Multiple tech companies (Google, Microsoft, Amazon) are investing in electrician training programs in IL, IA, OH but the specific training providers and fund distribution are not publicly documented. Need to track where this money actually flows.",
+    "evidence_ids": ["ev_6c5f4e3d7a8b2c9d", "ev_3f8a9b0c1d2e4f5a"],
+    "entity_ids": ["en_6f7a8b9c0d1e2f3a"],
+    "innocent_explanations": [
+      "Tech companies may be working through established JATC programs which have their own reporting",
+      "Funding details may be disclosed in corporate sustainability reports not yet indexed",
+      "Partnerships may still be in negotiation phase with details to be announced"
+    ],
+    "next_tests": [
+      "Request details from Google's workforce development program",
+      "Check if IL community colleges have announced new electrical programs with tech funding",
+      "Monitor IBEW local announcements for new training partnerships"
+    ],
+    "confidence": 0.65,
+    "status": "under_review",
+    "start_date": "2024-10-01",
+    "end_date": null,
+    "created_at": "2025-12-29T06:00:00Z",
+    "updated_at": "2025-12-29T06:00:00Z"
+  },
+  {
+    "lead_id": "ld_2b3c4d5e6f7a8b9c",
+    "title": "Gap Between Federal Funding Announcements and Training Outcomes",
+    "signal_category": "outcome_disconnect",
+    "summary": "DOL and DOE have announced $145M+ in electrical training funding, but industry reports still cite critical electrician shortages. Need to track whether announced funding is translating to actual trained workers.",
+    "evidence_ids": ["ev_8a3f2c1d9e4b7a6f", "ev_7b4e3d2c8f5a9b1e", "ev_3f8a9b0c1d2e4f5a"],
+    "entity_ids": ["en_1a2b3c4d5e6f7a8b", "en_7a8b9c0d1e2f3a4b"],
+    "innocent_explanations": [
+      "Apprenticeship programs take 4-5 years to produce journeymen, so recent funding hasn't had time to show results",
+      "Shortage may be due to retirement wave that exceeds current training capacity regardless of funding",
+      "Data center demand growth may be outpacing any realistic training expansion"
+    ],
+    "next_tests": [
+      "Compare DOL registered apprenticeship completion rates 2020 vs 2024",
+      "Request program-level data from major grant recipients",
+      "Track IBEW membership growth in data center corridor states"
+    ],
+    "confidence": 0.58,
+    "status": "needs_data",
+    "start_date": "2024-01-01",
+    "end_date": null,
+    "created_at": "2025-12-29T06:00:00Z",
+    "updated_at": "2025-12-29T06:00:00Z"
+  },
+  {
+    "lead_id": "ld_3c4d5e6f7a8b9c0d",
+    "title": "Illinois DCEO Grant Recipients Not Fully Disclosed",
+    "signal_category": "funding_opacity",
+    "summary": "Illinois DCEO announced $3.1M in electrical training grants but full recipient list and award amounts not published. Standard practice would include disclosure of all awardees.",
+    "evidence_ids": ["ev_5d6e7f8a9b0c1d2e"],
+    "entity_ids": ["en_5e6f7a8b9c0d1e2f"],
+    "innocent_explanations": [
+      "Full disclosure may be published separately from press release",
+      "Some grants may still be pending final execution",
+      "FOIA request may be needed but information is available upon request"
+    ],
+    "next_tests": [
+      "Submit FOIA request to DCEO for complete grant recipient list",
+      "Check DCEO grants database for electrical/construction training awards",
+      "Contact DCEO press office for additional details"
+    ],
+    "confidence": 0.52,
+    "status": "needs_data",
+    "start_date": "2024-09-15",
+    "end_date": null,
+    "created_at": "2025-12-29T06:00:00Z",
+    "updated_at": "2025-12-29T06:00:00Z"
+  }
+]
