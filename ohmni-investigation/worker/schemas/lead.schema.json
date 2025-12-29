@@ -1,0 +1,108 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Lead",
+  "type": "object",
+  "required": [
+    "lead_id",
+    "title",
+    "signal_category",
+    "summary",
+    "evidence_ids",
+    "innocent_explanations",
+    "next_tests",
+    "confidence",
+    "status",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "lead_id": {
+      "type": "string",
+      "pattern": "^ld_[a-f0-9]{16}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "signal_category": {
+      "type": "string",
+      "enum": [
+        "vendor_concentration",
+        "related_party_risk",
+        "threshold_splitting",
+        "vague_spend_inflation",
+        "pass_through_pattern",
+        "timeline_anomaly",
+        "reporting_mismatch",
+        "unknown"
+      ]
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^ev_[a-f0-9]{16}$"
+      },
+      "minItems": 1
+    },
+    "entity_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^en_[a-f0-9]{16}$"
+      },
+      "default": []
+    },
+    "innocent_explanations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "next_tests": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "needs_data",
+        "under_review",
+        "escalate_for_review",
+        "resolved",
+        "closed"
+      ]
+    },
+    "start_date": {
+      "type": ["string", "null"],
+      "format": "date"
+    },
+    "end_date": {
+      "type": ["string", "null"],
+      "format": "date"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false
+}
+

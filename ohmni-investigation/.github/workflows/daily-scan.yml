@@ -1,0 +1,65 @@
+name: Daily Investigation Scan
+
+on:
+  schedule:
+    # Run daily at 6 AM UTC (1 AM EST / 10 PM PST)
+    - cron: '0 6 * * *'
+  workflow_dispatch:  # Allow manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          cd worker
+          pip install -r requirements-openai.txt
+      
+      - name: Run daily scan
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OHMNI_OPENAI_MODEL: ${{ vars.OHMNI_OPENAI_MODEL || 'gpt-5.2' }}
+          OHMNI_OPENAI_REASONING_EFFORT: ${{ vars.OHMNI_OPENAI_REASONING_EFFORT || 'high' }}
+          OHMNI_MAX_SOURCES: ${{ vars.OHMNI_MAX_SOURCES || '20' }}
+          OHMNI_TWO_STAGE: ${{ vars.OHMNI_TWO_STAGE || 'false' }}
+        run: |
+          cd worker
+          python run_daily_openai.py
+      
+      - name: Validate artifacts
+        run: |
+          cd worker
+          python validate_artifacts.py
+      
+      - name: Lint public text
+        run: |
+          cd worker
+          python lint_public_text.py
+      
+      - name: Commit artifacts
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add site/data/*.json
+          git add site/casebook/*.json
+          git add site/casebook/*.md
+          git add data/runs/*.json
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Daily scan: $(date -u +%Y-%m-%d)"
+            git push
+          fi
+
