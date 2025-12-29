@@ -1,21 +1,130 @@
+# Ohmni Investigation - Discovery Configuration
+#
+# Mission: Track ALL money flowing into electrical workforce training
+# Context: Electrician shortage crisis + data center buildout + infrastructure needs
+#
+# Last updated: 2025-12-29
+
 queries:
-  - "electrical workforce training funding Illinois 2025"
-  - "IBEW apprenticeship program grants Illinois"
-  - "electrical training vendor contracts Chicago"
-  - "workforce development electrical trade funding"
-  - "electrical apprenticeship funding misuse investigation"
-  - "Department of Labor electrical training grants"
-  - "Illinois electrical training program oversight"
+  # === FEDERAL FUNDING ===
+  - "Department of Labor electrical apprenticeship grants 2025"
+  - "DOL registered apprenticeship funding electrical"
+  - "Department of Energy workforce development electrical"
+  - "Infrastructure Investment Jobs Act electrical training funding"
+  - "CHIPS Act workforce training electricians"
+  - "Inflation Reduction Act electrical workforce grants"
+  - "federal apprenticeship grants electrical 2025"
+
+  # === STATE FUNDING (Focus: Illinois, but national scope) ===
+  - "Illinois electrical workforce training funding"
+  - "DCEO workforce development grants electrical"
+  - "state apprenticeship grants electrical training 2025"
+  - "California electrical training grants"
+  - "Texas electrical workforce development funding"
+  - "workforce development board electrical training grants"
+
+  # === TECH COMPANY FUNDING (Data Center Buildout) ===
+  - "Google electrician training grants data center"
+  - "Microsoft data center workforce training electrical"
+  - "Amazon AWS electrical training program funding"
+  - "Meta electrical workforce development grants"
+  - "OpenAI infrastructure workforce training"
+  - "tech company electrical apprenticeship funding"
+  - "data center electrician training grants"
+
+  # === UTILITY & ENERGY COMPANY FUNDING ===
+  - "utility company electrical training grants"
+  - "ComEd workforce development electrical"
+  - "renewable energy electrician training funding"
+  - "EV infrastructure electrician training grants"
+
+  # === UNION & JATC PROGRAMS ===
+  - "IBEW apprenticeship program funding 2025"
+  - "IBEW NECA training trust fund"
+  - "JATC electrical training grants"
+  - "electrical union apprenticeship funding"
+  - "NJATC electrical training"
+
+  # === CRISIS & SHORTAGE COVERAGE ===
+  - "electrician shortage data centers"
+  - "electrical worker shortage crisis 2025"
+  - "skilled trades shortage electrical"
+  - "apprenticeship pipeline electrical crisis"
+  - "construction workforce shortage electricians"
+
+  # === TRAINING PROVIDERS & VENDORS ===
+  - "electrical training provider contracts"
+  - "vocational electrical training grants"
+  - "community college electrical program funding"
+  - "electrical training vendor awards"
+
+  # === INVESTIGATIONS & OVERSIGHT ===
+  - "apprenticeship program audit electrical"
+  - "workforce training fraud investigation electrical"
+  - "DOL OIG apprenticeship"
+  - "inspector general workforce training"
 
 watchlist:
+  # === FEDERAL AGENCIES ===
+  - name: "U.S. Department of Labor Employment and Training Administration"
+    url: "https://www.dol.gov/agencies/eta"
+  - name: "Department of Energy Office of Clean Energy"
+    url: "https://www.energy.gov"
+  - name: "DOL Office of Apprenticeship"
+    url: "https://www.apprenticeship.gov"
+
+  # === ILLINOIS STATE AGENCIES ===
   - name: "Illinois Department of Commerce and Economic Opportunity"
     url: "https://dceo.illinois.gov"
-  - name: "U.S. Department of Labor Employment and Training Administration"
-    url: "https://www.dol.gov/eta"
-  - name: "IBEW Local 134"
-    url: "https://www.ibew134.org"
-  - name: "Chicago Electrical Joint Apprenticeship and Training Committee"
-    url: ""
-  - name: "National Electrical Contractors Association Illinois"
+  - name: "Illinois Workforce Innovation Board"
     url: ""
 
+  # === IBEW LOCALS (Expanded) ===
+  - name: "IBEW Local 701"
+    url: "https://www.ibew701.org"
+  - name: "IBEW Local 134"
+    url: "https://www.ibew134.org"
+  - name: "IBEW Local 9"
+    url: ""
+  - name: "IBEW Local 364"
+    url: ""
+  - name: "IBEW International"
+    url: "https://www.ibew.org"
+
+  # === JATC & TRAINING ORGANIZATIONS ===
+  - name: "Chicago Electrical Joint Apprenticeship and Training Committee"
+    url: ""
+  - name: "Electrical Training Alliance"
+    url: "https://www.electricaltrainingalliance.org"
+  - name: "NJATC"
+    url: ""
+
+  # === CONTRACTOR ASSOCIATIONS ===
+  - name: "National Electrical Contractors Association"
+    url: "https://www.necanet.org"
+  - name: "NECA Illinois Chapter"
+    url: ""
+  - name: "Independent Electrical Contractors"
+    url: "https://www.ieci.org"
+
+  # === TECH COMPANIES (Data Center Builders) ===
+  - name: "Google Data Center Workforce"
+    url: ""
+  - name: "Microsoft Datacenter Academy"
+    url: ""
+  - name: "Amazon Web Services Training"
+    url: ""
+  - name: "Meta Data Centers"
+    url: ""
+
+  # === UTILITIES ===
+  - name: "Commonwealth Edison"
+    url: "https://www.comed.com"
+  - name: "Ameren Illinois"
+    url: ""
+
+  # === OVERSIGHT BODIES ===
+  - name: "DOL Office of Inspector General"
+    url: "https://www.oig.dol.gov"
+  - name: "Government Accountability Office"
+    url: "https://www.gao.gov"

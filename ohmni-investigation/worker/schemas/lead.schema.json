@@ -34,6 +34,9 @@
         "pass_through_pattern",
         "timeline_anomaly",
         "reporting_mismatch",
+        "outcome_disconnect",
+        "geographic_mismatch",
+        "funding_opacity",
         "unknown"
       ]
     },
