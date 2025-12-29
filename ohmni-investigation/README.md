@@ -2,8 +2,8 @@
 
 **Evidence-driven watchdog for electrical workforce training funding streams**
 
-[![Daily Scan](https://github.com/[owner]/ohmni-investigation/actions/workflows/daily-scan.yml/badge.svg)](https://github.com/[owner]/ohmni-investigation/actions/workflows/daily-scan.yml)
-[![GitHub Pages](https://github.com/[owner]/ohmni-investigation/actions/workflows/pages.yml/badge.svg)](https://github.com/[owner]/ohmni-investigation/actions/workflows/pages.yml)
+[![Daily Scan](https://github.com/BTCElectrician/ohmni-bid/actions/workflows/daily-scan.yml/badge.svg)](https://github.com/BTCElectrician/ohmni-bid/actions/workflows/daily-scan.yml)
+[![GitHub Pages](https://github.com/BTCElectrician/ohmni-bid/actions/workflows/pages.yml/badge.svg)](https://github.com/BTCElectrician/ohmni-bid/actions/workflows/pages.yml)
 
 ---
 
@@ -22,7 +22,7 @@ An automated system that:
 
 ## Live Site
 
-🔗 **[View the Investigation Dashboard](https://[owner].github.io/ohmni-investigation/)**
+🔗 **[View the Investigation Dashboard](https://btcelectrician.github.io/ohmni-bid/ohmni-investigation/site/)**
 
 ---
 
@@ -37,8 +37,8 @@ An automated system that:
 
 1. **Clone the repository:**
 ```bash
-git clone https://github.com/[owner]/ohmni-investigation.git
-cd ohmni-investigation
+git clone https://github.com/BTCElectrician/ohmni-bid.git
+cd ohmni-bid/ohmni-investigation
 ```
 
 2. **Install dependencies:**
@@ -264,6 +264,287 @@ Edit `worker/sources.yaml` to customize:
 
 ---
 
+## 🔧 Customization Guide
+
+This system is designed to be extended and enhanced. Here's how to turn it into an absolute alien freak of nature investigator.
+
+### Extensibility Points
+
+| What To Modify | File | Impact |
+|----------------|------|--------|
+| Search queries | `worker/sources.yaml` | What topics to investigate |
+| Watchlist entities | `worker/sources.yaml` | Which orgs to monitor |
+| System behavior | `worker/prompts/system_investigator.md` | Core personality & rules |
+| Daily instructions | `worker/prompts/run_daily.md` | Task execution logic |
+| Signal categories | `worker/schemas/lead.schema.json` | Types of patterns to detect |
+| Banned terms | `worker/lint_public_text.py` | Defamation firewall |
+| Data structure | `worker/schemas/*.json` | What data gets captured |
+| ID generation | `worker/utils/ids.py` | How duplicates are detected |
+| Source quality | `worker/run_daily_openai.py` | Filtering logic |
+
+---
+
+### 1. Customize Discovery Queries
+
+Edit `worker/sources.yaml` to change what the system searches for:
+
+```yaml
+queries:
+  # Add your investigation topics
+  - "electrical workforce training funding Illinois 2025"
+  - "IBEW apprenticeship program grants"
+  - "YOUR CUSTOM QUERY HERE"
+  - "specific vendor name + contracts"
+  - "specific program name + funding"
+  
+  # Pro tips:
+  # - Be specific: "Chicago electrical training contract 2024" > "training"
+  # - Include dates: helps find recent info
+  # - Use entity names: "DCEO electrical workforce" 
+  # - Combine terms: "vendor + contract + apprenticeship"
+```
+
+---
+
+### 2. Customize Watchlist
+
+Add organizations, agencies, or people to monitor:
+
+```yaml
+watchlist:
+  - name: "Illinois Department of Commerce"
+    url: "https://dceo.illinois.gov"
+  
+  - name: "Some Vendor You're Tracking"
+    url: ""  # Optional - leave empty if unknown
+  
+  - name: "Specific Official Name"
+    url: ""
+```
+
+The system will search for news/filings mentioning these entities.
+
+---
+
+### 3. Customize the System Prompt (Core Brain)
+
+Edit `worker/prompts/system_investigator.md` to change the AI's personality and approach:
+
+```markdown
+## What You Can Modify:
+
+### Investigation Focus
+- Add domain-specific knowledge
+- Define what "suspicious" means for your context
+- Add industry-specific red flags
+
+### Signal Detection
+- Add new pattern types to look for
+- Define thresholds (e.g., "concentration > 60% = flag")
+- Add cross-reference requirements
+
+### Output Style
+- Adjust confidence calibration
+- Change summary depth
+- Add specific fields to extract
+
+### Domain Knowledge
+- Add context about how the industry works
+- Define normal vs. abnormal patterns
+- Include relevant regulations/thresholds
+```
+
+**Example Enhancement:**
+```markdown
+## Additional Red Flags for Electrical Training
+
+- Single vendor receiving >50% of annual training contracts
+- Contracts awarded within 30 days of RFP (unusually fast)
+- Training programs with <70% completion rates receiving increased funding
+- Vendor addresses matching official's business interests
+- Pass-through entities with no training facilities
+```
+
+---
+
+### 4. Customize the Daily Run Prompt
+
+Edit `worker/prompts/run_daily.md` to change task execution:
+
+```markdown
+## What You Can Add:
+
+### Enhanced Search Strategy
+- Multi-hop searches (find X, then search for X's connections)
+- Temporal analysis (compare this year vs. last year)
+- Cross-reference requirements
+
+### Extraction Depth
+- Specific fields to always extract (dollar amounts, dates, names)
+- Relationship mapping requirements
+- Document type prioritization
+
+### Analysis Instructions
+- Comparative analysis (benchmark against other jurisdictions)
+- Trend detection over time
+- Network analysis of entity relationships
+```
+
+---
+
+### 5. Add New Signal Categories
+
+Edit `worker/schemas/lead.schema.json` to add detection patterns:
+
+```json
+{
+  "signal_category": {
+    "type": "string",
+    "enum": [
+      "vendor_concentration",
+      "related_party_risk",
+      "threshold_splitting",
+      "vague_spend_inflation",
+      "pass_through_pattern",
+      "timeline_anomaly",
+      "reporting_mismatch",
+      "geographic_mismatch",      // NEW: Vendor far from service area
+      "credential_gap",           // NEW: Provider lacks certifications
+      "outcome_disconnect",       // NEW: High spend, poor results
+      "bid_pattern_anomaly",      // NEW: Same bidders, rotating wins
+      "unknown"
+    ]
+  }
+}
+```
+
+Then update `worker/prompts/system_investigator.md` to define what each new category means.
+
+---
+
+### 6. Add Banned Terms (Defamation Firewall)
+
+Edit `worker/lint_public_text.py` to expand the safety net:
+
+```python
+BANNED_TERMS = [
+    r'\bfraud\b',
+    r'\bkickback\b',
+    r'\billegal\b',
+    r'\bcorrupt\b',
+    # Add more as needed:
+    r'\bcriminal\b',
+    r'\bconspir\w*\b',
+    r'\bracketeering\b',
+]
+```
+
+---
+
+### 7. Extend Data Schemas
+
+Add new fields to capture more information. Edit `worker/schemas/*.json`:
+
+**Example: Add `dollar_amount` to Evidence:**
+```json
+{
+  "dollar_amount": {
+    "type": ["number", "null"],
+    "description": "Dollar amount mentioned in source, if any"
+  }
+}
+```
+
+Then update the Pydantic models in `worker/run_daily_openai.py` to match.
+
+---
+
+### 8. Tune Model Behavior
+
+Adjust via environment variables or GitHub repo variables:
+
+```bash
+# Use the most powerful model
+OHMNI_OPENAI_MODEL=gpt-5.2-pro
+
+# Maximum reasoning depth
+OHMNI_OPENAI_REASONING_EFFORT=high
+
+# More sources per run
+OHMNI_MAX_SOURCES=50
+
+# Two-stage pipeline (fast scan + deep analysis)
+OHMNI_TWO_STAGE=true
+```
+
+---
+
+### 9. Advanced: Multi-Stage Pipeline
+
+The system supports a two-stage approach:
+
+**Stage 1 (Fast Scan):** `gpt-5-mini` quickly reviews many sources  
+**Stage 2 (Deep Analysis):** `gpt-5.2` or `gpt-5.2-pro` deeply analyzes top candidates
+
+Enable with `OHMNI_TWO_STAGE=true`
+
+---
+
+### 10. Future Enhancement Ideas
+
+Ideas for turning this into an absolute beast:
+
+```
+□ Document ingestion - Upload PDFs/docs for analysis
+□ FOIA tracking - Monitor FOIA request responses  
+□ Court record scraping - Track litigation involving entities
+□ Entity network mapping - Visualize relationships (NetworkX)
+□ Historical comparison - Trend analysis over years
+□ Cross-jurisdiction - Compare IL to other states
+□ Automated FOIA drafting - Generate requests based on leads
+□ Slack/Discord alerts - Notify on high-confidence leads
+□ Embedding search - Semantic search across evidence
+□ Knowledge graph - Neo4j for entity relationships
+□ Anomaly scoring - ML-based pattern detection
+```
+
+---
+
+### Pro Tips for Prompt Engineering
+
+When enhancing prompts with ChatGPT 5 Pro:
+
+1. **Be specific about domain** - Include electrical trade context, union structures, funding mechanisms
+2. **Define what "normal" looks like** - So the AI knows what's abnormal
+3. **Add calibration examples** - "This is a 0.3 confidence signal, this is 0.8"
+4. **Include red herrings** - Examples of things that LOOK suspicious but aren't
+5. **Add verification steps** - "Before flagging X, check Y"
+6. **Define thresholds** - Specific numbers/percentages that matter
+7. **Include temporal context** - Fiscal years, election cycles, budget deadlines
+
+---
+
+### Testing Your Customizations
+
+After making changes:
+
+```bash
+# Test locally
+cd worker
+python run_daily_openai.py
+
+# Validate output
+python validate_artifacts.py
+
+# Check for banned terms
+python lint_public_text.py
+
+# Review casebook entry
+cat ../site/casebook/$(date +%Y-%m-%d).md
+```
+
+---
+
 ## Development
 
 ### Run Validation
@@ -340,7 +621,7 @@ python worker/run_daily_openai.py
 
 ## Contact
 
-- **Issues:** [GitHub Issues](https://github.com/[owner]/ohmni-investigation/issues)
+- **Issues:** [GitHub Issues](https://github.com/BTCElectrician/ohmni-bid/issues)
 - **Email:** [To be determined]
 
 ---
