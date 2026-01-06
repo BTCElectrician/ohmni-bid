@@ -8,6 +8,7 @@ import os
 import sys
 import smtplib
 from email.message import EmailMessage
+from datetime import datetime
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -28,17 +29,17 @@ def build_message(status: dict, sender: str, recipient: str) -> EmailMessage:
         "",
         f"Summary: {status.get('message')}",
         "",
-        "Key Signals",
-        f"- Excel changed since last sync: {'YES' if status.get('excel_changed') else 'No'}",
+        "Key Signals (What these mean)",
+        f"- Pricing stale (Excel changed since last sync): {'YES' if status.get('excel_changed') else 'No'}",
         (
-            "- Excel updated since last check: "
+            "- PM updated Excel since last check: "
             f"{'YES' if status.get('excel_changed_since_last_check') else 'No'}"
         ),
         "",
         "Timestamps",
-        f"- Checked at: {status.get('checked_at')}",
-        f"- Excel modified: {status.get('excel_modified')}",
-        f"- JSON modified: {status.get('json_modified')}",
+        f"- Checked at: {format_timestamp(status.get('checked_at'))}",
+        f"- Excel modified: {format_timestamp(status.get('excel_modified'))}",
+        f"- JSON modified: {format_timestamp(status.get('json_modified'))}",
         "",
         "History file: data/sync_history.json",
     ]
@@ -55,6 +56,24 @@ def send_email(message: EmailMessage, sender: str, password: str):
     with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
         server.login(sender, password)
         server.send_message(message)
+
+
+def format_timestamp(value: str) -> str:
+    if not value:
+        return "Unknown"
+    try:
+        dt = datetime.fromisoformat(value)
+    except ValueError:
+        return value
+    return dt.strftime("%B {day}, %Y at %I:%M %p").format(day=ordinal(dt.day))
+
+
+def ordinal(n: int) -> str:
+    if 10 <= n % 100 <= 20:
+        suffix = "th"
+    else:
+        suffix = {1: "st", 2: "nd", 3: "rd"}.get(n % 10, "th")
+    return f"{n}{suffix}"
 
 
 def main():

@@ -163,9 +163,12 @@ if __name__ == "__main__":
         print(f"Excel file: {'Found' if result['excel_exists'] else 'MISSING'}")
         print(f"Excel modified: {result['excel_modified']}")
         print(f"JSON modified: {result['json_modified']}")
-        print(f"Excel changed since last sync: {'YES' if result['excel_changed'] else 'No'}")
         print(
-            "Excel updated since last check: "
+            "Pricing stale (Excel changed since last sync): "
+            f"{'YES' if result['excel_changed'] else 'No'}"
+        )
+        print(
+            "PM updated Excel since last check: "
             f"{'YES' if result['excel_changed_since_last_check'] else 'No'}"
         )
         if result.get("previous_excel_modified"):
