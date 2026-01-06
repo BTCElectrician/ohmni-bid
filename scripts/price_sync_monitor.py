@@ -42,7 +42,10 @@ def load_sync_history() -> dict:
         "created_at": datetime.now().isoformat(),
         "checks": [],
         "last_excel_hash": None,
-        "last_sync_at": None
+        "last_sync_at": None,
+        "last_seen_excel_hash": None,
+        "last_seen_excel_modified": None,
+        "last_checked_at": None
     }
 
 
@@ -60,6 +63,8 @@ def check_sync_status():
     excel_hash = get_file_hash(EXCEL_PATH)
     excel_modified = get_file_modified_time(EXCEL_PATH)
     json_modified = get_file_modified_time(PRICING_JSON_PATH)
+    previous_seen_hash = history.get("last_seen_excel_hash")
+    previous_seen_modified = history.get("last_seen_excel_modified")
 
     check_record = {
         "checked_at": datetime.now().isoformat(),
@@ -68,6 +73,10 @@ def check_sync_status():
         "excel_modified": excel_modified,
         "json_modified": json_modified,
         "excel_changed": excel_hash != history.get("last_excel_hash"),
+        "excel_changed_since_last_check": (
+            previous_seen_hash is not None and excel_hash != previous_seen_hash
+        ),
+        "previous_excel_modified": previous_seen_modified,
         "needs_sync": False
     }
 
@@ -79,13 +88,22 @@ def check_sync_status():
         check_record["needs_sync"] = True
         check_record["message"] = "pricing_database.json missing! Run extract_pricing.py."
     else:
-        check_record["message"] = "Pricing is in sync."
+        if previous_seen_hash is None:
+            check_record["message"] = "Pricing is in sync. Tracking started."
+        elif check_record["excel_changed_since_last_check"]:
+            check_record["message"] = "Pricing is in sync. Excel updated since last check."
+        else:
+            check_record["message"] = "Pricing is in sync. No Excel update since last check."
 
     # Add to history
     history["checks"].append(check_record)
 
     # Keep only last 100 checks
     history["checks"] = history["checks"][-100:]
+
+    history["last_seen_excel_hash"] = excel_hash
+    history["last_seen_excel_modified"] = excel_modified
+    history["last_checked_at"] = check_record["checked_at"]
 
     save_sync_history(history)
 
@@ -120,7 +138,7 @@ def show_history():
 
     print("\n--- Recent Checks ---")
     for check in history.get("checks", [])[-10:]:
-        status = "⚠️  NEEDS SYNC" if check.get("needs_sync") else "✓ In sync"
+        status = "NEEDS SYNC" if check.get("needs_sync") else "IN SYNC"
         print(f"{check['checked_at']}: {status}")
 
     print()
@@ -146,5 +164,11 @@ if __name__ == "__main__":
         print(f"Excel modified: {result['excel_modified']}")
         print(f"JSON modified: {result['json_modified']}")
         print(f"Excel changed since last sync: {'YES' if result['excel_changed'] else 'No'}")
+        print(
+            "Excel updated since last check: "
+            f"{'YES' if result['excel_changed_since_last_check'] else 'No'}"
+        )
+        if result.get("previous_excel_modified"):
+            print(f"Previous Excel modified: {result['previous_excel_modified']}")
         print(f"\nStatus: {result['message']}")
         print()
