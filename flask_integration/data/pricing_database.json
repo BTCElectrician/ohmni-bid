@@ -1,0 +1,2174 @@
+{
+  "version": "1.0",
+  "source": "Unit price - Master 11-3-21- JG.xlsx",
+  "extracted_at": "2026-01-06T16:58:00.306153",
+  "parameters": {
+    "laborRate": 98.0,
+    "materialTaxRate": 0.1025,
+    "defaultOverheadProfitRate": 0
+  },
+  "conduit": [
+    {
+      "type": "EMT_SS",
+      "typeName": "EMT Set Screw",
+      "name": "1/2\" EMT SS Unit",
+      "size": "1/2",
+      "materialCostPer100ft": 108.0,
+      "laborHoursPer100ft": 4.67
+    },
+    {
+      "type": "EMT_SS",
+      "typeName": "EMT Set Screw",
+      "name": "3/4\" EMT SS Unit",
+      "size": "3/4",
+      "materialCostPer100ft": 184.15,
+      "laborHoursPer100ft": 4.96
+    },
+    {
+      "type": "EMT_SS",
+      "typeName": "EMT Set Screw",
+      "name": "1\" EMT SS Unit",
+      "size": "1",
+      "materialCostPer100ft": 312.2,
+      "laborHoursPer100ft": 6.938
+    },
+    {
+      "type": "EMT_SS",
+      "typeName": "EMT Set Screw",
+      "name": "1-1/4\" EMT SS Unit",
+      "size": "1-1/4",
+      "materialCostPer100ft": 508.20000000000005,
+      "laborHoursPer100ft": 8.182
+    },
+    {
+      "type": "EMT_SS",
+      "typeName": "EMT Set Screw",
+      "name": "1-1/2\" EMT SS Unit",
+      "size": "1-1/2",
+      "materialCostPer100ft": 621.6,
+      "laborHoursPer100ft": 9.542
+    },
+    {
+      "type": "EMT_SS",
+      "typeName": "EMT Set Screw",
+      "name": "2\" EMT SS Unit",
+      "size": "2",
+      "materialCostPer100ft": 700.65,
+      "laborHoursPer100ft": 11.213
+    },
+    {
+      "type": "EMT_SS",
+      "typeName": "EMT Set Screw",
+      "name": "2-1/2\" EMT SS Unit",
+      "size": "2-1/2",
+      "materialCostPer100ft": 1024.4,
+      "laborHoursPer100ft": 12.1
+    },
+    {
+      "type": "EMT_SS",
+      "typeName": "EMT Set Screw",
+      "name": "3\" EMT SS Unit",
+      "size": "3",
+      "materialCostPer100ft": 1250.0,
+      "laborHoursPer100ft": 13.5
+    },
+    {
+      "type": "EMT_SS",
+      "typeName": "EMT Set Screw",
+      "name": "3-1/2\" EMT SS Unit",
+      "size": "3-1/2",
+      "materialCostPer100ft": 1584.0,
+      "laborHoursPer100ft": 16.355
+    },
+    {
+      "type": "EMT_SS",
+      "typeName": "EMT Set Screw",
+      "name": "4\" EMT SS Unit",
+      "size": "4",
+      "materialCostPer100ft": 1553.65,
+      "laborHoursPer100ft": 18.775
+    },
+    {
+      "type": "EMT_COMP",
+      "typeName": "EMT Compression",
+      "name": "1/2\" EMT COMP Unit",
+      "size": "1/2",
+      "materialCostPer100ft": 115.19999999999999,
+      "laborHoursPer100ft": 4.79
+    },
+    {
+      "type": "EMT_COMP",
+      "typeName": "EMT Compression",
+      "name": "3/4\" EMT COMP Unit",
+      "size": "3/4",
+      "materialCostPer100ft": 196.85000000000002,
+      "laborHoursPer100ft": 5.065
+    },
+    {
+      "type": "EMT_COMP",
+      "typeName": "EMT Compression",
+      "name": "1\" EMT COMP Unit",
+      "size": "1",
+      "materialCostPer100ft": 334.5,
+      "laborHoursPer100ft": 6.905
+    },
+    {
+      "type": "EMT_COMP",
+      "typeName": "EMT Compression",
+      "name": "1-1/4\" EMT COMP Unit",
+      "size": "1-1/4",
+      "materialCostPer100ft": 746.75,
+      "laborHoursPer100ft": 8.282
+    },
+    {
+      "type": "EMT_COMP",
+      "typeName": "EMT Compression",
+      "name": "1-1/2\" EMT COMP Unit",
+      "size": "1-1/2",
+      "materialCostPer100ft": 621.6,
+      "laborHoursPer100ft": 9.663
+    },
+    {
+      "type": "EMT_COMP",
+      "typeName": "EMT Compression",
+      "name": "2\" EMT COMP Unit",
+      "size": "2",
+      "materialCostPer100ft": 700.65,
+      "laborHoursPer100ft": 11.392
+    },
+    {
+      "type": "EMT_COMP",
+      "typeName": "EMT Compression",
+      "name": "2-1/2\" EMT COMP Unit",
+      "size": "2-1/2",
+      "materialCostPer100ft": 1024.4,
+      "laborHoursPer100ft": 12.23
+    },
+    {
+      "type": "EMT_COMP",
+      "typeName": "EMT Compression",
+      "name": "3\" EMT COMP Unit",
+      "size": "3",
+      "materialCostPer100ft": 1250.0,
+      "laborHoursPer100ft": 13.65
+    },
+    {
+      "type": "EMT_COMP",
+      "typeName": "EMT Compression",
+      "name": "3-1/2\" EMT COMP Unit",
+      "size": "3-1/2",
+      "materialCostPer100ft": 1584.0,
+      "laborHoursPer100ft": 16.535
+    },
+    {
+      "type": "EMT_COMP",
+      "typeName": "EMT Compression",
+      "name": "4\" EMT COMP Unit",
+      "size": "4",
+      "materialCostPer100ft": 1756.3,
+      "laborHoursPer100ft": 18.975
+    },
+    {
+      "type": "HW",
+      "typeName": "Heavy Wall/Rigid",
+      "name": "1/2\" HW Unit",
+      "size": "1/2",
+      "materialCostPer100ft": 507.0,
+      "laborHoursPer100ft": 9.224
+    },
+    {
+      "type": "HW",
+      "typeName": "Heavy Wall/Rigid",
+      "name": "3/4\" HW Unit",
+      "size": "3/4",
+      "materialCostPer100ft": 501.70000000000005,
+      "laborHoursPer100ft": 9.853
+    },
+    {
+      "type": "HW",
+      "typeName": "Heavy Wall/Rigid",
+      "name": "1\" HW Unit",
+      "size": "1",
+      "materialCostPer100ft": 772.8,
+      "laborHoursPer100ft": 10.823
+    },
+    {
+      "type": "HW",
+      "typeName": "Heavy Wall/Rigid",
+      "name": "1-1/4\" HW Unit",
+      "size": "1-1/4",
+      "materialCostPer100ft": 1138.2,
+      "laborHoursPer100ft": 14.625
+    },
+    {
+      "type": "HW",
+      "typeName": "Heavy Wall/Rigid",
+      "name": "1-1/2\" HW Unit",
+      "size": "1-1/2",
+      "materialCostPer100ft": 1279.6,
+      "laborHoursPer100ft": 16.46
+    },
+    {
+      "type": "HW",
+      "typeName": "Heavy Wall/Rigid",
+      "name": "2\" HW Unit",
+      "size": "2",
+      "materialCostPer100ft": 2851.2,
+      "laborHoursPer100ft": 18.948
+    },
+    {
+      "type": "HW",
+      "typeName": "Heavy Wall/Rigid",
+      "name": "2-1/2\" HW Unit",
+      "size": "2-1/2",
+      "materialCostPer100ft": 2745.6,
+      "laborHoursPer100ft": 19.997
+    },
+    {
+      "type": "HW",
+      "typeName": "Heavy Wall/Rigid",
+      "name": "3\" HW Unit",
+      "size": "3",
+      "materialCostPer100ft": 2993.75,
+      "laborHoursPer100ft": 23.898
+    },
+    {
+      "type": "HW",
+      "typeName": "Heavy Wall/Rigid",
+      "name": "3-1/2\" HW Unit",
+      "size": "3-1/2",
+      "materialCostPer100ft": 3766.8,
+      "laborHoursPer100ft": 27.719
+    },
+    {
+      "type": "HW",
+      "typeName": "Heavy Wall/Rigid",
+      "name": "4\" HW Unit",
+      "size": "4",
+      "materialCostPer100ft": 3981.6,
+      "laborHoursPer100ft": 32.883
+    },
+    {
+      "type": "IMC",
+      "typeName": "IMC",
+      "name": "1/2\" IMC Unit",
+      "size": "1/2",
+      "materialCostPer100ft": 304.5,
+      "laborHoursPer100ft": 7.524
+    },
+    {
+      "type": "IMC",
+      "typeName": "IMC",
+      "name": "3/4\" IMC Unit",
+      "size": "3/4",
+      "materialCostPer100ft": 346.55,
+      "laborHoursPer100ft": 8.413
+    },
+    {
+      "type": "IMC",
+      "typeName": "IMC",
+      "name": "1\" IMC Unit",
+      "size": "1",
+      "materialCostPer100ft": 513.8,
+      "laborHoursPer100ft": 9.173
+    },
+    {
+      "type": "IMC",
+      "typeName": "IMC",
+      "name": "1-1/4\" IMC Unit",
+      "size": "1-1/4",
+      "materialCostPer100ft": 721.0,
+      "laborHoursPer100ft": 9.702
+    },
+    {
+      "type": "IMC",
+      "typeName": "IMC",
+      "name": "1-1/2\" IMC Unit",
+      "size": "1-1/2",
+      "materialCostPer100ft": 897.4000000000001,
+      "laborHoursPer100ft": 11.157
+    },
+    {
+      "type": "IMC",
+      "typeName": "IMC",
+      "name": "2\" IMC Unit",
+      "size": "2",
+      "materialCostPer100ft": 1082.7,
+      "laborHoursPer100ft": 13.298
+    },
+    {
+      "type": "IMC",
+      "typeName": "IMC",
+      "name": "2-1/2\" IMC Unit",
+      "size": "2-1/2",
+      "materialCostPer100ft": 2068.3,
+      "laborHoursPer100ft": 14.798
+    },
+    {
+      "type": "IMC",
+      "typeName": "IMC",
+      "name": "3\" IMC Unit",
+      "size": "3",
+      "materialCostPer100ft": 2602.5,
+      "laborHoursPer100ft": 17.748
+    },
+    {
+      "type": "IMC",
+      "typeName": "IMC",
+      "name": "3-1/2\" IMC Unit",
+      "size": "3-1/2",
+      "materialCostPer100ft": 2937.6,
+      "laborHoursPer100ft": 21.418
+    },
+    {
+      "type": "IMC",
+      "typeName": "IMC",
+      "name": "4\" IMC Unit",
+      "size": "4",
+      "materialCostPer100ft": 3301.2,
+      "laborHoursPer100ft": 25.133
+    },
+    {
+      "type": "PVC",
+      "typeName": "PVC Schedule 40",
+      "name": "1/2\" PVC Unit",
+      "size": "1/2",
+      "materialCostPer100ft": 133.5,
+      "laborHoursPer100ft": 4.058
+    },
+    {
+      "type": "PVC",
+      "typeName": "PVC Schedule 40",
+      "name": "3/4\" PVC Unit",
+      "size": "3/4",
+      "materialCostPer100ft": 156.6,
+      "laborHoursPer100ft": 4.635
+    },
+    {
+      "type": "PVC",
+      "typeName": "PVC Schedule 40",
+      "name": "1\" PVC Unit",
+      "size": "1",
+      "materialCostPer100ft": 229.60000000000002,
+      "laborHoursPer100ft": 5.265
+    },
+    {
+      "type": "PVC",
+      "typeName": "PVC Schedule 40",
+      "name": "1-1/4\" PVC Unit",
+      "size": "1-1/4",
+      "materialCostPer100ft": 310.8,
+      "laborHoursPer100ft": 5.17
+    },
+    {
+      "type": "PVC",
+      "typeName": "PVC Schedule 40",
+      "name": "1-1/2\" PVC Unit",
+      "size": "1-1/2",
+      "materialCostPer100ft": 359.8,
+      "laborHoursPer100ft": 5.86
+    },
+    {
+      "type": "PVC",
+      "typeName": "PVC Schedule 40",
+      "name": "2\" PVC Unit",
+      "size": "2",
+      "materialCostPer100ft": 440.1,
+      "laborHoursPer100ft": 6.645
+    },
+    {
+      "type": "PVC",
+      "typeName": "PVC Schedule 40",
+      "name": "2-1/2\" PVC Unit",
+      "size": "2-1/2",
+      "materialCostPer100ft": 657.8,
+      "laborHoursPer100ft": 7.565
+    },
+    {
+      "type": "PVC",
+      "typeName": "PVC Schedule 40",
+      "name": "3\" PVC Unit",
+      "size": "3",
+      "materialCostPer100ft": 768.75,
+      "laborHoursPer100ft": 8.58
+    },
+    {
+      "type": "PVC",
+      "typeName": "PVC Schedule 40",
+      "name": "3-1/2\" PVC Unit",
+      "size": "3-1/2",
+      "materialCostPer100ft": 942.0,
+      "laborHoursPer100ft": 9.26
+    },
+    {
+      "type": "PVC",
+      "typeName": "PVC Schedule 40",
+      "name": "4\" PVC Unit",
+      "size": "4",
+      "materialCostPer100ft": 1027.2,
+      "laborHoursPer100ft": 11.63
+    },
+    {
+      "type": "PVC",
+      "typeName": "PVC Schedule 40",
+      "name": "5\" PVC Unit",
+      "size": "5",
+      "materialCostPer100ft": 1444.8,
+      "laborHoursPer100ft": 13.47
+    },
+    {
+      "type": "PVC_GRC",
+      "typeName": "PVC/GRC Assembly",
+      "name": "1/2\" PVC GRC Unit",
+      "size": "1/2",
+      "materialCostPer100ft": 8.95,
+      "laborHoursPer100ft": 12.094
+    },
+    {
+      "type": "PVC_GRC",
+      "typeName": "PVC/GRC Assembly",
+      "name": "3/4\" PVC GRC Unit",
+      "size": "3/4",
+      "materialCostPer100ft": 10.02,
+      "laborHoursPer100ft": 13.774
+    },
+    {
+      "type": "PVC_GRC",
+      "typeName": "PVC/GRC Assembly",
+      "name": "1\" PVC GRC Unit",
+      "size": "1",
+      "materialCostPer100ft": 11.03,
+      "laborHoursPer100ft": 13.16
+    },
+    {
+      "type": "PVC_GRC",
+      "typeName": "PVC/GRC Assembly",
+      "name": "1-1/4\" PVC GRC Unit",
+      "size": "1-1/4",
+      "materialCostPer100ft": 13.26,
+      "laborHoursPer100ft": 14.84
+    },
+    {
+      "type": "PVC_GRC",
+      "typeName": "PVC/GRC Assembly",
+      "name": "1-1/2\" PVC GRC Unit",
+      "size": "1-1/2",
+      "materialCostPer100ft": 16.24,
+      "laborHoursPer100ft": 17.747
+    },
+    {
+      "type": "PVC_GRC",
+      "typeName": "PVC/GRC Assembly",
+      "name": "2\" PVC GRC Unit",
+      "size": "2",
+      "materialCostPer100ft": 22.55,
+      "laborHoursPer100ft": 20.948
+    },
+    {
+      "type": "PVC_GRC",
+      "typeName": "PVC/GRC Assembly",
+      "name": "2-1/2\" PVC GRC Unit",
+      "size": "2-1/2",
+      "materialCostPer100ft": 32.47,
+      "laborHoursPer100ft": 22.702
+    },
+    {
+      "type": "PVC_GRC",
+      "typeName": "PVC/GRC Assembly",
+      "name": "3\" PVC GRC Unit",
+      "size": "3",
+      "materialCostPer100ft": 42.82,
+      "laborHoursPer100ft": 26.433
+    },
+    {
+      "type": "PVC_GRC",
+      "typeName": "PVC/GRC Assembly",
+      "name": "3-1/2\" PVC GRC Unit",
+      "size": "3-1/2",
+      "materialCostPer100ft": 62.38,
+      "laborHoursPer100ft": 29.593
+    },
+    {
+      "type": "PVC_GRC",
+      "typeName": "PVC/GRC Assembly",
+      "name": "4\" PVC GRC Unit",
+      "size": "4",
+      "materialCostPer100ft": 70.64,
+      "laborHoursPer100ft": 36.198
+    }
+  ],
+  "wire": [
+    {
+      "material": "CU",
+      "type": "THHN",
+      "size": "#12",
+      "marketPricePer1000ft": 1.0,
+      "markupPercent": 0.15,
+      "laborHoursPer1000ft": 5.5
+    },
+    {
+      "material": "CU",
+      "type": "THHN",
+      "size": "#10",
+      "marketPricePer1000ft": 1.0,
+      "markupPercent": 0.15,
+      "laborHoursPer1000ft": 6.0
+    },
+    {
+      "material": "CU",
+      "type": "THHN",
+      "size": "#8",
+      "marketPricePer1000ft": 1.0,
+      "markupPercent": 0.15,
+      "laborHoursPer1000ft": 6.25
+    },
+    {
+      "material": "CU",
+      "type": "THHN",
+      "size": "#6",
+      "marketPricePer1000ft": 1.0,
+      "markupPercent": 0.1,
+      "laborHoursPer1000ft": 7.0
+    },
+    {
+      "material": "CU",
+      "type": "THHN",
+      "size": "#4",
+      "marketPricePer1000ft": 1.0,
+      "markupPercent": 0.1,
+      "laborHoursPer1000ft": 8.5
+    },
+    {
+      "material": "CU",
+      "type": "THHN",
+      "size": "#3",
+      "marketPricePer1000ft": 1.0,
+      "markupPercent": 0.05,
+      "laborHoursPer1000ft": 9.0
+    },
+    {
+      "material": "CU",
+      "type": "THHN",
+      "size": "#2",
+      "marketPricePer1000ft": 1.0,
+      "markupPercent": 0.05,
+      "laborHoursPer1000ft": 10.0
+    },
+    {
+      "material": "CU",
+      "type": "THHN",
+      "size": "#1",
+      "marketPricePer1000ft": 1.0,
+      "markupPercent": 0.05,
+      "laborHoursPer1000ft": 11.0
+    },
+    {
+      "material": "CU",
+      "type": "THHN",
+      "size": "#1/0",
+      "marketPricePer1000ft": 1.0,
+      "markupPercent": 0.05,
+      "laborHoursPer1000ft": 13.0
+    },
+    {
+      "material": "CU",
+      "type": "THHN",
+      "size": "#2/0",
+      "marketPricePer1000ft": 1.0,
+      "markupPercent": 0.05,
+      "laborHoursPer1000ft": 15.0
+    },
+    {
+      "material": "CU",
+      "type": "THHN",
+      "size": "#3/0",
+      "marketPricePer1000ft": 1.0,
+      "markupPercent": 0.05,
+      "laborHoursPer1000ft": 17.0
+    },
+    {
+      "material": "CU",
+      "type": "THHN",
+      "size": "#4/0",
+      "marketPricePer1000ft": 1.0,
+      "markupPercent": 0.05,
+      "laborHoursPer1000ft": 19.0
+    },
+    {
+      "material": "CU",
+      "type": "THHN",
+      "size": "250 MCM",
+      "marketPricePer1000ft": 1.0,
+      "markupPercent": 0.05,
+      "laborHoursPer1000ft": 22.0
+    },
+    {
+      "material": "CU",
+      "type": "THHN",
+      "size": "300 MCM",
+      "marketPricePer1000ft": 1.0,
+      "markupPercent": 0.05,
+      "laborHoursPer1000ft": 25.5
+    },
+    {
+      "material": "CU",
+      "type": "THHN",
+      "size": "350 MCM",
+      "marketPricePer1000ft": 1.0,
+      "markupPercent": 0.05,
+      "laborHoursPer1000ft": 27.0
+    },
+    {
+      "material": "CU",
+      "type": "THHN",
+      "size": "400 MCM",
+      "marketPricePer1000ft": 1.0,
+      "markupPercent": 0.05,
+      "laborHoursPer1000ft": 29.0
+    },
+    {
+      "material": "CU",
+      "type": "THHN",
+      "size": "500 MCM",
+      "marketPricePer1000ft": 1.0,
+      "markupPercent": 0.05,
+      "laborHoursPer1000ft": 33.0
+    },
+    {
+      "material": "CU",
+      "type": "THHN",
+      "size": "600 MCM",
+      "marketPricePer1000ft": 1.0,
+      "markupPercent": 0.05,
+      "laborHoursPer1000ft": 37.0
+    },
+    {
+      "material": "CU",
+      "type": "THHN",
+      "size": "750 MCM",
+      "marketPricePer1000ft": 1.0,
+      "markupPercent": 0.1,
+      "laborHoursPer1000ft": 42.0
+    },
+    {
+      "material": "AL",
+      "type": "THHN",
+      "size": "#6",
+      "marketPricePer1000ft": 1.0,
+      "markupPercent": 0.05,
+      "laborHoursPer1000ft": 12.0
+    },
+    {
+      "material": "AL",
+      "type": "THHN",
+      "size": "#4",
+      "marketPricePer1000ft": 1.0,
+      "markupPercent": 0.05,
+      "laborHoursPer1000ft": 13.0
+    },
+    {
+      "material": "AL",
+      "type": "THHN",
+      "size": "#2",
+      "marketPricePer1000ft": 1.0,
+      "markupPercent": 0.05,
+      "laborHoursPer1000ft": 14.0
+    },
+    {
+      "material": "AL",
+      "type": "THHN",
+      "size": "#1/0",
+      "marketPricePer1000ft": 1.0,
+      "markupPercent": 0.05,
+      "laborHoursPer1000ft": 15.0
+    },
+    {
+      "material": "AL",
+      "type": "THHN",
+      "size": "#2/0",
+      "marketPricePer1000ft": 1.0,
+      "markupPercent": 0.05,
+      "laborHoursPer1000ft": 17.0
+    },
+    {
+      "material": "AL",
+      "type": "THHN",
+      "size": "#3/0",
+      "marketPricePer1000ft": 1.0,
+      "markupPercent": 0.05,
+      "laborHoursPer1000ft": 20.0
+    },
+    {
+      "material": "AL",
+      "type": "THHN",
+      "size": "#4/0",
+      "marketPricePer1000ft": 1.0,
+      "markupPercent": 0.05,
+      "laborHoursPer1000ft": 21.0
+    },
+    {
+      "material": "AL",
+      "type": "THHN",
+      "size": "250 MCM",
+      "marketPricePer1000ft": 1.0,
+      "markupPercent": 0.05,
+      "laborHoursPer1000ft": 23.0
+    },
+    {
+      "material": "AL",
+      "type": "THHN",
+      "size": "300 MCM",
+      "marketPricePer1000ft": 1.0,
+      "markupPercent": 0.05,
+      "laborHoursPer1000ft": 25.0
+    },
+    {
+      "material": "AL",
+      "type": "THHN",
+      "size": "350 MCM",
+      "marketPricePer1000ft": 1.0,
+      "markupPercent": 0.05,
+      "laborHoursPer1000ft": 26.0
+    },
+    {
+      "material": "AL",
+      "type": "THHN",
+      "size": "400 MCM",
+      "marketPricePer1000ft": 1.0,
+      "markupPercent": 0.05,
+      "laborHoursPer1000ft": 29.0
+    },
+    {
+      "material": "AL",
+      "type": "THHN",
+      "size": "500 MCM",
+      "marketPricePer1000ft": 1.0,
+      "markupPercent": 0.05,
+      "laborHoursPer1000ft": 32.0
+    },
+    {
+      "material": "AL",
+      "type": "THHN",
+      "size": "600 MCM",
+      "marketPricePer1000ft": 1.0,
+      "markupPercent": 0.05,
+      "laborHoursPer1000ft": 34.0
+    }
+  ],
+  "lineItems": [
+    {
+      "category": "TEMP_POWER",
+      "description": "Temp power from ComEd permanent power",
+      "materialUnitCost": 8285.2,
+      "laborHoursPerUnit": 82.852,
+      "unitType": "LOT"
+    },
+    {
+      "category": "TEMP_POWER",
+      "description": "Hook up of construction trailer",
+      "materialUnitCost": 1500.0,
+      "laborHoursPerUnit": 30.0,
+      "unitType": "LOT"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "ComEd pad",
+      "materialUnitCost": 2000.0,
+      "laborHoursPerUnit": 10.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "Rework existing panel for new loads",
+      "materialUnitCost": 400.0,
+      "laborHoursPerUnit": 4.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "4000A., 277/480V., 3PH. Main switchboard w/ meter",
+      "materialUnitCost": 35000.0,
+      "laborHoursPerUnit": 124.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "3000A., 277/480V., 3PH. Main switchboard w/ meter",
+      "materialUnitCost": 30000.0,
+      "laborHoursPerUnit": 104.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "2500A., 277/480V., 3PH. Main switchboard w/ meter",
+      "materialUnitCost": 25000.0,
+      "laborHoursPerUnit": 82.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "2000A., 277/480V., 3PH. Main switchboard w/ meter",
+      "materialUnitCost": 23000.0,
+      "laborHoursPerUnit": 66.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "1600A., 277/480V., 3PH. Main switchboard w/ meter",
+      "materialUnitCost": 20000.0,
+      "laborHoursPerUnit": 55.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "1200A., 277/480V., 3PH. Main distribution board w/ ct/meter",
+      "materialUnitCost": 17000.0,
+      "laborHoursPerUnit": 51.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "1000A., 277/480V., 3PH. Main distribution board w/ ct/meter",
+      "materialUnitCost": 15000.0,
+      "laborHoursPerUnit": 41.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "800A., 277/480V., 3PH. Distribution board w/ feed",
+      "materialUnitCost": 9000.0,
+      "laborHoursPerUnit": 33.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "600A., 277/480V., 3PH. Main distribution board w/ ct/meter",
+      "materialUnitCost": 8000.0,
+      "laborHoursPerUnit": 28.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "400A 277/480V., 3Ph, Panelboard w/ feed",
+      "materialUnitCost": 3000.0,
+      "laborHoursPerUnit": 14.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "250A 277/480V., 3PH Panelboard w/ feed",
+      "materialUnitCost": 2300.0,
+      "laborHoursPerUnit": 12.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "225A 277/480V., 3PH Panelboard w/ feed",
+      "materialUnitCost": 2300.0,
+      "laborHoursPerUnit": 12.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "200A 277/480V., 3PH Panelboard w/ feed",
+      "materialUnitCost": 2300.0,
+      "laborHoursPerUnit": 12.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "100A 277/480V., 3PH Panelboard w/ feed",
+      "materialUnitCost": 2000.0,
+      "laborHoursPerUnit": 10.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "400A 120/208V., 3Ph, Panelboard w/ feed",
+      "materialUnitCost": 3000.0,
+      "laborHoursPerUnit": 14.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "200A 120/208V., 3PH Panelboard w/ feed",
+      "materialUnitCost": 2300.0,
+      "laborHoursPerUnit": 12.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "150A 120/208V., 3PH Panelboard w/ feed",
+      "materialUnitCost": 2000.0,
+      "laborHoursPerUnit": 10.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "125A 120/208V., 3PH Panelboard w/ feed",
+      "materialUnitCost": 2000.0,
+      "laborHoursPerUnit": 10.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "100A 120/208V., 3PH Panelboard w/ feed",
+      "materialUnitCost": 2000.0,
+      "laborHoursPerUnit": 10.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "300 KVA transformer",
+      "materialUnitCost": 8000.0,
+      "laborHoursPerUnit": 24.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "225 KVA transformer",
+      "materialUnitCost": 6500.0,
+      "laborHoursPerUnit": 24.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "150 KVA transformer",
+      "materialUnitCost": 5000.0,
+      "laborHoursPerUnit": 15.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "112.5KVA transformer",
+      "materialUnitCost": 4000.0,
+      "laborHoursPerUnit": 13.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "75KVA transformer",
+      "materialUnitCost": 3500.0,
+      "laborHoursPerUnit": 13.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "45KVA transformer",
+      "materialUnitCost": 2500.0,
+      "laborHoursPerUnit": 12.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "30KVA transformer",
+      "materialUnitCost": 2000.0,
+      "laborHoursPerUnit": 10.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "15KVA transformer",
+      "materialUnitCost": 1500.0,
+      "laborHoursPerUnit": 5.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "3000A Bus Duct (ft)",
+      "materialUnitCost": 100.0,
+      "laborHoursPerUnit": 70.0,
+      "unitType": "C"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "3000A Bus Duct End",
+      "materialUnitCost": 100.0,
+      "laborHoursPerUnit": 1.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "3000A Bus Duct Floor Supports",
+      "materialUnitCost": 50.0,
+      "laborHoursPerUnit": 2.5,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "3000A Bus Duct Tap Box Starter",
+      "materialUnitCost": 300.0,
+      "laborHoursPerUnit": 24.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "3000A Bus Duct Wall Supports",
+      "materialUnitCost": 50.0,
+      "laborHoursPerUnit": 2.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "2000A Bus Duct (ft)",
+      "materialUnitCost": 100.0,
+      "laborHoursPerUnit": 70.0,
+      "unitType": "C"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "2000A Bus Duct Tap Box Starter",
+      "materialUnitCost": 300.0,
+      "laborHoursPerUnit": 24.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "2000A Bus Duct End",
+      "materialUnitCost": 100.0,
+      "laborHoursPerUnit": 1.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "2000A Bus Duct Floor Supports",
+      "materialUnitCost": 50.0,
+      "laborHoursPerUnit": 2.5,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "2000A Bus Duct Wall Supports",
+      "materialUnitCost": 50.0,
+      "laborHoursPerUnit": 2.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "1600A Bus Duct (ft)",
+      "materialUnitCost": 100.0,
+      "laborHoursPerUnit": 35.0,
+      "unitType": "C"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "1600A Bus Duct Tap Box Starter",
+      "materialUnitCost": 300.0,
+      "laborHoursPerUnit": 16.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "1600A Bus Duct End",
+      "materialUnitCost": 100.0,
+      "laborHoursPerUnit": 0.5,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "1600A Bus Duct Floor Supports",
+      "materialUnitCost": 50.0,
+      "laborHoursPerUnit": 1.5,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "1600A Bus Duct Wall Supports",
+      "materialUnitCost": 50.0,
+      "laborHoursPerUnit": 1.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "800A Bus Duct (ft)",
+      "materialUnitCost": 100.0,
+      "laborHoursPerUnit": 35.0,
+      "unitType": "C"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "800A Bus Duct Tap Box Starter",
+      "materialUnitCost": 300.0,
+      "laborHoursPerUnit": 16.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "800A Bus Duct End",
+      "materialUnitCost": 100.0,
+      "laborHoursPerUnit": 0.5,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "800A Bus Duct Floor Supports",
+      "materialUnitCost": 50.0,
+      "laborHoursPerUnit": 1.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "800A Bus Duct Wall Supports",
+      "materialUnitCost": 50.0,
+      "laborHoursPerUnit": 1.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "1200A Bus Plug",
+      "materialUnitCost": 100.0,
+      "laborHoursPerUnit": 12.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "800A Bus Plug",
+      "materialUnitCost": 100.0,
+      "laborHoursPerUnit": 8.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "600A Bus Plug",
+      "materialUnitCost": 100.0,
+      "laborHoursPerUnit": 6.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "400A Bus Plug",
+      "materialUnitCost": 100.0,
+      "laborHoursPerUnit": 4.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "600A Meter Main",
+      "materialUnitCost": 100.0,
+      "laborHoursPerUnit": 8.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "400A Meter Main",
+      "materialUnitCost": 100.0,
+      "laborHoursPerUnit": 8.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "4 Stack meter",
+      "materialUnitCost": 50.0,
+      "laborHoursPerUnit": 2.5,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "3 Stack meter",
+      "materialUnitCost": 50.0,
+      "laborHoursPerUnit": 2.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "400A CT Meter",
+      "materialUnitCost": 100.0,
+      "laborHoursPerUnit": 16.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "600A CT Meter",
+      "materialUnitCost": 1150.0,
+      "laborHoursPerUnit": 5.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "1200A CT Meter",
+      "materialUnitCost": 1750.0,
+      "laborHoursPerUnit": 6.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "200A Meter Socket",
+      "materialUnitCost": 500.0,
+      "laborHoursPerUnit": 2.0,
+      "unitType": "E"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "Empty 3/4\" C",
+      "materialUnitCost": 184.15,
+      "laborHoursPerUnit": 4.96,
+      "unitType": "C"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "Empty 1\" C",
+      "materialUnitCost": 312.2,
+      "laborHoursPerUnit": 6.938,
+      "unitType": "C"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "Empty 1-1/4\" C",
+      "materialUnitCost": 508.20000000000005,
+      "laborHoursPerUnit": 8.182,
+      "unitType": "C"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "Empty 1-1/2\" C",
+      "materialUnitCost": 621.6,
+      "laborHoursPerUnit": 9.542,
+      "unitType": "C"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "Empty 2\" C",
+      "materialUnitCost": 700.65,
+      "laborHoursPerUnit": 11.213,
+      "unitType": "C"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "Empty 2-1/2\" C",
+      "materialUnitCost": 1024.4,
+      "laborHoursPerUnit": 12.1,
+      "unitType": "C"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "Empty 3\" C",
+      "materialUnitCost": 1250.0,
+      "laborHoursPerUnit": 13.5,
+      "unitType": "C"
+    },
+    {
+      "category": "ELECTRICAL_SERVICE",
+      "description": "Empty 4\" C",
+      "materialUnitCost": 1553.65,
+      "laborHoursPerUnit": 18.775,
+      "unitType": "C"
+    },
+    {
+      "category": "MECHANICAL_CONNECTIONS",
+      "description": "Make Up Air Units - gas (warehouse)",
+      "materialUnitCost": 2000.0,
+      "laborHoursPerUnit": 15.0,
+      "unitType": "E"
+    },
+    {
+      "category": "MECHANICAL_CONNECTIONS",
+      "description": "Roof Top Unit - gas (office)",
+      "materialUnitCost": 1200.0,
+      "laborHoursPerUnit": 20.0,
+      "unitType": "E"
+    },
+    {
+      "category": "MECHANICAL_CONNECTIONS",
+      "description": "Electric water heaters",
+      "materialUnitCost": 200.0,
+      "laborHoursPerUnit": 2.75,
+      "unitType": "E"
+    },
+    {
+      "category": "MECHANICAL_CONNECTIONS",
+      "description": "200 Amp Fire pump w/ 30' feed and meter",
+      "materialUnitCost": 8000.0,
+      "laborHoursPerUnit": 45.0,
+      "unitType": "E"
+    },
+    {
+      "category": "MECHANICAL_CONNECTIONS",
+      "description": "Jockey pump",
+      "materialUnitCost": 600.0,
+      "laborHoursPerUnit": 4.0,
+      "unitType": "E"
+    },
+    {
+      "category": "MECHANICAL_CONNECTIONS",
+      "description": "Hydraulic elevator",
+      "materialUnitCost": 1500.0,
+      "laborHoursPerUnit": 15.0,
+      "unitType": "E"
+    },
+    {
+      "category": "MECHANICAL_CONNECTIONS",
+      "description": "Exhaust Fan with Interlock Conduit",
+      "materialUnitCost": 160.0,
+      "laborHoursPerUnit": 11.0,
+      "unitType": "E"
+    },
+    {
+      "category": "MECHANICAL_CONNECTIONS",
+      "description": "Unit Heater (gas)",
+      "materialUnitCost": 150.0,
+      "laborHoursPerUnit": 8.0,
+      "unitType": "E"
+    },
+    {
+      "category": "MECHANICAL_CONNECTIONS",
+      "description": "Electric Wall heater (FBO)",
+      "materialUnitCost": 150.0,
+      "laborHoursPerUnit": 6.0,
+      "unitType": "E"
+    },
+    {
+      "category": "MECHANICAL_CONNECTIONS",
+      "description": "Baseboard Heater (FBO)",
+      "materialUnitCost": 150.0,
+      "laborHoursPerUnit": 6.0,
+      "unitType": "E"
+    },
+    {
+      "category": "MECHANICAL_CONNECTIONS",
+      "description": "Toilet Exhaust (FBO)",
+      "materialUnitCost": 70.0,
+      "laborHoursPerUnit": 1.25,
+      "unitType": "E"
+    },
+    {
+      "category": "MECHANICAL_CONNECTIONS",
+      "description": "Sump Pump",
+      "materialUnitCost": 125.0,
+      "laborHoursPerUnit": 8.0,
+      "unitType": "E"
+    },
+    {
+      "category": "MECHANICAL_CONNECTIONS",
+      "description": "30A Equipment connection",
+      "materialUnitCost": 125.0,
+      "laborHoursPerUnit": 2.0,
+      "unitType": "E"
+    },
+    {
+      "category": "MECHANICAL_CONNECTIONS",
+      "description": "40A Equipment connection",
+      "materialUnitCost": 200.0,
+      "laborHoursPerUnit": 3.0,
+      "unitType": "E"
+    },
+    {
+      "category": "MECHANICAL_CONNECTIONS",
+      "description": "60A Equipment connection",
+      "materialUnitCost": 200.0,
+      "laborHoursPerUnit": 3.0,
+      "unitType": "E"
+    },
+    {
+      "category": "MECHANICAL_CONNECTIONS",
+      "description": "100A Equipment connection",
+      "materialUnitCost": 350.0,
+      "laborHoursPerUnit": 4.0,
+      "unitType": "E"
+    },
+    {
+      "category": "MECHANICAL_CONNECTIONS",
+      "description": "200A Equipment connection",
+      "materialUnitCost": 725.0,
+      "laborHoursPerUnit": 6.5,
+      "unitType": "E"
+    },
+    {
+      "category": "MECHANICAL_CONNECTIONS",
+      "description": "400A Equipment connection",
+      "materialUnitCost": 1300.0,
+      "laborHoursPerUnit": 10.75,
+      "unitType": "E"
+    },
+    {
+      "category": "MECHANICAL_CONNECTIONS",
+      "description": "600A.Equipment connection",
+      "materialUnitCost": 2600.0,
+      "laborHoursPerUnit": 18.0,
+      "unitType": "E"
+    },
+    {
+      "category": "MECHANICAL_CONNECTIONS",
+      "description": "800A.Equipment connection",
+      "materialUnitCost": 3000.0,
+      "laborHoursPerUnit": 20.0,
+      "unitType": "E"
+    },
+    {
+      "category": "MECHANICAL_CONNECTIONS",
+      "description": "1200A.Equipment connection",
+      "materialUnitCost": 4000.0,
+      "laborHoursPerUnit": 30.0,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "6 Lamp T5 highbay",
+      "materialUnitCost": 150.0,
+      "laborHoursPerUnit": 4.0,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "6 Lamp T5 highbay w/ Motion Sensor",
+      "materialUnitCost": 200.0,
+      "laborHoursPerUnit": 4.0,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "LED highbay",
+      "materialUnitCost": 510.0,
+      "laborHoursPerUnit": 4.0,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "LED highbay w/ Motion Sensor",
+      "materialUnitCost": 575.0,
+      "laborHoursPerUnit": 4.0,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "8 Lamp T5 highbay",
+      "materialUnitCost": 250.0,
+      "laborHoursPerUnit": 4.25,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "8 Lamp T5 highbay w/ Motion Sensor",
+      "materialUnitCost": 300.0,
+      "laborHoursPerUnit": 4.25,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "Exit/ Emergency light combo (warehouse)",
+      "materialUnitCost": 185.0,
+      "laborHoursPerUnit": 3.0,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "Exit light (warehouse)",
+      "materialUnitCost": 150.0,
+      "laborHoursPerUnit": 3.0,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "Emergency Light (warehouse)",
+      "materialUnitCost": 150.0,
+      "laborHoursPerUnit": 3.0,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "Remote Head WP",
+      "materialUnitCost": 70.0,
+      "laborHoursPerUnit": 1.25,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "4' LED strip lights (warehouse)",
+      "materialUnitCost": 100.0,
+      "laborHoursPerUnit": 3.0,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "8' LED strip lights  (warehouse)",
+      "materialUnitCost": 100.0,
+      "laborHoursPerUnit": 3.25,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "2x4 LED  (Warehouse)",
+      "materialUnitCost": 100.0,
+      "laborHoursPerUnit": 2.25,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "2x4 LED",
+      "materialUnitCost": 50.0,
+      "laborHoursPerUnit": 1.5,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "2x2 LED",
+      "materialUnitCost": 50.0,
+      "laborHoursPerUnit": 1.5,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "6\"  LED Downlight",
+      "materialUnitCost": 50.0,
+      "laborHoursPerUnit": 2.0,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "4' LED Wall Bracket (stairwell)",
+      "materialUnitCost": 50.0,
+      "laborHoursPerUnit": 1.5,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "4' LED strip lights",
+      "materialUnitCost": 50.0,
+      "laborHoursPerUnit": 1.5,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "4' LED Wraparound",
+      "materialUnitCost": 50.0,
+      "laborHoursPerUnit": 1.5,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "4' LED Linear",
+      "materialUnitCost": 50.0,
+      "laborHoursPerUnit": 3.0,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "8' LED Linear",
+      "materialUnitCost": 50.0,
+      "laborHoursPerUnit": 3.0,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "Wall Sconce",
+      "materialUnitCost": 50.0,
+      "laborHoursPerUnit": 1.5,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "Exit with battery back up",
+      "materialUnitCost": 75.0,
+      "laborHoursPerUnit": 3.0,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "Emergency battery light",
+      "materialUnitCost": 50.0,
+      "laborHoursPerUnit": 2.0,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "Dock Light (warehouse)",
+      "materialUnitCost": 185.0,
+      "laborHoursPerUnit": 3.0,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "Dock Light (Warehouse - FBO)",
+      "materialUnitCost": 50.0,
+      "laborHoursPerUnit": 3.0,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "Single Pole Switch",
+      "materialUnitCost": 25.0,
+      "laborHoursPerUnit": 1.0,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "Three way Switch",
+      "materialUnitCost": 25.0,
+      "laborHoursPerUnit": 1.5,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "Motion Sensor (Wall)",
+      "materialUnitCost": 65.0,
+      "laborHoursPerUnit": 1.25,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "Motion Sensor (Ceiling)",
+      "materialUnitCost": 140.0,
+      "laborHoursPerUnit": 1.5,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "Dimmer",
+      "materialUnitCost": 85.0,
+      "laborHoursPerUnit": 2.0,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "Wireless Switch",
+      "materialUnitCost": 55.0,
+      "laborHoursPerUnit": 0.5,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "Wireless Dimmer",
+      "materialUnitCost": 55.0,
+      "laborHoursPerUnit": 0.5,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "Wireless Motion Sensor (Ceiling)",
+      "materialUnitCost": 100.0,
+      "laborHoursPerUnit": 0.5,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "Wireless Daylight Sensor (Ceiling)",
+      "materialUnitCost": 100.0,
+      "laborHoursPerUnit": 0.5,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "Wireless Receiver",
+      "materialUnitCost": 100.0,
+      "laborHoursPerUnit": 0.5,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "Lighting Control Relay Panel",
+      "materialUnitCost": 1200.0,
+      "laborHoursPerUnit": 6.0,
+      "unitType": "E"
+    },
+    {
+      "category": "INTERIOR_LIGHTING",
+      "description": "Momentary Switch",
+      "materialUnitCost": 200.0,
+      "laborHoursPerUnit": 2.0,
+      "unitType": "E"
+    },
+    {
+      "category": "EXTERIOR_LIGHTING",
+      "description": "LED Wall Pack (Perimeter)",
+      "materialUnitCost": 250.0,
+      "laborHoursPerUnit": 6.0,
+      "unitType": "E"
+    },
+    {
+      "category": "EXTERIOR_LIGHTING",
+      "description": "LED Wall Pack Light (Man Doors)",
+      "materialUnitCost": 200.0,
+      "laborHoursPerUnit": 4.0,
+      "unitType": "E"
+    },
+    {
+      "category": "EXTERIOR_LIGHTING",
+      "description": "LED Single head pole fixture w/ 25' pole",
+      "materialUnitCost": 200.0,
+      "laborHoursPerUnit": 8.0,
+      "unitType": "E"
+    },
+    {
+      "category": "EXTERIOR_LIGHTING",
+      "description": "LED Double head pole fixture w/ 25' pole",
+      "materialUnitCost": 300.0,
+      "laborHoursPerUnit": 10.0,
+      "unitType": "E"
+    },
+    {
+      "category": "EXTERIOR_LIGHTING",
+      "description": "LED MH Triple head pole fixture w/ 25' pole",
+      "materialUnitCost": 400.0,
+      "laborHoursPerUnit": 12.0,
+      "unitType": "E"
+    },
+    {
+      "category": "EXTERIOR_LIGHTING",
+      "description": "LED Quad head pole fixture w/ 25' pole",
+      "materialUnitCost": 500.0,
+      "laborHoursPerUnit": 14.0,
+      "unitType": "E"
+    },
+    {
+      "category": "EXTERIOR_LIGHTING",
+      "description": "Bollard",
+      "materialUnitCost": 200.0,
+      "laborHoursPerUnit": 8.0,
+      "unitType": "E"
+    },
+    {
+      "category": "EXTERIOR_LIGHTING",
+      "description": "Flag Pole Lighting",
+      "materialUnitCost": 200.0,
+      "laborHoursPerUnit": 8.0,
+      "unitType": "E"
+    },
+    {
+      "category": "EXTERIOR_LIGHTING",
+      "description": "Site Signage",
+      "materialUnitCost": 1200.0,
+      "laborHoursPerUnit": 15.0,
+      "unitType": "E"
+    },
+    {
+      "category": "EXTERIOR_LIGHTING",
+      "description": "Contactor, Time Clock, Photocell",
+      "materialUnitCost": 750.0,
+      "laborHoursPerUnit": 4.0,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "WP/GFI Receptacle (roof)",
+      "materialUnitCost": 110.0,
+      "laborHoursPerUnit": 4.5,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "Duplex Receptacle (warehouse)",
+      "materialUnitCost": 75.0,
+      "laborHoursPerUnit": 4.0,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "Double Duplex Receptacle (warehouse)",
+      "materialUnitCost": 85.0,
+      "laborHoursPerUnit": 4.0,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "Duplex Receptacle (warehouse docks)",
+      "materialUnitCost": 85.0,
+      "laborHoursPerUnit": 4.0,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "Double Duplex Receptacle (warehouse docks)",
+      "materialUnitCost": 95.0,
+      "laborHoursPerUnit": 4.0,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "GFI Receptacle (warehouse toilet)",
+      "materialUnitCost": 125.0,
+      "laborHoursPerUnit": 4.0,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "Duplex Receptacle",
+      "materialUnitCost": 60.0,
+      "laborHoursPerUnit": 1.3,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "Dedicated Duplex Receptacle",
+      "materialUnitCost": 75.0,
+      "laborHoursPerUnit": 2.0,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "Double Duplex Receptacle",
+      "materialUnitCost": 70.0,
+      "laborHoursPerUnit": 1.5,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "Dedicated Double Duplex Receptacle",
+      "materialUnitCost": 85.0,
+      "laborHoursPerUnit": 2.25,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "GFI Receptacle",
+      "materialUnitCost": 75.0,
+      "laborHoursPerUnit": 1.5,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "Dedicated GFI Duplex Receptacle",
+      "materialUnitCost": 85.0,
+      "laborHoursPerUnit": 2.0,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "Floor Duplex Receptacle",
+      "materialUnitCost": 300.0,
+      "laborHoursPerUnit": 2.5,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "Furniture power feed (Floor)",
+      "materialUnitCost": 450.0,
+      "laborHoursPerUnit": 4.0,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "Furniture power feed (Wall)",
+      "materialUnitCost": 175.0,
+      "laborHoursPerUnit": 3.5,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "Microwave receptacles",
+      "materialUnitCost": 60.0,
+      "laborHoursPerUnit": 2.25,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "Dishwasher",
+      "materialUnitCost": 85.0,
+      "laborHoursPerUnit": 2.25,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "Vending Machine receptacle",
+      "materialUnitCost": 60.0,
+      "laborHoursPerUnit": 2.25,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "Copier",
+      "materialUnitCost": 85.0,
+      "laborHoursPerUnit": 2.5,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "Over Head Door with disconnect",
+      "materialUnitCost": 230.0,
+      "laborHoursPerUnit": 8.0,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "Projector screen with switch",
+      "materialUnitCost": 150.0,
+      "laborHoursPerUnit": 2.5,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "Tele / Data stub",
+      "materialUnitCost": 40.0,
+      "laborHoursPerUnit": 1.25,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "Tele / Data Outlet",
+      "materialUnitCost": 75.0,
+      "laborHoursPerUnit": 2.5,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "TV stub",
+      "materialUnitCost": 60.0,
+      "laborHoursPerUnit": 1.75,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "TV Outlet",
+      "materialUnitCost": 115.0,
+      "laborHoursPerUnit": 3.5,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "Floor Tele / Data outlet",
+      "materialUnitCost": 375.0,
+      "laborHoursPerUnit": 3.5,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "Floor AV outlet",
+      "materialUnitCost": 425.0,
+      "laborHoursPerUnit": 4.5,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "Furniture Tele/data feed (Floor)",
+      "materialUnitCost": 400.0,
+      "laborHoursPerUnit": 3.5,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "Furniture tele/data feed (Wall)",
+      "materialUnitCost": 200.0,
+      "laborHoursPerUnit": 3.0,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "Power pole",
+      "materialUnitCost": 250.0,
+      "laborHoursPerUnit": 6.0,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "wire way",
+      "materialUnitCost": 30.0,
+      "laborHoursPerUnit": 0.1,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "Dock Restraints",
+      "materialUnitCost": 400.0,
+      "laborHoursPerUnit": 7.5,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "Dock Levelers",
+      "materialUnitCost": 350.0,
+      "laborHoursPerUnit": 4.0,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "Coring (Scanning & X-raying Excluded)",
+      "materialUnitCost": 100.0,
+      "laborHoursPerUnit": 1.0,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "Scanning",
+      "materialUnitCost": 100.0,
+      "laborHoursPerUnit": 1.0,
+      "unitType": "E"
+    },
+    {
+      "category": "POWER_RECEPTACLES",
+      "description": "X-Raying",
+      "materialUnitCost": 500.0,
+      "laborHoursPerUnit": 1.5,
+      "unitType": "E"
+    },
+    {
+      "category": "SITE_CONDUITS",
+      "description": "Empty 2\" PVC conduit feed Tele/Data (ft.)",
+      "materialUnitCost": 440.1,
+      "laborHoursPerUnit": 6.645,
+      "unitType": "C"
+    },
+    {
+      "category": "SITE_CONDUITS",
+      "description": "Empty 4\" PVC conduit feed Tele/Data (ft.)",
+      "materialUnitCost": 1027.2,
+      "laborHoursPerUnit": 11.63,
+      "unitType": "C"
+    },
+    {
+      "category": "SITE_CONDUITS",
+      "description": "Empty 5\" PVC conduit feed",
+      "materialUnitCost": 1444.8,
+      "laborHoursPerUnit": 13.47,
+      "unitType": "C"
+    },
+    {
+      "category": "SITE_CONDUITS",
+      "description": "(2) Empty 4\" PVC Conduit feed ComEd (ft.)",
+      "materialUnitCost": 2054.4,
+      "laborHoursPerUnit": 23.26,
+      "unitType": "C"
+    },
+    {
+      "category": "SITE_CONDUITS",
+      "description": "(2) Empty 5\" PVC conduit feed",
+      "materialUnitCost": 2889.6,
+      "laborHoursPerUnit": 26.94,
+      "unitType": "C"
+    },
+    {
+      "category": "SITE_CONDUITS",
+      "description": "Trenching with spoils backfill",
+      "materialUnitCost": 2.0,
+      "laborHoursPerUnit": 8.0,
+      "unitType": "E"
+    },
+    {
+      "category": "SITE_CONDUITS",
+      "description": "CA-6 Backfill as needed",
+      "materialUnitCost": 500.0,
+      "laborHoursPerUnit": 3.0,
+      "unitType": "C"
+    },
+    {
+      "category": "SECURITY",
+      "description": "Card Access Conduits and power",
+      "materialUnitCost": 110.0,
+      "laborHoursPerUnit": 3.0,
+      "unitType": "E"
+    },
+    {
+      "category": "SECURITY",
+      "description": "Exterior Camera Conduits and power",
+      "materialUnitCost": 300.0,
+      "laborHoursPerUnit": 4.0,
+      "unitType": "E"
+    },
+    {
+      "category": "FIRE_ALARM",
+      "description": "Fire Alarm Control Panel",
+      "materialUnitCost": 3500.0,
+      "laborHoursPerUnit": 20.0,
+      "unitType": "E"
+    },
+    {
+      "category": "FIRE_ALARM",
+      "description": "Connection to existing fire alarm system",
+      "materialUnitCost": 2500.0,
+      "laborHoursPerUnit": 25.0,
+      "unitType": "E"
+    },
+    {
+      "category": "FIRE_ALARM",
+      "description": "Office Stub",
+      "materialUnitCost": 20.0,
+      "laborHoursPerUnit": 1.0,
+      "unitType": "E"
+    },
+    {
+      "category": "FIRE_ALARM",
+      "description": "Duct Detector",
+      "materialUnitCost": 400.0,
+      "laborHoursPerUnit": 4.0,
+      "unitType": "E"
+    },
+    {
+      "category": "FIRE_ALARM",
+      "description": "Audio visual",
+      "materialUnitCost": 200.0,
+      "laborHoursPerUnit": 3.5,
+      "unitType": "E"
+    },
+    {
+      "category": "FIRE_ALARM",
+      "description": "Visual",
+      "materialUnitCost": 200.0,
+      "laborHoursPerUnit": 3.5,
+      "unitType": "E"
+    },
+    {
+      "category": "FIRE_ALARM",
+      "description": "Pull Station",
+      "materialUnitCost": 200.0,
+      "laborHoursPerUnit": 3.5,
+      "unitType": "E"
+    },
+    {
+      "category": "FIRE_ALARM",
+      "description": "Power Booster",
+      "materialUnitCost": 600.0,
+      "laborHoursPerUnit": 4.0,
+      "unitType": "E"
+    },
+    {
+      "category": "FIRE_ALARM",
+      "description": "Flow/Tamper connection",
+      "materialUnitCost": 200.0,
+      "laborHoursPerUnit": 3.0,
+      "unitType": "E"
+    },
+    {
+      "category": "FIRE_ALARM",
+      "description": "Fire Alarm Bell",
+      "materialUnitCost": 250.0,
+      "laborHoursPerUnit": 2.0,
+      "unitType": "E"
+    },
+    {
+      "category": "FIRE_ALARM",
+      "description": "Knox Box",
+      "materialUnitCost": 600.0,
+      "laborHoursPerUnit": 2.0,
+      "unitType": "E"
+    },
+    {
+      "category": "GENERAL_CONDITIONS",
+      "description": "Engineered Permit Drawings",
+      "materialUnitCost": 3000.0,
+      "laborHoursPerUnit": 40.0,
+      "unitType": "LOT"
+    },
+    {
+      "category": "GENERAL_CONDITIONS",
+      "description": "Disconnect of power for safe demolition by others",
+      "materialUnitCost": 1000.0,
+      "laborHoursPerUnit": 20.0,
+      "unitType": "LOT"
+    },
+    {
+      "category": "GENERAL_CONDITIONS",
+      "description": "Down Time (Number of floors 1-14)",
+      "materialUnitCost": 15.0,
+      "laborHoursPerUnit": 1.25,
+      "unitType": "LOT"
+    },
+    {
+      "category": "GENERAL_CONDITIONS",
+      "description": "Down Time (Number of floors 15 & up)",
+      "materialUnitCost": 20.0,
+      "laborHoursPerUnit": 1.0,
+      "unitType": "LOT"
+    },
+    {
+      "category": "GENERAL_CONDITIONS",
+      "description": "Tools & Supervision",
+      "materialUnitCost": 1000.0,
+      "laborHoursPerUnit": 40.0,
+      "unitType": "LOT"
+    },
+    {
+      "category": "GENERAL_CONDITIONS",
+      "description": "Rental Equipment",
+      "materialUnitCost": 5000.0,
+      "laborHoursPerUnit": 0,
+      "unitType": "LOT"
+    }
+  ]
+}
