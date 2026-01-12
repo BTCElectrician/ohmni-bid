@@ -77,7 +77,7 @@ Use these benchmarks when details are limited:
 | Mechanical connections | 0.5 | 1-2 |
 
 ### Labor Rate
-Default: $98/hour (fully burdened journeyman rate)
+Default: $118/hour (fully burdened journeyman rate)
 Adjust for prevailing wage if applicable.
 
 ### Material Markup

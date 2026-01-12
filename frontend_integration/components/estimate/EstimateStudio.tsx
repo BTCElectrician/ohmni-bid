@@ -70,7 +70,7 @@ export function EstimateStudio({ estimateId, onBack }: EstimateStudioProps) {
     if (!estimateId && !estimate) {
       createEstimate({
         project_name: 'New Estimate',
-        labor_rate: 98,
+        labor_rate: 118,
         material_tax_rate: 0.1025,
         overhead_profit_rate: 0,
       });

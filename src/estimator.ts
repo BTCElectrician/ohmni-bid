@@ -67,7 +67,7 @@ export interface LineItem {
 }
 
 export interface EstimateParameters {
-  laborRate: number;           // Default: $98/hr
+  laborRate: number;           // Default: $118/hr
   materialTaxRate: number;     // Default: 10.25%
   overheadProfitRate: number;  // Configurable
 }
@@ -112,7 +112,7 @@ export interface FeederCalculation {
 // ============================================================================
 
 export const DEFAULT_PARAMETERS: EstimateParameters = {
-  laborRate: 98.00,
+  laborRate: 118.00,
   materialTaxRate: 0.1025,
   overheadProfitRate: 0
 };

@@ -55,3 +55,8 @@ Thumbs.db
 .coverage
 htmlcov/
 
+# Node.js
+node_modules/
+.npm-cache/
+package-lock.json
+dist/

@@ -44,44 +44,58 @@ Total = ((Labor_Hours × Labor_Rate) + (Material × (1 + Tax_Rate))) × (1 + O&P
 - Material Tax: **10.25%** (Washington state)
 - Overhead & Profit: **0%** (configurable)
 
+## Configuration & Defaults Architecture
+
+**IMPORTANT FOR AI AGENTS & DEVELOPERS:**
+
+This system uses a **code-first approach** for default parameters. The source of truth for defaults is in code constants, not in JSON files.
+
+### Source of Truth for Defaults
+
+| Parameter | Source of Truth | Location |
+|-----------|----------------|----------|
+| **Labor Rate** | `DEFAULT_LABOR_RATE = 118.00` | `flask_integration/services/estimation_service.py`<br>`src/estimator.ts` |
+| **Material Tax Rate** | `DEFAULT_TAX_RATE = 0.1025` | `flask_integration/services/estimation_service.py`<br>`src/estimator.ts` |
+| **Overhead & Profit** | `DEFAULT_OP_RATE = 0.0` | `flask_integration/services/estimation_service.py`<br>`src/estimator.ts` |
+
+### Pricing Database JSON (`pricing_database.json`)
+
+The `parameters` object in `pricing_database.json` is **NOT the source of truth**. It's a snapshot extracted from the Excel workbook during the extraction process. The actual defaults used by the application come from code constants.
+
+**Why this matters:**
+- When updating labor rates, update the code constants (`DEFAULT_LABOR_RATE`), not the JSON file
+- The JSON file's `parameters` section is informational only (shows what was in Excel at extraction time)
+- If you need to change defaults, update them in:
+  1. `flask_integration/services/estimation_service.py` (Python backend)
+  2. `src/estimator.ts` (TypeScript engine)
+  3. `frontend_integration/store/estimateStore.ts` (React frontend defaults)
+
+### Current Defaults (2025)
+
+- **Labor Rate**: $118/hr (IBEW Local 134 2025 rates)
+- **Material Tax**: 10.25% (Washington state)
+- **Overhead & Profit**: 0% (user configurable per estimate)
+
 ## Setup
 
-<<<<<<< HEAD
-1. Create and activate virtual environment:
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
-
-2. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-=======
 ### Prerequisites
 
 - **Python 3.11+** (with virtual environment)
 - **Node.js 20+** (for TypeScript compilation)
-- **Apple Silicon Mac** (M1/M2/M3) - setup optimized for ARM
 
-### Installation (Apple Silicon)
+### Installation
 
-1. **Clone and checkout branch:**
+1. **Activate virtual environment:**
 ```bash
-git fetch origin
-git checkout claude/reverse-engineer-excel-logic-AXGOh
+source venv/bin/activate  # or: venv/bin/python -m pip install
 ```
 
-2. **Python dependencies:**
+2. **Install Python dependencies:**
 ```bash
-# Virtual environment already exists
-source venv/bin/activate  # or: venv/bin/python -m pip install
-
-# Install dependencies
 pip install -r requirements.txt
 ```
 
-3. **TypeScript build:**
+3. **Install Node.js dependencies and build:**
 ```bash
 npm install
 npm run build
@@ -111,15 +125,16 @@ ohmni-bid/
 │   └── estimator.ts              # Core TypeScript calculation engine
 ├── flask_integration/            # Backend package
 │   ├── models/                   # SQLAlchemy models
-│   ├── services/                 # Business logic
+│   ├── services/                 # Business logic (DEFAULT_LABOR_RATE here)
 │   ├── routes/                   # REST API endpoints
 │   ├── prompts/                  # AI prompts (chat & vision)
 │   └── data/
 │       └── pricing_database.json # 295 items extracted from Excel
+│                                # (parameters section is snapshot only)
 ├── frontend_integration/          # Frontend package
 │   ├── components/estimate/      # React components
 │   ├── hooks/estimate/           # React Query hooks
-│   ├── store/                    # Zustand state
+│   ├── store/                    # Zustand state (defaults here)
 │   ├── services/                 # API client
 │   └── types/                    # TypeScript interfaces
 ├── scripts/
@@ -131,7 +146,6 @@ ohmni-bid/
 │   └── sync_history.json         # Sync tracking
 └── ELECTRICAL_BID_LOGIC.md      # Complete reverse-engineering docs
 ```
->>>>>>> claude/reverse-engineer-excel-logic-AXGOh
 
 ## Usage
 
@@ -258,6 +272,7 @@ See `frontend_integration/IMPLEMENTATION_SPEC.md` for complete integration guide
 - **[ELECTRICAL_BID_LOGIC.md](./ELECTRICAL_BID_LOGIC.md)** - Complete reverse-engineering documentation
 - **[flask_integration/IMPLEMENTATION_SPEC.md](./flask_integration/IMPLEMENTATION_SPEC.md)** - Backend integration guide
 - **[frontend_integration/IMPLEMENTATION_SPEC.md](./frontend_integration/IMPLEMENTATION_SPEC.md)** - Frontend integration guide
+- **[AGENT_GUIDE.md](./AGENT_GUIDE.md)** - **For AI agents: Architecture, defaults, and conventions**
 
 ## Development
 

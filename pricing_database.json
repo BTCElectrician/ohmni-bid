@@ -2,7 +2,7 @@
   "version": "1.0",
   "source": "ohmni bid.xlsx",
   "parameters": {
-    "laborRate": 98.0,
+    "laborRate": 118.0,
     "materialTaxRate": 0.1025,
     "defaultOverheadProfitRate": 0
   },

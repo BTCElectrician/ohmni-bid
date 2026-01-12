@@ -227,7 +227,7 @@ def extract_line_items(wb) -> list:
 def extract_parameters(wb) -> dict:
     """Extract global parameters from basebid sheet."""
     params = {
-        "laborRate": 98.0,
+        "laborRate": 118.0,
         "materialTaxRate": 0.1025,
         "defaultOverheadProfitRate": 0
     }

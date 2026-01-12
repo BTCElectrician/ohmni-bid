@@ -106,7 +106,7 @@ class Estimate(db.Model):
     project_type = db.Column(db.String(50), nullable=True)  # warehouse, office, retail, industrial
 
     # Pricing parameters (can override defaults per estimate)
-    labor_rate = db.Column(db.Numeric(10, 2), default=98.00)
+    labor_rate = db.Column(db.Numeric(10, 2), default=118.00)
     material_tax_rate = db.Column(db.Numeric(5, 4), default=0.1025)
     overhead_profit_rate = db.Column(db.Numeric(5, 4), default=0)
 
@@ -152,7 +152,7 @@ class Estimate(db.Model):
             'contact_name': self.contact_name,
             'square_footage': self.square_footage,
             'project_type': self.project_type,
-            'labor_rate': float(self.labor_rate) if self.labor_rate else 98.00,
+            'labor_rate': float(self.labor_rate) if self.labor_rate else 118.00,
             'material_tax_rate': float(self.material_tax_rate) if self.material_tax_rate else 0.1025,
             'overhead_profit_rate': float(self.overhead_profit_rate) if self.overhead_profit_rate else 0,
             'total_material': float(self.total_material) if self.total_material else 0,
@@ -191,7 +191,7 @@ class Estimate(db.Model):
             total_material += float(item.material_extension) if item.material_extension else 0
             total_labor_hours += float(item.labor_extension) if item.labor_extension else 0
 
-        labor_rate = float(self.labor_rate) if self.labor_rate else 98.00
+        labor_rate = float(self.labor_rate) if self.labor_rate else 118.00
         tax_rate = float(self.material_tax_rate) if self.material_tax_rate else 0.1025
         op_rate = float(self.overhead_profit_rate) if self.overhead_profit_rate else 0
 
@@ -273,7 +273,7 @@ class EstimateLineItem(db.Model):
             'sort_order': self.sort_order,
         }
 
-    def calculate(self, labor_rate=98.00, tax_rate=0.1025, op_rate=0):
+    def calculate(self, labor_rate=118.00, tax_rate=0.1025, op_rate=0):
         """Calculate extensions and total cost"""
         qty = float(self.quantity) if self.quantity else 0
         mat_cost = float(self.material_unit_cost) if self.material_unit_cost else 0

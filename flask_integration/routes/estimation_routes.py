@@ -47,7 +47,7 @@ def create_estimate():
         "square_footage": 5000,
         "gc_name": "ABC Construction",
         "project_location": "123 Main St",
-        "labor_rate": 98.00,
+        "labor_rate": 118.00,
         "material_tax_rate": 0.1025,
         "overhead_profit_rate": 0.15
     }
@@ -63,7 +63,7 @@ def create_estimate():
             gc_name=data.get('gc_name'),
             project_location=data.get('project_location'),
             chat_session_id=data.get('chat_session_id'),
-            labor_rate=data.get('labor_rate', 98.00),
+            labor_rate=data.get('labor_rate', 118.00),
             material_tax_rate=data.get('material_tax_rate', 0.1025),
             overhead_profit_rate=data.get('overhead_profit_rate', 0)
         )
@@ -456,7 +456,7 @@ def quick_quote():
             {"name": "2x4 LED", "quantity": 50},
             {"name": "Single Pole Switch", "quantity": 10}
         ],
-        "labor_rate": 98.00,
+        "labor_rate": 118.00,
         "overhead_profit_rate": 0.15
     }
     """
@@ -466,7 +466,7 @@ def quick_quote():
 
         result = service.quick_quote(
             items=data.get('items', []),
-            labor_rate=data.get('labor_rate', 98.00),
+            labor_rate=data.get('labor_rate', 118.00),
             tax_rate=data.get('material_tax_rate', 0.1025),
             op_rate=data.get('overhead_profit_rate', 0)
         )

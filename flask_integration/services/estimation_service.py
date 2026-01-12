@@ -23,7 +23,7 @@ logger = logging.getLogger(__name__)
 # CONSTANTS
 # =============================================================================
 
-DEFAULT_LABOR_RATE = 98.00
+DEFAULT_LABOR_RATE = 118.00
 DEFAULT_TAX_RATE = 0.1025
 DEFAULT_OP_RATE = 0.0
 

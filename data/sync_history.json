@@ -92,11 +92,47 @@
       "previous_excel_modified": "2025-12-26T18:24:23.563063",
       "needs_sync": true,
       "message": "Excel file has changed! Run extract_pricing.py to sync."
+    },
+    {
+      "checked_at": "2026-01-08T10:15:31.101175",
+      "excel_exists": true,
+      "excel_hash": "a3745451b1726a8ab68c00c272df07d5",
+      "excel_modified": "2025-12-26T18:24:23.563063",
+      "json_modified": "2026-01-07T09:37:26.729670",
+      "excel_changed": true,
+      "excel_changed_since_last_check": false,
+      "previous_excel_modified": "2025-12-26T18:24:23.563063",
+      "needs_sync": true,
+      "message": "Excel file has changed! Run extract_pricing.py to sync."
+    },
+    {
+      "checked_at": "2026-01-08T10:16:52.895674",
+      "excel_exists": true,
+      "excel_hash": "a3745451b1726a8ab68c00c272df07d5",
+      "excel_modified": "2025-12-26T18:24:23.563063",
+      "json_modified": "2026-01-07T09:37:26.729670",
+      "excel_changed": false,
+      "excel_changed_since_last_check": false,
+      "previous_excel_modified": "2025-12-26T18:24:23.563063",
+      "needs_sync": false,
+      "message": "Pricing is in sync. No Excel update since last check."
+    },
+    {
+      "checked_at": "2026-01-11T21:27:05.184263",
+      "excel_exists": true,
+      "excel_hash": "a3745451b1726a8ab68c00c272df07d5",
+      "excel_modified": "2025-12-26T18:24:23.563063",
+      "json_modified": "2026-01-07T09:37:26.729670",
+      "excel_changed": false,
+      "excel_changed_since_last_check": false,
+      "previous_excel_modified": "2025-12-26T18:24:23.563063",
+      "needs_sync": false,
+      "message": "Pricing is in sync. No Excel update since last check."
     }
   ],
-  "last_excel_hash": null,
-  "last_sync_at": null,
+  "last_excel_hash": "a3745451b1726a8ab68c00c272df07d5",
+  "last_sync_at": "2026-01-08T10:16:52.360639",
   "last_seen_excel_hash": "a3745451b1726a8ab68c00c272df07d5",
   "last_seen_excel_modified": "2025-12-26T18:24:23.563063",
-  "last_checked_at": "2026-01-07T09:27:51.848979"
+  "last_checked_at": "2026-01-11T21:27:05.184263"
 }

@@ -249,11 +249,29 @@ The pricing engine implements this formula (from the original Excel):
 # Line Item Total
 total_cost = ((labor_hours * labor_rate) + (material_cost * (1 + tax_rate))) * (1 + overhead_profit_rate)
 
-# Defaults:
-# labor_rate = $98/hr
-# tax_rate = 10.25%
-# overhead_profit_rate = 0% (user configurable)
+# Defaults (Source of Truth):
+# labor_rate = $118/hr (DEFAULT_LABOR_RATE in estimation_service.py)
+# tax_rate = 10.25% (DEFAULT_TAX_RATE in estimation_service.py)
+# overhead_profit_rate = 0% (DEFAULT_OP_RATE in estimation_service.py, user configurable)
 ```
+
+### Default Parameters Architecture
+
+**IMPORTANT:** Default parameters are defined in code constants, not in JSON files.
+
+**Source of Truth Locations:**
+- `flask_integration/services/estimation_service.py`:
+  - `DEFAULT_LABOR_RATE = 118.00`
+  - `DEFAULT_TAX_RATE = 0.1025`
+  - `DEFAULT_OP_RATE = 0.0`
+
+**Note on `pricing_database.json`:**
+The `parameters` section in `pricing_database.json` is a **snapshot** extracted from the Excel workbook. It is **NOT used** as the source of truth for application defaults. When updating labor rates or other defaults, update the code constants above, not the JSON file.
+
+**Current Defaults (2025):**
+- Labor Rate: $118/hr (IBEW Local 134 2025)
+- Material Tax: 10.25% (Washington state)
+- Overhead & Profit: 0% (configurable per estimate)
 
 ### Unit Types
 

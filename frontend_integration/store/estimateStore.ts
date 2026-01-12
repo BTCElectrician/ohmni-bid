@@ -146,7 +146,7 @@ function calculateTotals(
   lineItems: EstimateLineItem[],
   estimate: Estimate | null
 ): EstimateTotals {
-  const laborRate = estimate?.labor_rate ?? 98;
+  const laborRate = estimate?.labor_rate ?? 118;
   const taxRate = estimate?.material_tax_rate ?? 0.1025;
   const opRate = estimate?.overhead_profit_rate ?? 0;
   const sqft = estimate?.square_footage;

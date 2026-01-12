@@ -266,7 +266,7 @@ export function ProjectInfoPanel({
                   type="number"
                   value={estimate.labor_rate}
                   onChange={(e) =>
-                    handleFieldChange('labor_rate', parseFloat(e.target.value) || 98)
+                    handleFieldChange('labor_rate', parseFloat(e.target.value) || 118)
                   }
                   className={cn(
                     'w-full px-3 py-2 rounded-lg',

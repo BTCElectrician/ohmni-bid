@@ -153,7 +153,7 @@ Total Cost = ((Labor_Hours × Labor_Rate) + (Material_Cost × (1 + Tax_Rate))) �
 
 Where:
 - I{row} = Labor hours extension (hours)
-- $I$323 = Labor rate per hour ($98/hr)
+- $I$323 = Labor rate per hour ($118/hr)
 - F{row} = Material cost extension ($)
 - $E$323 = Material tax/markup rate (10.25%)
 - $C$329 = Overhead & Profit rate (configurable, default 0%)
@@ -164,10 +164,29 @@ Where:
 | Cell | Parameter | Default Value |
 |------|-----------|---------------|
 | E323 | Material Tax/Markup | 10.25% |
-| I323 | Labor Rate ($/hr) | $98.00 |
+| I323 | Labor Rate ($/hr) | $118.00 |
 | C329 | Overhead & Profit | 0% (configurable) |
 | F326 | Project Square Footage | 828,520 sf |
 | D331 | **FINAL BID TOTAL** | =ROUNDUP(SUM(D328:D330),0) |
+
+**IMPORTANT FOR AI AGENTS & DEVELOPERS:**
+
+The system uses a **code-first architecture** for default parameters. The source of truth is in code constants, not in JSON files or Excel snapshots.
+
+**Source of Truth Locations:**
+- **Python Backend**: `flask_integration/services/estimation_service.py`
+  - `DEFAULT_LABOR_RATE = 118.00`
+  - `DEFAULT_TAX_RATE = 0.1025`
+  - `DEFAULT_OP_RATE = 0.0`
+- **TypeScript Engine**: `src/estimator.ts`
+  - `DEFAULT_PARAMETERS.laborRate = 118.00`
+  - `DEFAULT_PARAMETERS.materialTaxRate = 0.1025`
+  - `DEFAULT_PARAMETERS.overheadProfitRate = 0`
+- **React Frontend**: `frontend_integration/store/estimateStore.ts`
+  - `const laborRate = estimate?.labor_rate ?? 118`
+
+**Note on `pricing_database.json`:**
+The `parameters` section in `pricing_database.json` is a **snapshot** extracted from the Excel workbook during extraction. It is **NOT used** as the source of truth. When updating defaults, always update the code constants above, not the JSON file.
 
 ### Feeder Wire/Conduit Lookups
 
@@ -423,7 +442,7 @@ interface Estimate {
   date: Date;
 
   // Pricing parameters
-  laborRate: number;         // default $98/hr
+  laborRate: number;         // default $118/hr
   materialTaxRate: number;   // default 10.25%
   overheadProfitRate: number;// configurable
 
@@ -591,7 +610,7 @@ CREATE TABLE estimates (
   contact_name VARCHAR(255),
   prepared_by VARCHAR(100),
   created_at TIMESTAMP,
-  labor_rate DECIMAL(10,2) DEFAULT 98.00,
+  labor_rate DECIMAL(10,2) DEFAULT 118.00,
   material_tax_rate DECIMAL(5,4) DEFAULT 0.1025,
   overhead_profit_rate DECIMAL(5,4) DEFAULT 0,
   final_bid DECIMAL(12,2)
@@ -618,7 +637,7 @@ CREATE TABLE line_items (
 ## 7. Key Insights
 
 ### Pricing Philosophy
-1. **Labor is king**: At $98/hr, labor costs often exceed material costs
+1. **Labor is king**: At $118/hr, labor costs often exceed material costs
 2. **Markup layers**: Material gets 10.25% tax, then O&P on everything
 3. **Unit consistency**: Always work in per 100ft for conduit, per 1000ft for wire
 4. **Feeder complexity**: Distribution feeders combine wire + conduit pricing

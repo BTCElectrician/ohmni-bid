@@ -323,10 +323,21 @@ From the Excel reverse engineering:
 Total = ((Labor_Hours × Labor_Rate) + (Material × (1 + Tax))) × (1 + O&P)
 ```
 
-Where:
-- **Labor_Rate**: Default $98/hr
-- **Tax**: Default 10.25% (Washington state)
-- **O&P**: Configurable (0% for base bid)
+### Default Parameters Architecture
+
+**IMPORTANT FOR DEVELOPERS:** Default parameters are defined in code, not in JSON files.
+
+**Source of Truth:**
+- **Frontend**: `frontend_integration/store/estimateStore.ts` - `const laborRate = estimate?.labor_rate ?? 118`
+- **Backend**: `flask_integration/services/estimation_service.py` - `DEFAULT_LABOR_RATE = 118.00`
+- **TypeScript Engine**: `src/estimator.ts` - `DEFAULT_PARAMETERS.laborRate = 118.00`
+
+**Current Defaults (2025):**
+- **Labor_Rate**: $118/hr (IBEW Local 134 2025) - defined in code constants
+- **Tax**: 10.25% (Washington state) - defined in code constants
+- **O&P**: 0% (configurable per estimate)
+
+**Note:** The `parameters` section in `pricing_database.json` is a snapshot from Excel extraction and is **NOT used** as the source of truth. Always update defaults in the code files listed above.
 
 Unit types:
 - **E** = Each (qty × unit cost)
