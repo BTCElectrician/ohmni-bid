@@ -13,6 +13,8 @@
 - `OPENAI_EMBEDDINGS_MODEL` (default: text-embedding-3-small)
 - `OPENAI_TRANSCRIBE_MODEL` (default: gpt-4o-mini-transcribe)
 - `OPENAI_VISION_MODEL` (default: gpt-4o-mini)
+- `EMBEDDINGS_BATCH_SIZE` (default: 40)
+- `EMBEDDINGS_DRY_RUN` (set `1` to skip updates)
 
 ## Walkthrough Storage
 
