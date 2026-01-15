@@ -1,0 +1,467 @@
+'use client';
+
+import { useEffect, useMemo, useState } from 'react';
+
+import { AuthCard } from '@/components/AuthCard';
+import { EstimateGrid } from '@/components/EstimateGrid';
+import { EstimateHeader } from '@/components/EstimateHeader';
+import { EstimateSummary } from '@/components/EstimateSummary';
+import {
+  calculateEstimateTotals,
+  calculateLaborExtension,
+  calculateLineItemTotal,
+  calculateMaterialExtension,
+  createLineItem
+} from '@/lib/estimate/calc';
+import { DEFAULT_PARAMETERS } from '@/lib/estimate/defaults';
+import type { EstimateParameters, LineItem, ProjectInfo } from '@/lib/estimate/types';
+import { generateId } from '@/lib/estimate/utils';
+import { useWorkspaceAuth } from '@/lib/hooks/useWorkspace';
+
+const emptyTemplate = {
+  category: 'GENERAL_CONDITIONS',
+  name: 'New item',
+  materialUnitCost: 0,
+  unitType: 'E',
+  laborHoursPerUnit: 0
+} as const;
+
+const emptyProject: ProjectInfo = {
+  projectName: 'Untitled Estimate'
+};
+
+export default function EstimatePage() {
+  const {
+    user,
+    orgId,
+    supabase,
+    loading,
+    error: authError,
+    signInWithEmail,
+    signOut
+  } = useWorkspaceAuth();
+  const [authEmail, setAuthEmail] = useState('');
+  const [authMessage, setAuthMessage] = useState('');
+
+  const [project, setProject] = useState<ProjectInfo>(emptyProject);
+  const [parameters, setParameters] = useState<EstimateParameters>({
+    ...DEFAULT_PARAMETERS
+  });
+  const [lineItems, setLineItems] = useState<LineItem[]>([]);
+  const [estimateId, setEstimateId] = useState<string | null>(null);
+  const [hasLoaded, setHasLoaded] = useState(false);
+  const [estimateLoading, setEstimateLoading] = useState(false);
+  const [loadError, setLoadError] = useState<string | null>(null);
+  const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
+  const [saveError, setSaveError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setLineItems(items =>
+      items.map(item => ({
+        ...item,
+        totalCost: calculateLineItemTotal(
+          item.materialExtension,
+          item.laborExtension,
+          parameters
+        )
+      }))
+    );
+  }, [
+    parameters.laborRate,
+    parameters.materialTaxRate,
+    parameters.overheadProfitRate
+  ]);
+
+  const totals = useMemo(
+    () => calculateEstimateTotals(lineItems, parameters, project.squareFootage),
+    [lineItems, parameters, project.squareFootage]
+  );
+
+  useEffect(() => {
+    if (!user || !orgId || hasLoaded) return;
+
+    let active = true;
+    setEstimateLoading(true);
+    setLoadError(null);
+
+    const loadEstimate = async () => {
+      const { data: estimateRow, error: estimateError } = await supabase
+        .from('estimates')
+        .select('*')
+        .eq('org_id', orgId)
+        .order('updated_at', { ascending: false })
+        .limit(1)
+        .maybeSingle();
+
+      if (!active) return;
+
+      if (estimateError) {
+        setLoadError(estimateError.message);
+        setEstimateLoading(false);
+        setHasLoaded(true);
+        return;
+      }
+
+      if (!estimateRow) {
+        setEstimateId(null);
+        setProject(emptyProject);
+        setParameters({ ...DEFAULT_PARAMETERS });
+        setLineItems([]);
+        setEstimateLoading(false);
+        setHasLoaded(true);
+        return;
+      }
+
+      setEstimateId(estimateRow.id);
+      setProject({
+        projectName: estimateRow.project_name || 'Untitled Estimate',
+        projectNumber: estimateRow.project_number || undefined,
+        location: estimateRow.project_location || undefined,
+        gcName: estimateRow.gc_name || undefined,
+        squareFootage: estimateRow.square_footage || undefined
+      });
+      setParameters({
+        laborRate: Number(estimateRow.labor_rate || DEFAULT_PARAMETERS.laborRate),
+        materialTaxRate: Number(
+          estimateRow.material_tax_rate || DEFAULT_PARAMETERS.materialTaxRate
+        ),
+        overheadProfitRate: Number(
+          estimateRow.overhead_profit_rate ||
+            DEFAULT_PARAMETERS.overheadProfitRate
+        )
+      });
+
+      const { data: lineRows, error: lineError } = await supabase
+        .from('estimate_line_items')
+        .select('*')
+        .eq('estimate_id', estimateRow.id)
+        .order('sort_order', { ascending: true });
+
+      if (!active) return;
+
+      if (lineError) {
+        setLoadError(lineError.message);
+        setEstimateLoading(false);
+        setHasLoaded(true);
+        return;
+      }
+
+      const mapped = (lineRows || []).map((item: any) => ({
+        id: item.id,
+        category: item.category,
+        description: item.description,
+        quantity: Number(item.quantity),
+        unitType: item.unit_type,
+        materialUnitCost: Number(item.material_unit_cost),
+        laborHoursPerUnit: Number(item.labor_hours_per_unit),
+        materialExtension: Number(item.material_extension),
+        laborExtension: Number(item.labor_extension),
+        totalCost: Number(item.total_cost)
+      }));
+
+      setLineItems(mapped);
+      setEstimateLoading(false);
+      setHasLoaded(true);
+    };
+
+    loadEstimate();
+
+    return () => {
+      active = false;
+    };
+  }, [user, orgId, hasLoaded, supabase]);
+
+  const addRow = () => {
+    const lineItem = createLineItem(emptyTemplate, 1, parameters, generateId());
+    setLineItems(items => [...items, lineItem]);
+  };
+
+  const normalizeLineItems = (items: LineItem[]) =>
+    items.map(item => {
+      const materialExtension = calculateMaterialExtension(
+        item.quantity,
+        item.materialUnitCost,
+        item.unitType
+      );
+      const laborExtension = calculateLaborExtension(
+        item.quantity,
+        item.laborHoursPerUnit,
+        item.unitType
+      );
+      const totalCost = calculateLineItemTotal(
+        materialExtension,
+        laborExtension,
+        parameters
+      );
+
+      return {
+        ...item,
+        materialExtension,
+        laborExtension,
+        totalCost
+      };
+    });
+
+  const handleSave = async () => {
+    if (!user || !orgId) return;
+
+    setSaveStatus('saving');
+    setSaveError(null);
+
+    const normalizedItems = normalizeLineItems(lineItems);
+    setLineItems(normalizedItems);
+
+    const totalsSnapshot = calculateEstimateTotals(
+      normalizedItems,
+      parameters,
+      project.squareFootage
+    );
+
+    const payload = {
+      org_id: orgId,
+      user_id: user.id,
+      project_name: project.projectName,
+      project_number: project.projectNumber || null,
+      project_location: project.location || null,
+      project_type: null,
+      square_footage: project.squareFootage || null,
+      gc_name: project.gcName || null,
+      contact_name: project.contactName || null,
+      contact_email: null,
+      contact_phone: null,
+      labor_rate: parameters.laborRate,
+      material_tax_rate: parameters.materialTaxRate,
+      overhead_profit_rate: parameters.overheadProfitRate,
+      total_material: totalsSnapshot.totalMaterial,
+      total_material_with_tax: totalsSnapshot.totalMaterialWithTax,
+      total_labor_hours: totalsSnapshot.totalLaborHours,
+      total_labor_cost: totalsSnapshot.totalLaborCost,
+      subtotal: totalsSnapshot.subtotal,
+      overhead_profit: totalsSnapshot.overheadProfit,
+      final_bid: totalsSnapshot.finalBid,
+      price_per_sqft: totalsSnapshot.pricePerSqFt || null,
+      status: 'draft',
+      estimate_metadata: {},
+      updated_at: new Date().toISOString()
+    };
+
+    let persistedEstimateId = estimateId;
+
+    if (estimateId) {
+      const { error: updateError } = await supabase
+        .from('estimates')
+        .update(payload)
+        .eq('id', estimateId);
+
+      if (updateError) {
+        setSaveStatus('error');
+        setSaveError(updateError.message);
+        return;
+      }
+    } else {
+      const { data: insertRow, error: insertError } = await supabase
+        .from('estimates')
+        .insert({ ...payload, created_at: new Date().toISOString() })
+        .select('id')
+        .single();
+
+      if (insertError || !insertRow) {
+        setSaveStatus('error');
+        setSaveError(insertError?.message || 'Estimate insert failed');
+        return;
+      }
+
+      persistedEstimateId = insertRow.id;
+      setEstimateId(insertRow.id);
+    }
+
+    const { error: deleteError } = await supabase
+      .from('estimate_line_items')
+      .delete()
+      .eq('estimate_id', persistedEstimateId);
+
+    if (deleteError) {
+      setSaveStatus('error');
+      setSaveError(deleteError.message);
+      return;
+    }
+
+    const linePayload = normalizedItems.map((item, index) => ({
+      estimate_id: persistedEstimateId,
+      category: item.category,
+      description: item.description,
+      quantity: item.quantity,
+      unit_type: item.unitType,
+      material_unit_cost: item.materialUnitCost,
+      labor_hours_per_unit: item.laborHoursPerUnit,
+      material_extension: item.materialExtension,
+      labor_extension: item.laborExtension,
+      total_cost: item.totalCost,
+      source: 'manual',
+      ai_confidence: null,
+      ai_notes: null,
+      sort_order: index,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    }));
+
+    if (linePayload.length > 0) {
+      const { error: lineError } = await supabase
+        .from('estimate_line_items')
+        .insert(linePayload);
+
+      if (lineError) {
+        setSaveStatus('error');
+        setSaveError(lineError.message);
+        return;
+      }
+    }
+
+    setSaveStatus('saved');
+  };
+
+  const handleExport = async () => {
+    const response = await fetch('/api/export', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ project, parameters, items: lineItems })
+    });
+
+    if (!response.ok) {
+      return;
+    }
+
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `estimate-${Date.now()}.xlsx`;
+    a.click();
+    window.URL.revokeObjectURL(url);
+  };
+
+  const handleEmailSignIn = async () => {
+    if (!authEmail) return;
+    const ok = await signInWithEmail(authEmail);
+    if (ok) {
+      setAuthMessage('Check your email for the sign-in link.');
+    }
+  };
+
+  if (loading) {
+    return (
+      <main className="min-h-screen">
+        <div className="mx-auto max-w-md px-6 py-16">
+          <div className="glass-panel rounded-3xl p-10">
+            <h1 className="text-xl font-semibold text-slate-100">Loading workspace</h1>
+            <p className="mt-2 text-sm text-slate-300">
+              Preparing your estimating session.
+            </p>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
+  if (!user) {
+    return (
+      <main className="min-h-screen">
+        <div className="mx-auto max-w-md px-6 py-16">
+          <AuthCard
+            email={authEmail}
+            onEmailChange={setAuthEmail}
+            onSubmit={handleEmailSignIn}
+            message={authMessage}
+            error={authError}
+          />
+        </div>
+      </main>
+    );
+  }
+
+  return (
+    <main className="relative min-h-screen overflow-hidden">
+      <div className="pointer-events-none absolute -left-32 top-40 h-80 w-80 rounded-full bg-cyan-400/30 blur-3xl" />
+      <div className="pointer-events-none absolute right-[-140px] top-[-80px] h-96 w-96 rounded-full bg-sky-300/35 blur-3xl" />
+      <div className="pointer-events-none absolute bottom-[-120px] left-1/4 h-96 w-96 rounded-full bg-lime-300/20 blur-[120px]" />
+      <div className="mx-auto max-w-6xl px-6 py-10">
+        <div className="flex flex-col gap-6">
+          <div className="glass-panel rounded-3xl p-6 animate-rise">
+            <EstimateHeader
+              projectName={project.projectName}
+              onProjectNameChange={value =>
+                setProject(current => ({ ...current, projectName: value }))
+              }
+              userEmail={user.email}
+              onAddRow={addRow}
+              onSave={handleSave}
+              onExport={handleExport}
+              onSignOut={signOut}
+              saveStatus={saveStatus}
+              saveError={saveError}
+              loadError={loadError}
+              estimateLoading={estimateLoading}
+            />
+
+            <div className="mt-4 grid gap-4 md:grid-cols-3">
+              <div>
+                <label className="text-xs font-medium text-slate-300">Labor Rate ($/hr)</label>
+                <input
+                  type="number"
+                  value={parameters.laborRate}
+                  onChange={event =>
+                    setParameters(current => ({
+                      ...current,
+                      laborRate: Number(event.target.value)
+                    }))
+                  }
+                  className="mt-1 w-full rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-sm text-slate-100"
+                />
+              </div>
+              <div>
+                <label className="text-xs font-medium text-slate-300">Material Tax Rate</label>
+                <input
+                  type="number"
+                  step="0.0001"
+                  value={parameters.materialTaxRate}
+                  onChange={event =>
+                    setParameters(current => ({
+                      ...current,
+                      materialTaxRate: Number(event.target.value)
+                    }))
+                  }
+                  className="mt-1 w-full rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-sm text-slate-100"
+                />
+              </div>
+              <div>
+                <label className="text-xs font-medium text-slate-300">Overhead & Profit</label>
+                <input
+                  type="number"
+                  step="0.0001"
+                  value={parameters.overheadProfitRate}
+                  onChange={event =>
+                    setParameters(current => ({
+                      ...current,
+                      overheadProfitRate: Number(event.target.value)
+                    }))
+                  }
+                  className="mt-1 w-full rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-sm text-slate-100"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="glass-panel rounded-3xl p-6 animate-rise-delayed">
+            <EstimateGrid
+              rowData={lineItems}
+              parameters={parameters}
+              onRowDataChange={setLineItems}
+            />
+          </div>
+
+          <EstimateSummary totals={totals} />
+        </div>
+      </div>
+    </main>
+  );
+}

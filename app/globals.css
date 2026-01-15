@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --bg: #0b1118;
+  --bg-secondary: #0f1c28;
+  --panel: rgba(18, 30, 42, 0.88);
+  --panel-strong: rgba(18, 30, 42, 0.96);
+  --ink: #e6f2ff;
+  --ink-muted: #8fa2b5;
+  --accent: #2fb4ff;
+  --accent-2: #69be28;
+  --accent-glow: #a7e8ff;
+  --border: rgba(143, 162, 181, 0.18);
+  --shadow: 0 20px 40px rgba(2, 8, 16, 0.55);
+}
+
+body {
+  background: radial-gradient(circle at 15% 10%, rgba(47, 180, 255, 0.2), transparent 55%),
+    radial-gradient(circle at 85% 20%, rgba(105, 190, 40, 0.18), transparent 45%),
+    linear-gradient(140deg, var(--bg) 0%, var(--bg-secondary) 55%, #0b1a24 100%);
+  color: var(--ink);
+  font-family: var(--font-body), sans-serif;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-rise {
+  animation: rise 0.6s ease-out both;
+}
+
+.animate-rise-delayed {
+  animation: rise 0.8s ease-out 0.08s both;
+}
+
+.glass-panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(16px) saturate(125%);
+}
+
+.ag-theme-quartz {
+  --ag-font-family: var(--font-body), sans-serif;
+  --ag-background-color: transparent;
+  --ag-foreground-color: var(--ink);
+  --ag-secondary-foreground-color: var(--ink-muted);
+  --ag-border-color: var(--border);
+  --ag-header-background-color: rgba(7, 13, 20, 0.55);
+  --ag-row-hover-color: rgba(47, 180, 255, 0.12);
+  --ag-odd-row-background-color: rgba(9, 16, 24, 0.25);
+}

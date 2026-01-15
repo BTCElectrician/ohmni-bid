@@ -1,26 +1,36 @@
 {
-  "name": "ohmni-bid",
-  "version": "1.0.0",
-  "description": "Electrical estimating engine - AI-powered bid generation",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "name": "ohmni-bid-next",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "build": "tsc",
-    "dev": "ts-node src/index.ts",
-    "test": "jest",
-    "lint": "eslint src/**/*.ts"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
   },
-  "keywords": [
-    "electrical",
-    "estimating",
-    "construction",
-    "bidding",
-    "ai"
-  ],
-  "author": "",
-  "license": "MIT",
+  "dependencies": {
+    "@ai-sdk/openai": "^1.0.0",
+    "@supabase/ssr": "^0.4.0",
+    "@supabase/supabase-js": "^2.45.0",
+    "ag-grid-community": "^32.3.0",
+    "ag-grid-react": "^32.3.0",
+    "ai": "^3.1.0",
+    "exceljs": "^4.4.0",
+    "inngest": "^3.22.0",
+    "lucide-react": "^0.452.0",
+    "next": "^15.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "zod": "^3.23.8"
+  },
   "devDependencies": {
-    "@types/node": "^20.0.0",
-    "typescript": "^5.0.0"
+    "@types/node": "^22.8.5",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.1",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.45",
+    "tailwindcss": "^3.4.10",
+    "typescript": "^5.6.3"
   }
 }
