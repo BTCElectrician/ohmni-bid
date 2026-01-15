@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import { AuthCard } from '@/components/AuthCard';
+import { EstimateAssistant, type DraftLineItem } from '@/components/EstimateAssistant';
 import { EstimateGrid } from '@/components/EstimateGrid';
 import { EstimateHeader } from '@/components/EstimateHeader';
 import { EstimateSummary } from '@/components/EstimateSummary';
@@ -174,6 +175,21 @@ export default function EstimatePage() {
   const addRow = () => {
     const lineItem = createLineItem(emptyTemplate, 1, parameters, generateId());
     setLineItems(items => [...items, lineItem]);
+  };
+
+  const handleApplyDrafts = (drafts: DraftLineItem[]) => {
+    const newItems = drafts.map(draft => {
+      const template = {
+        category: draft.category,
+        name: draft.description,
+        materialUnitCost: draft.suggestedItem?.material_cost || 0,
+        unitType: draft.unitType,
+        laborHoursPerUnit: draft.suggestedItem?.labor_hours || 0
+      };
+      return createLineItem(template, draft.quantity || 1, parameters, generateId());
+    });
+
+    setLineItems(items => [...items, ...newItems]);
   };
 
   const normalizeLineItems = (items: LineItem[]) =>
@@ -458,6 +474,13 @@ export default function EstimatePage() {
               onRowDataChange={setLineItems}
             />
           </div>
+
+          <EstimateAssistant
+            project={project}
+            parameters={parameters}
+            lineItems={lineItems}
+            onApplyDrafts={handleApplyDrafts}
+          />
 
           <EstimateSummary totals={totals} />
         </div>

@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { Session, User } from '@supabase/supabase-js';
 
-import { getBrowserSupabase } from '@/lib/db/supabase';
+import { getBrowserSupabase, hasSupabaseEnv } from '@/lib/db/supabase';
 import { getOrCreateOrgId } from '@/lib/org';
 
 interface WorkspaceAuthState {
@@ -25,6 +25,12 @@ export function useWorkspaceAuth(): WorkspaceAuthState {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!hasSupabaseEnv) {
+      setError('Missing Supabase env vars. Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.');
+      setAuthReady(true);
+      return;
+    }
+
     let active = true;
 
     supabase.auth
@@ -52,7 +58,7 @@ export function useWorkspaceAuth(): WorkspaceAuthState {
   }, [supabase]);
 
   useEffect(() => {
-    if (!authReady) return;
+    if (!authReady || !hasSupabaseEnv) return;
     if (!session?.user) {
       setOrgId(null);
       return;
@@ -81,6 +87,10 @@ export function useWorkspaceAuth(): WorkspaceAuthState {
 
   const signInWithEmail = useCallback(
     async (email: string) => {
+      if (!hasSupabaseEnv) {
+        setError('Missing Supabase env vars. Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.');
+        return false;
+      }
       setError(null);
       const redirectTo =
         typeof window === 'undefined'
@@ -100,6 +110,10 @@ export function useWorkspaceAuth(): WorkspaceAuthState {
   );
 
   const signOut = useCallback(async () => {
+    if (!hasSupabaseEnv) {
+      setError('Missing Supabase env vars. Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.');
+      return;
+    }
     setError(null);
     const { error: signOutError } = await supabase.auth.signOut();
     if (signOutError) {

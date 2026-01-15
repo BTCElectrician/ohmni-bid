@@ -5,7 +5,7 @@ Provide a concrete, code-referenced snapshot of the migrated Next.js + Supabase 
 
 ## Status (from STATUS.md)
 - Phase: implementation
-- Review: ChatGPT 5.2 Pro response integrated; internal review complete
+- Review: ChatGPT 5.2 Pro response integrated; internal review updated for completeness/correctness/trade gaps
 - Guardrails: minimal code, maximize SDKs/services, files under ~500 lines
 - Stripe billing planned; not started
 - Next: apply schema + RLS in Supabase, create storage bucket, set envs, and backfill embeddings
@@ -18,8 +18,10 @@ Provide a concrete, code-referenced snapshot of the migrated Next.js + Supabase 
 - UI: Next.js App Router pages in `app/` with Tailwind for styling.
 - Estimator engine: pure TypeScript logic in `lib/estimate/*`.
 - AI tools: server-only tool implementations in `lib/tools/estimateTools.ts`.
-- Data layer: Supabase clients in `lib/db/supabase.ts`, schema in `supabase/schema.sql`.
+- Data layer: Supabase clients in `lib/db/supabase.ts` (browser/service) and `lib/db/supabaseServer.ts` (server), schema in `supabase/schema.sql`.
 - Pricing data: JSON snapshot in `data/pricing_database.json`, import helper in `lib/pricing/importSupabase.ts`.
+- Walkthrough capture APIs: `app/api/transcribe/route.ts` and `app/api/vision-count/route.ts` using `lib/ai/*` and `lib/db/supabaseServer.ts`.
+- Drafting API: `app/api/draft-items/route.ts` for transcript-to-draft line items with catalog suggestions.
 
 ## Core Estimating Logic (code-first)
 - Calculation formula (from `lib/estimate/calc.ts`):
@@ -41,6 +43,7 @@ Provide a concrete, code-referenced snapshot of the migrated Next.js + Supabase 
 - `app/estimate/page.tsx` handles auth gating and save/load to Supabase with manual save.
 - `components/EstimateGrid.tsx` uses AG Grid and recalculates line totals on edit.
 - `components/EstimateSummary.tsx` displays totals derived from `lib/estimate/calc.ts`.
+- `components/EstimateAssistant.tsx` generates reviewable draft line items and applies them only after user approval.
 - `app/api/export/route.ts` recomputes totals server-side and returns `.xlsx` via ExcelJS.
 
 ## AI Tool-Calling Boundary
@@ -214,7 +217,7 @@ Why:
 - Confirm calculation logic parity with legacy formulas (`legacy/ELECTRICAL_BID_LOGIC.md`).
 - Evaluate Gemini Pro trade-specific enhancements for feasibility and sequencing.
 
-## ChatGPT 5.2 Pro Response (2026-01-14)
+## ChatGPT 5.2 Pro Response (Pasted, 2026-01-14)
 According to a document from **January 14, 2026**, you're *already* much closer than you think: you have a clean Next.js + Supabase scaffold, a pure TypeScript estimator engine, an AI tool-calling boundary, and an XLSX export route. That's the correct "minimum-code" foundation for the voice/photo/chat estimator you're describing.
 
 ## My take on your idea
@@ -467,9 +470,10 @@ If you want, in a follow-up I can turn this into a concrete "repo plan" (exact n
 [3]: https://platform.openai.com/docs/guides/function-calling?utm_source=chatgpt.com "Function calling | OpenAI API"
 [4]: https://platform.openai.com/docs/guides/embeddings?utm_source=chatgpt.com "Vector embeddings | OpenAI API"
 
-## Agent Review Notes (current)
+## Agent Review Notes (2026-01-15)
 ### Completeness and correctness
 - `calculateEstimateTotals` in `lib/estimate/calc.ts` rounds `finalBid` up to whole dollars via `Math.ceil`, which is not called out in the formula summary.
+- `categoryTotals` sums `lineItem.totalCost`, which already includes tax and overhead; category totals will not reconcile 1:1 with `subtotal` and `overheadProfit`, and the final bid is rounded.
 - `validateConduitFill` is implemented in `lib/tools/estimateTools.ts` and uses a sizing lookup; it is guidance, not a true NEC fill calculation with conductor areas.
 - `CONDUIT_SIZING` in `lib/estimate/sizing.ts` is a fixed table keyed by wire size and conductor count; there is no handling for insulation type, number of conductors beyond the table, or percent-fill thresholds.
 
@@ -477,6 +481,9 @@ If you want, in a follow-up I can turn this into a concrete "repo plan" (exact n
 - Separate material sales tax vs markup, with jurisdiction-specific tax rules (labor should remain untaxed).
 - Labor burden and productivity modifiers beyond NECA columns (crew mix, supervision, shift differential, non-productive time).
 - NEC-driven sizing inputs (insulation type, conductor OD, conduit type) plus voltage-drop checks for feeders.
+- Conductor derating for ambient temperature and number of current-carrying conductors (branch circuits + feeders).
+- Grounding/bonding conductor sizing and equipment/breaker short-circuit ratings (SCCR).
+- Device/fixture assembly takeoffs and small-material allowances (boxes, fittings, connectors, supports).
 - General conditions allowances (permits, bonding/insurance, equipment rental, mobilization, freight).
 - Change-order/alternate workflows (add-deducts, unit pricing, contingency/escalation allowances).
 
@@ -485,8 +492,13 @@ If you want, in a follow-up I can turn this into a concrete "repo plan" (exact n
 - Schema: `supabase/schema.sql`
 - AI endpoint: `app/api/ai/route.ts`
 - Export endpoint: `app/api/export/route.ts`
+- Walkthrough endpoints: `app/api/transcribe/route.ts`, `app/api/vision-count/route.ts`
+- Drafting endpoint: `app/api/draft-items/route.ts`
 - Estimator logic: `lib/estimate/*`
 - Tool helpers: `lib/tools/estimateTools.ts`
+- Supabase server client: `lib/db/supabaseServer.ts`
+- AI helpers: `lib/ai/transcribe.ts`, `lib/ai/visionCount.ts`
+- Assistant UI: `components/EstimateAssistant.tsx`
 - Pricing import: `lib/pricing/*`
 - Pricing data: `data/pricing_database.json`
 - Estimate UI: `app/estimate/page.tsx`, `components/EstimateGrid.tsx`, `components/EstimateSummary.tsx`
