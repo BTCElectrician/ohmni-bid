@@ -150,6 +150,7 @@ export default function EstimatePage() {
 
       const mapped = (lineRows || []).map((item: any) => ({
         id: item.id,
+        pricingItemId: item.pricing_item_id || null,
         category: item.category,
         description: item.description,
         quantity: Number(item.quantity),
@@ -185,7 +186,8 @@ export default function EstimatePage() {
         name: draft.description,
         materialUnitCost: draft.suggestedItem?.material_cost || 0,
         unitType: draft.unitType,
-        laborHoursPerUnit: draft.suggestedItem?.labor_hours || 0
+        laborHoursPerUnit: draft.suggestedItem?.labor_hours || 0,
+        pricingItemId: draft.suggestedItem?.id || null
       };
       return createLineItem(template, draft.quantity || 1, parameters, generateId());
     });
@@ -305,6 +307,7 @@ export default function EstimatePage() {
 
     const linePayload = normalizedItems.map((item, index) => ({
       estimate_id: persistedEstimateId,
+      pricing_item_id: item.pricingItemId || null,
       category: item.category,
       description: item.description,
       quantity: item.quantity,

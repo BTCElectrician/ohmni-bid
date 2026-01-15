@@ -46,6 +46,7 @@ Provide a concrete, code-referenced snapshot of the migrated Next.js + Supabase 
 - `components/EstimateSummary.tsx` displays totals derived from `lib/estimate/calc.ts`.
 - `components/EstimateAssistant.tsx` generates reviewable draft line items and applies them only after user approval.
 - `components/EstimateChat.tsx` provides a tool-calling chat view backed by `/api/ai`, with live estimate context.
+- Draft line items preserve `pricing_item_id` when a catalog suggestion exists and are stored on save.
 - `app/api/export/route.ts` recomputes totals server-side and returns `.xlsx` via ExcelJS.
 
 ## AI Tool-Calling Boundary

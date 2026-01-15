@@ -41,10 +41,12 @@ export interface LineItemTemplate {
   materialUnitCost: number;
   unitType: UnitType;
   laborHoursPerUnit: number;
+  pricingItemId?: string | null;
 }
 
 export interface LineItem {
   id: string;
+  pricingItemId?: string | null;
   category: EstimateCategory;
   description: string;
   quantity: number;

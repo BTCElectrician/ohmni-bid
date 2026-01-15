@@ -83,6 +83,7 @@ export function createLineItem(
 
   return {
     id: id || generateId(),
+    pricingItemId: template.pricingItemId ?? null,
     category: template.category,
     description: template.name,
     quantity,

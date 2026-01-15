@@ -12,6 +12,7 @@
   - Added walkthrough UI plus `/api/transcribe` and `/api/vision-count` routes.
   - Added assistant draft takeoff panel and `/api/draft-items` endpoint for reviewable line items.
   - Added walkthrough latest-note fetch and estimate chat panel using `/api/ai`.
+  - Draft-applied line items now retain `pricing_item_id` when available.
   - Refreshed UI styling with new typography, glass panels, and gradient backgrounds.
   - Archived legacy assets and prior integrations under `legacy/`.
   - Added embeddings backfill script for `pricing_items`.
