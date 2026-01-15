@@ -11,6 +11,7 @@
   - Added Supabase auth gating and estimate persistence in the UI.
   - Added walkthrough UI plus `/api/transcribe` and `/api/vision-count` routes.
   - Refreshed UI styling with new typography, glass panels, and gradient backgrounds.
+  - Archived legacy assets and prior integrations under `legacy/`.
 - Next steps:
   - Apply `supabase/schema.sql` changes in the Supabase project and confirm RLS policies.
   - Create the `walkthrough` storage bucket (or set `WALKTHROUGH_BUCKET`).
