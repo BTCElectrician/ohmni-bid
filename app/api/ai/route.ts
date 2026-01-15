@@ -9,15 +9,90 @@ import {
 } from '@/lib/tools';
 import { DEFAULT_PARAMETERS } from '@/lib/estimate/defaults';
 
+type ChatContext = {
+  project?: {
+    projectName?: string;
+    location?: string;
+    squareFootage?: number;
+  };
+  parameters?: {
+    laborRate?: number;
+    materialTaxRate?: number;
+    overheadProfitRate?: number;
+  };
+  totals?: {
+    totalMaterial?: number;
+    totalLaborHours?: number;
+    totalLaborCost?: number;
+    subtotal?: number;
+    overheadProfit?: number;
+    finalBid?: number;
+  };
+  lineItems?: Array<{
+    category?: string;
+    description?: string;
+    quantity?: number;
+    unitType?: string;
+  }>;
+};
+
+function formatContext(context?: ChatContext) {
+  if (!context) return '';
+  const lines: string[] = [];
+
+  if (context.project?.projectName) {
+    lines.push(`Project: ${context.project.projectName}`);
+  }
+  if (context.project?.location) {
+    lines.push(`Location: ${context.project.location}`);
+  }
+  if (typeof context.project?.squareFootage === 'number') {
+    lines.push(`Square Footage: ${context.project.squareFootage}`);
+  }
+
+  if (context.parameters) {
+    lines.push(
+      `Labor Rate: ${context.parameters.laborRate ?? 'n/a'}, ` +
+        `Material Tax: ${context.parameters.materialTaxRate ?? 'n/a'}, ` +
+        `O&P: ${context.parameters.overheadProfitRate ?? 'n/a'}`
+    );
+  }
+
+  if (context.totals) {
+    lines.push(
+      `Totals -> Material: ${context.totals.totalMaterial ?? 'n/a'}, ` +
+        `Labor Hours: ${context.totals.totalLaborHours ?? 'n/a'}, ` +
+        `Labor Cost: ${context.totals.totalLaborCost ?? 'n/a'}, ` +
+        `Final Bid: ${context.totals.finalBid ?? 'n/a'}`
+    );
+  }
+
+  if (context.lineItems?.length) {
+    const maxItems = 25;
+    const items = context.lineItems.slice(0, maxItems).map(item =>
+      `${item.quantity ?? ''} ${item.unitType ?? ''} ${item.description ?? ''} (${item.category ?? ''})`
+    );
+    lines.push('Line items:');
+    lines.push(...items);
+    if (context.lineItems.length > maxItems) {
+      lines.push(`...and ${context.lineItems.length - maxItems} more`);
+    }
+  }
+
+  return lines.join('\n');
+}
+
 export async function POST(req: Request) {
-  const { messages } = await req.json();
+  const { messages, context } = await req.json();
   const model = process.env.OPENAI_CHAT_MODEL || 'gpt-4.1-mini';
+  const contextBlock = formatContext(context);
 
   const result = await streamText({
     model: openai(model),
     system:
       'You are an estimating assistant. The agent interprets intent, but code computes prices. ' +
-      'Always call tools for pricing, validation, and totals. Never guess numbers.',
+      'Always call tools for pricing, validation, and totals. Never guess numbers.' +
+      (contextBlock ? `\n\nCurrent estimate context:\n${contextBlock}` : ''),
     messages,
     tools: {
       searchCatalog: tool({

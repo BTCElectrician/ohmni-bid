@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 
 import { AuthCard } from '@/components/AuthCard';
 import { EstimateAssistant, type DraftLineItem } from '@/components/EstimateAssistant';
+import { EstimateChat } from '@/components/EstimateChat';
 import { EstimateGrid } from '@/components/EstimateGrid';
 import { EstimateHeader } from '@/components/EstimateHeader';
 import { EstimateSummary } from '@/components/EstimateSummary';
@@ -475,12 +476,20 @@ export default function EstimatePage() {
             />
           </div>
 
-          <EstimateAssistant
-            project={project}
-            parameters={parameters}
-            lineItems={lineItems}
-            onApplyDrafts={handleApplyDrafts}
-          />
+          <div className="grid gap-6 lg:grid-cols-2">
+            <EstimateAssistant
+              project={project}
+              parameters={parameters}
+              lineItems={lineItems}
+              onApplyDrafts={handleApplyDrafts}
+            />
+            <EstimateChat
+              project={project}
+              parameters={parameters}
+              lineItems={lineItems}
+              totals={totals}
+            />
+          </div>
 
           <EstimateSummary totals={totals} />
         </div>

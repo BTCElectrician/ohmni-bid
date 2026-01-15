@@ -41,6 +41,8 @@ export function EstimateAssistant({
   const [questions, setQuestions] = useState<string[]>([]);
   const [status, setStatus] = useState<'idle' | 'loading' | 'error'>('idle');
   const [error, setError] = useState<string | null>(null);
+  const [noteStatus, setNoteStatus] = useState<'idle' | 'loading'>('idle');
+  const [noteError, setNoteError] = useState<string | null>(null);
 
   const lineItemContext = useMemo(
     () =>
@@ -101,6 +103,24 @@ export function EstimateAssistant({
     }
   };
 
+  const handleLoadLatestNote = async () => {
+    setNoteStatus('loading');
+    setNoteError(null);
+
+    try {
+      const response = await fetch('/api/walkthrough/latest-note');
+      const payload = await response.json();
+      if (!response.ok) {
+        throw new Error(payload?.error || 'Latest note lookup failed');
+      }
+      setNotes(payload.transcript || '');
+    } catch (err) {
+      setNoteError(err instanceof Error ? err.message : 'Latest note lookup failed');
+    } finally {
+      setNoteStatus('idle');
+    }
+  };
+
   const updateDraft = (id: string, patch: Partial<DraftLineItem>) => {
     setDrafts(items =>
       items.map(item => (item.id === id ? { ...item, ...patch } : item))
@@ -116,20 +136,29 @@ export function EstimateAssistant({
 
   return (
     <section className="glass-panel rounded-3xl p-6 animate-rise-delayed">
-      <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <div>
           <h2 className="text-xl font-semibold text-slate-100">Assistant draft takeoff</h2>
           <p className="text-sm text-slate-300">
             Drop in a walkthrough note and review draft line items before applying.
           </p>
         </div>
-        <button
-          onClick={handleGenerateDrafts}
-          className="inline-flex items-center justify-center rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-slate-900 shadow-[0_12px_20px_rgba(47,180,255,0.25)]"
-          disabled={status === 'loading'}
-        >
-          {status === 'loading' ? 'Generating...' : 'Generate drafts'}
-        </button>
+        <div className="flex flex-wrap gap-3">
+          <button
+            onClick={handleLoadLatestNote}
+            className="inline-flex items-center justify-center rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-slate-100"
+            disabled={noteStatus === 'loading'}
+          >
+            {noteStatus === 'loading' ? 'Loading...' : 'Use latest walkthrough note'}
+          </button>
+          <button
+            onClick={handleGenerateDrafts}
+            className="inline-flex items-center justify-center rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-slate-900 shadow-[0_12px_20px_rgba(47,180,255,0.25)]"
+            disabled={status === 'loading'}
+          >
+            {status === 'loading' ? 'Generating...' : 'Generate drafts'}
+          </button>
+        </div>
       </div>
 
       <textarea
@@ -260,9 +289,8 @@ export function EstimateAssistant({
         </div>
       ) : null}
 
-      {error ? (
-        <p className="mt-3 text-xs text-rose-300">{error}</p>
-      ) : null}
+      {noteError ? <p className="mt-3 text-xs text-rose-300">{noteError}</p> : null}
+      {error ? <p className="mt-3 text-xs text-rose-300">{error}</p> : null}
     </section>
   );
 }

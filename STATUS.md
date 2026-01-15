@@ -11,6 +11,7 @@
   - Added Supabase auth gating and estimate persistence in the UI.
   - Added walkthrough UI plus `/api/transcribe` and `/api/vision-count` routes.
   - Added assistant draft takeoff panel and `/api/draft-items` endpoint for reviewable line items.
+  - Added walkthrough latest-note fetch and estimate chat panel using `/api/ai`.
   - Refreshed UI styling with new typography, glass panels, and gradient backgrounds.
   - Archived legacy assets and prior integrations under `legacy/`.
   - Added embeddings backfill script for `pricing_items`.

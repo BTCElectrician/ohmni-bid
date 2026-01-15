@@ -22,6 +22,7 @@ Provide a concrete, code-referenced snapshot of the migrated Next.js + Supabase 
 - Pricing data: JSON snapshot in `data/pricing_database.json`, import helper in `lib/pricing/importSupabase.ts`.
 - Walkthrough capture APIs: `app/api/transcribe/route.ts` and `app/api/vision-count/route.ts` using `lib/ai/*` and `lib/db/supabaseServer.ts`.
 - Drafting API: `app/api/draft-items/route.ts` for transcript-to-draft line items with catalog suggestions.
+- Walkthrough note fetch: `app/api/walkthrough/latest-note/route.ts` for loading the newest transcript into drafting.
 
 ## Core Estimating Logic (code-first)
 - Calculation formula (from `lib/estimate/calc.ts`):
@@ -44,6 +45,7 @@ Provide a concrete, code-referenced snapshot of the migrated Next.js + Supabase 
 - `components/EstimateGrid.tsx` uses AG Grid and recalculates line totals on edit.
 - `components/EstimateSummary.tsx` displays totals derived from `lib/estimate/calc.ts`.
 - `components/EstimateAssistant.tsx` generates reviewable draft line items and applies them only after user approval.
+- `components/EstimateChat.tsx` provides a tool-calling chat view backed by `/api/ai`, with live estimate context.
 - `app/api/export/route.ts` recomputes totals server-side and returns `.xlsx` via ExcelJS.
 
 ## AI Tool-Calling Boundary
@@ -493,12 +495,14 @@ If you want, in a follow-up I can turn this into a concrete "repo plan" (exact n
 - AI endpoint: `app/api/ai/route.ts`
 - Export endpoint: `app/api/export/route.ts`
 - Walkthrough endpoints: `app/api/transcribe/route.ts`, `app/api/vision-count/route.ts`
+- Walkthrough latest-note endpoint: `app/api/walkthrough/latest-note/route.ts`
 - Drafting endpoint: `app/api/draft-items/route.ts`
 - Estimator logic: `lib/estimate/*`
 - Tool helpers: `lib/tools/estimateTools.ts`
 - Supabase server client: `lib/db/supabaseServer.ts`
 - AI helpers: `lib/ai/transcribe.ts`, `lib/ai/visionCount.ts`
 - Assistant UI: `components/EstimateAssistant.tsx`
+- Chat UI: `components/EstimateChat.tsx`
 - Pricing import: `lib/pricing/*`
 - Pricing data: `data/pricing_database.json`
 - Estimate UI: `app/estimate/page.tsx`, `components/EstimateGrid.tsx`, `components/EstimateSummary.tsx`
