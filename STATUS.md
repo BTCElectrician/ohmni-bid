@@ -16,8 +16,17 @@
   - Refreshed UI styling with new typography, glass panels, and gradient backgrounds.
   - Archived legacy assets and prior integrations under `legacy/`.
   - Added embeddings backfill script for `pricing_items`.
+- Commit log (ahead of origin/main):
+  - f68f106 feat(estimate): persist pricing item ids on line items
+  - 0c80bbd feat(chat): add estimator chat panel and latest note fetch
+  - 307897b feat(embeddings): add backfill script and update docs
+  - bfcb418 feat(estimate): add assistant draft panel and draft-items API
+  - 9f757ba Archive legacy assets and register model docs
+  - da32c0c Keep Next.js tsconfig updates
+  - f92a884 Implement chromium owl theme and walkthrough MVP
 - Next steps:
   - Apply `supabase/schema.sql` changes in the Supabase project and confirm RLS policies.
   - Create the `walkthrough` storage bucket (or set `WALKTHROUGH_BUCKET`).
   - Set OpenAI env vars for transcription/vision models in deployment.
   - Run `npm run embeddings:backfill` to populate 1536-dim embeddings.
+  - Push local commits to origin/main when ready.
