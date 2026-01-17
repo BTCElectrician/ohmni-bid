@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "embeddings:backfill": "node scripts/embeddings-backfill.mjs"
+    "embeddings:backfill": "node scripts/embeddings-backfill.mjs",
+    "supabase:apply": "bash scripts/apply-supabase-schema.sh"
   },
   "dependencies": {
     "@ai-sdk/openai": "^1.0.0",
