@@ -19,7 +19,7 @@ Provide a concrete, code-referenced snapshot of the migrated Next.js + Supabase 
 - Estimator engine: pure TypeScript logic in `lib/estimate/*`.
 - AI tools: server-only tool implementations in `lib/tools/estimateTools.ts`.
 - Data layer: Supabase clients in `lib/db/supabase.ts` (browser/service) and `lib/db/supabaseServer.ts` (server), schema in `supabase/schema.sql`.
-- Pricing data: JSON snapshot in `data/pricing_database.json`, import helper in `lib/pricing/importSupabase.ts`.
+- Pricing data: JSON snapshot in `data/pricing_database.json`, import helper in `scripts/pricing/import_pricing.mjs`.
 - Walkthrough capture APIs: `app/api/transcribe/route.ts` and `app/api/vision-count/route.ts` using `lib/ai/*` and `lib/db/supabaseServer.ts`.
 - Drafting API: `app/api/draft-items/route.ts` for transcript-to-draft line items with catalog suggestions.
 - Walkthrough note fetch: `app/api/walkthrough/latest-note/route.ts` for loading the newest transcript into drafting.
@@ -61,7 +61,7 @@ Provide a concrete, code-referenced snapshot of the migrated Next.js + Supabase 
 - `pricing_items` table:
   - Vector embedding: `embedding vector(1536)`
   - Index: ivfflat with cosine ops
-  - Columns: category/subcategory/name/description/size/unit_type/material_cost/labor_hours/market_price/markup_percent
+  - Columns: category/subcategory/name/external_ref/description/size/unit_type/material_cost/labor_hours/market_price/markup_percent
 - `estimates` table:
   - Project info, pricing params, totals, status, metadata
 - `estimate_line_items` table:
@@ -74,8 +74,8 @@ Provide a concrete, code-referenced snapshot of the migrated Next.js + Supabase 
 ## Pricing Data and Copper Price Tracking Ideas
 - `data/pricing_database.json` includes wire fields:
   - `marketPricePer1000ft`, `markupPercent`, `materialCostPer1000ft` (computed if missing)
-- Import helper `lib/pricing/importSupabase.ts`:
-  - Batch inserts into `pricing_items`
+- Import helper `scripts/pricing/import_pricing.mjs`:
+  - Upserts by `external_ref` into `pricing_items`
   - Computes wire material cost if missing
 - Legacy tooling for pricing sync:
   - Extraction: `legacy/scripts/extract_pricing.py`
@@ -506,5 +506,7 @@ If you want, in a follow-up I can turn this into a concrete "repo plan" (exact n
 - Chat UI: `components/EstimateChat.tsx`
 - Pricing import: `lib/pricing/*`
 - Pricing data: `data/pricing_database.json`
+- Pricing extractor: `scripts/pricing/extract_pricing.py`
+- Pricing import script: `scripts/pricing/import_pricing.mjs`
 - Estimate UI: `app/estimate/page.tsx`, `components/EstimateGrid.tsx`, `components/EstimateSummary.tsx`
 - Legacy logic reference: `legacy/ELECTRICAL_BID_LOGIC.md`

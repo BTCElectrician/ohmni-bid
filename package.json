@@ -9,7 +9,9 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "embeddings:backfill": "node scripts/embeddings-backfill.mjs",
-    "supabase:apply": "bash scripts/apply-supabase-schema.sh"
+    "supabase:apply": "bash scripts/apply-supabase-schema.sh",
+    "pricing:extract": "python3 scripts/pricing/extract_pricing.py",
+    "pricing:import": "node scripts/pricing/import_pricing.mjs"
   },
   "dependencies": {
     "@ai-sdk/openai": "^1.0.0",

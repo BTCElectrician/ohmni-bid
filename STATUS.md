@@ -17,6 +17,7 @@
   - Archived legacy assets and prior integrations under `legacy/`.
   - Added embeddings backfill script for `pricing_items`.
   - Added one-brain Supabase setup doc and a single-command schema apply script.
+  - Added pricing extraction + import scripts with stable `external_ref` support.
 - Commit log (ahead of origin/main):
   - f68f106 feat(estimate): persist pricing item ids on line items
   - 0c80bbd feat(chat): add estimator chat panel and latest note fetch

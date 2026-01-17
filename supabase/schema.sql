@@ -54,6 +54,7 @@ create table if not exists pricing_items (
   category text not null,
   subcategory text,
   name text not null,
+  external_ref text,
   description text,
   size text,
   unit_type text not null default 'E',
@@ -70,6 +71,7 @@ create table if not exists pricing_items (
 create index if not exists pricing_items_category_idx on pricing_items(category);
 create index if not exists pricing_items_subcategory_idx on pricing_items(subcategory);
 create index if not exists pricing_items_name_idx on pricing_items(name);
+create unique index if not exists pricing_items_external_ref_idx on pricing_items(external_ref);
 
 -- Vector index for semantic catalog search
 create index if not exists pricing_items_embedding_idx

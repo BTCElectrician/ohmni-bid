@@ -5,6 +5,7 @@ export interface PricingParameters {
 }
 
 export interface ConduitPricingItem {
+  externalRef?: string;
   type: string;
   typeName: string;
   name: string;
@@ -14,6 +15,7 @@ export interface ConduitPricingItem {
 }
 
 export interface WirePricingItem {
+  externalRef?: string;
   material: string;
   type: string;
   size: string;
@@ -25,6 +27,7 @@ export interface WirePricingItem {
 }
 
 export interface LineItemPricing {
+  externalRef?: string;
   category: string;
   description: string;
   materialUnitCost: number;

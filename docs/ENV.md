@@ -6,6 +6,13 @@
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 - `SUPABASE_SERVICE_ROLE_KEY`
 - `SUPABASE_DB_URL` (only needed to run `npm run supabase:apply`)
+- `PRICING_JSON_PATH` (optional override for pricing import)
+- `PRICING_BATCH_SIZE` (default: 500)
+
+## Pricing Extraction
+
+- `EXCEL_PASSWORD` (password for the pricing workbook)
+- `PRICING_XLSX_PATH` (optional override for the Excel workbook path)
 
 ## OpenAI
 
