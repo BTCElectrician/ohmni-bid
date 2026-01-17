@@ -25,3 +25,9 @@ Agent instructions for this repo.
 
 - New stack lives at the repo root.
 - Legacy codebase is preserved under `legacy/` and should not be modified unless explicitly requested.
+
+## Pricing updates (source of truth)
+
+- Use `scripts/pricing/extract_pricing.py` to generate `data/pricing_database.json`.
+- Use `scripts/pricing/import_pricing.mjs` to upsert into `pricing_items` by `external_ref`.
+- Legacy extractor output under `legacy/` is historical only; do not update or depend on it.
