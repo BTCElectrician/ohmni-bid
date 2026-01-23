@@ -27,7 +27,8 @@
   - Expanded Excel export header with project details fields.
   - Clarified Supabase setup/env docs with connection string + key guidance.
   - Added ESLint config, excluded legacy from typecheck, and aligned server Supabase cookie handling.
-- Commit log (ahead of origin/main):
+  - Migrated lint script to ESLint CLI to avoid `next lint` deprecation.
+- Commit log (recent on main):
   - 4dea944 chore: add lint config and fix typecheck
   - 696e991 docs(status): refresh commit log
   - d57bcac feat: add project details and supabase sync updates
@@ -44,4 +45,4 @@
   - f92a884 Implement chromium owl theme and walkthrough MVP
 - Next steps:
   - Set OpenAI env vars for transcription/vision models in deployment.
-  - Push local commits to origin/main when ready.
+  - Re-run `npm audit fix` when registry access is available (current ENOTFOUND).
