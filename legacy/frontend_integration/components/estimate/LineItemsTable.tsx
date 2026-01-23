@@ -252,7 +252,7 @@ function CategorySection({
           >
             <div className="border-t border-border-subtle/50">
               {/* Table Header */}
-              <div className="grid grid-cols-12 gap-2 px-4 py-2 bg-abco-navy/30 text-xs font-medium text-text-secondary uppercase tracking-wide">
+              <div className="grid grid-cols-12 gap-2 px-4 py-2 bg-navy/30 text-xs font-medium text-text-secondary uppercase tracking-wide">
                 <div className="col-span-5">Description</div>
                 <div className="col-span-1 text-right">Qty</div>
                 <div className="col-span-2 text-right">Material</div>

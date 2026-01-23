@@ -99,7 +99,7 @@ export function EstimateStudio({ estimateId, onBack }: EstimateStudioProps) {
   return (
     <div className="flex flex-col h-screen bg-dark-bg overflow-hidden">
       {/* Header */}
-      <header className="flex-shrink-0 border-b border-border-subtle bg-abco-navy/50 backdrop-blur-xl">
+      <header className="flex-shrink-0 border-b border-border-subtle bg-navy/50 backdrop-blur-xl">
         <div className="flex items-center justify-between px-4 h-14">
           {/* Left - Back & Title */}
           <div className="flex items-center gap-3">
@@ -247,7 +247,7 @@ export function EstimateStudio({ estimateId, onBack }: EstimateStudioProps) {
               animate={{ width: 320, opacity: 1 }}
               exit={{ width: 0, opacity: 0 }}
               transition={{ duration: 0.2, ease: 'easeInOut' }}
-              className="flex-shrink-0 border-r border-border-subtle bg-abco-navy/30 overflow-hidden"
+              className="flex-shrink-0 border-r border-border-subtle bg-navy/30 overflow-hidden"
             >
               <ProjectInfoPanel
                 estimate={estimate}
@@ -287,7 +287,7 @@ export function EstimateStudio({ estimateId, onBack }: EstimateStudioProps) {
               animate={{ width: 400, opacity: 1 }}
               exit={{ width: 0, opacity: 0 }}
               transition={{ duration: 0.2, ease: 'easeInOut' }}
-              className="flex-shrink-0 border-l border-border-subtle bg-abco-navy/30 overflow-hidden"
+              className="flex-shrink-0 border-l border-border-subtle bg-navy/30 overflow-hidden"
             >
               <EstimateChat
                 estimateId={estimate?.id}

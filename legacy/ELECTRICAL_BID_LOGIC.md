@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-This Excel workbook is a **commercial electrical estimating system** used by ABCO Electrical Construction and Design. It calculates electrical project bids by:
+This Excel workbook is a **commercial electrical estimating system** used by Ohmni Oracle LLC. It calculates electrical project bids by:
 
 1. Taking line item quantities from a takeoff
 2. Looking up material costs and labor hours from pricing databases

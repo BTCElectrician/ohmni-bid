@@ -71,7 +71,7 @@ export interface ProjectInfo {
   gcName?: string;
   contactName?: string;
   preparedBy?: string;
-  date?: Date;
+  date?: string;
   squareFootage?: number;
 }
 

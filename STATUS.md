@@ -18,6 +18,14 @@
   - Added embeddings backfill script for `pricing_items`.
   - Added one-brain Supabase setup doc and a single-command schema apply script.
   - Added pricing extraction + import scripts with stable `external_ref` support.
+  - Removed legacy client branding references and normalized color token naming.
+  - Added root wrapper scripts for legacy price sync monitor/email automation.
+  - Applied Supabase schema to the new project (via pooler connection).
+  - Added walkthrough storage bucket + org-based storage policies to the schema.
+  - Imported pricing items into Supabase (295 upserts) and completed embeddings backfill.
+  - Added project details form and persisted prepared-by/bid-date in estimate metadata.
+  - Expanded Excel export header with project details fields.
+  - Clarified Supabase setup/env docs with connection string + key guidance.
 - Commit log (ahead of origin/main):
   - f68f106 feat(estimate): persist pricing item ids on line items
   - 0c80bbd feat(chat): add estimator chat panel and latest note fetch
@@ -27,8 +35,5 @@
   - da32c0c Keep Next.js tsconfig updates
   - f92a884 Implement chromium owl theme and walkthrough MVP
 - Next steps:
-  - Apply `supabase/schema.sql` changes in the Supabase project and confirm RLS policies.
-  - Create the `walkthrough` storage bucket (or set `WALKTHROUGH_BUCKET`).
   - Set OpenAI env vars for transcription/vision models in deployment.
-  - Run `npm run embeddings:backfill` to populate 1536-dim embeddings.
   - Push local commits to origin/main when ready.

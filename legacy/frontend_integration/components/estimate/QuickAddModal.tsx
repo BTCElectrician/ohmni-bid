@@ -199,7 +199,7 @@ export function QuickAddModal({ isOpen, onClose, onAddItems }: QuickAddModalProp
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           className={cn(
             'relative w-full max-w-4xl max-h-[85vh]',
-            'bg-abco-navy rounded-2xl shadow-2xl',
+            'bg-navy rounded-2xl shadow-2xl',
             'border border-border-subtle',
             'flex flex-col overflow-hidden'
           )}
@@ -402,7 +402,7 @@ export function QuickAddModal({ isOpen, onClose, onAddItems }: QuickAddModalProp
           </div>
 
           {/* Footer */}
-          <div className="flex-shrink-0 p-4 border-t border-border-subtle bg-abco-navy/50">
+          <div className="flex-shrink-0 p-4 border-t border-border-subtle bg-navy/50">
             <div className="flex items-center justify-between">
               {/* Selected Summary */}
               <div className="flex items-center gap-6">

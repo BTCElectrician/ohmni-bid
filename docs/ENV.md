@@ -2,12 +2,15 @@
 
 ## Supabase
 
-- `NEXT_PUBLIC_SUPABASE_URL`
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-- `SUPABASE_SERVICE_ROLE_KEY`
-- `SUPABASE_DB_URL` (only needed to run `npm run supabase:apply`)
+- `NEXT_PUBLIC_SUPABASE_URL` (format: `https://<project-ref>.supabase.co`)
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY` (Supabase "publishable" key)
+- `SUPABASE_SERVICE_ROLE_KEY` (Supabase "secret" key; server-only)
+- `SUPABASE_DB_URL` (copy from Connect > Connection string; use Session Pooler on IPv4; only needed for `npm run supabase:apply`)
 - `PRICING_JSON_PATH` (optional override for pricing import)
 - `PRICING_BATCH_SIZE` (default: 500)
+
+If your DB password includes `$`, wrap `SUPABASE_DB_URL` in single quotes when
+exporting it in a shell.
 
 ## Pricing Extraction
 

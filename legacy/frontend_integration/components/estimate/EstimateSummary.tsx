@@ -101,7 +101,7 @@ export function EstimateSummary({
       animate={{ y: 0, opacity: 1 }}
       className={cn(
         'flex-shrink-0 border-t border-border-subtle',
-        'bg-gradient-to-r from-abco-navy via-deep-navy to-abco-navy',
+        'bg-gradient-to-r from-navy via-deep-navy to-navy',
         'backdrop-blur-xl'
       )}
     >

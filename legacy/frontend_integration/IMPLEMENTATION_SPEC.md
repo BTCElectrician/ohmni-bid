@@ -252,7 +252,7 @@ module.exports = {
       colors: {
         'electric-blue': '#00D4FF',
         'electric-glow': '#00FF88',
-        'abco-navy': '#0A1628',
+        'navy': '#0A1628',
         'dark-bg': '#030712',
         'surface-elevated': '#1E293B',
         'border-subtle': '#334155',

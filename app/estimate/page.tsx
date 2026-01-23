@@ -7,30 +7,19 @@ import { EstimateAssistant, type DraftLineItem } from '@/components/EstimateAssi
 import { EstimateChat } from '@/components/EstimateChat';
 import { EstimateGrid } from '@/components/EstimateGrid';
 import { EstimateHeader } from '@/components/EstimateHeader';
+import { ProjectDetails } from '@/components/ProjectDetails';
 import { EstimateSummary } from '@/components/EstimateSummary';
 import {
   calculateEstimateTotals,
-  calculateLaborExtension,
   calculateLineItemTotal,
-  calculateMaterialExtension,
   createLineItem
 } from '@/lib/estimate/calc';
 import { DEFAULT_PARAMETERS } from '@/lib/estimate/defaults';
+import { normalizeLineItems } from '@/lib/estimate/normalize';
+import { EMPTY_LINE_ITEM_TEMPLATE, EMPTY_PROJECT } from '@/lib/estimate/templates';
 import type { EstimateParameters, LineItem, ProjectInfo } from '@/lib/estimate/types';
 import { generateId } from '@/lib/estimate/utils';
 import { useWorkspaceAuth } from '@/lib/hooks/useWorkspace';
-
-const emptyTemplate = {
-  category: 'GENERAL_CONDITIONS',
-  name: 'New item',
-  materialUnitCost: 0,
-  unitType: 'E',
-  laborHoursPerUnit: 0
-} as const;
-
-const emptyProject: ProjectInfo = {
-  projectName: 'Untitled Estimate'
-};
 
 export default function EstimatePage() {
   const {
@@ -45,12 +34,13 @@ export default function EstimatePage() {
   const [authEmail, setAuthEmail] = useState('');
   const [authMessage, setAuthMessage] = useState('');
 
-  const [project, setProject] = useState<ProjectInfo>(emptyProject);
+  const [project, setProject] = useState<ProjectInfo>(EMPTY_PROJECT);
   const [parameters, setParameters] = useState<EstimateParameters>({
     ...DEFAULT_PARAMETERS
   });
   const [lineItems, setLineItems] = useState<LineItem[]>([]);
   const [estimateId, setEstimateId] = useState<string | null>(null);
+  const [estimateMetadata, setEstimateMetadata] = useState<Record<string, unknown>>({});
   const [hasLoaded, setHasLoaded] = useState(false);
   const [estimateLoading, setEstimateLoading] = useState(false);
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -106,13 +96,22 @@ export default function EstimatePage() {
 
       if (!estimateRow) {
         setEstimateId(null);
-        setProject(emptyProject);
+        setProject(EMPTY_PROJECT);
         setParameters({ ...DEFAULT_PARAMETERS });
         setLineItems([]);
+        setEstimateMetadata({});
         setEstimateLoading(false);
         setHasLoaded(true);
         return;
       }
+
+      const metadata =
+        estimateRow.estimate_metadata &&
+        typeof estimateRow.estimate_metadata === 'object'
+          ? estimateRow.estimate_metadata
+          : {};
+
+      setEstimateMetadata(metadata as Record<string, unknown>);
 
       setEstimateId(estimateRow.id);
       setProject({
@@ -120,7 +119,15 @@ export default function EstimatePage() {
         projectNumber: estimateRow.project_number || undefined,
         location: estimateRow.project_location || undefined,
         gcName: estimateRow.gc_name || undefined,
-        squareFootage: estimateRow.square_footage || undefined
+        squareFootage: estimateRow.square_footage || undefined,
+        preparedBy:
+          typeof (metadata as Record<string, unknown>).prepared_by === 'string'
+            ? ((metadata as Record<string, unknown>).prepared_by as string)
+            : undefined,
+        date:
+          typeof (metadata as Record<string, unknown>).bid_date === 'string'
+            ? ((metadata as Record<string, unknown>).bid_date as string)
+            : undefined
       });
       setParameters({
         laborRate: Number(estimateRow.labor_rate || DEFAULT_PARAMETERS.laborRate),
@@ -175,7 +182,12 @@ export default function EstimatePage() {
   }, [user, orgId, hasLoaded, supabase]);
 
   const addRow = () => {
-    const lineItem = createLineItem(emptyTemplate, 1, parameters, generateId());
+    const lineItem = createLineItem(
+      EMPTY_LINE_ITEM_TEMPLATE,
+      1,
+      parameters,
+      generateId()
+    );
     setLineItems(items => [...items, lineItem]);
   };
 
@@ -195,39 +207,13 @@ export default function EstimatePage() {
     setLineItems(items => [...items, ...newItems]);
   };
 
-  const normalizeLineItems = (items: LineItem[]) =>
-    items.map(item => {
-      const materialExtension = calculateMaterialExtension(
-        item.quantity,
-        item.materialUnitCost,
-        item.unitType
-      );
-      const laborExtension = calculateLaborExtension(
-        item.quantity,
-        item.laborHoursPerUnit,
-        item.unitType
-      );
-      const totalCost = calculateLineItemTotal(
-        materialExtension,
-        laborExtension,
-        parameters
-      );
-
-      return {
-        ...item,
-        materialExtension,
-        laborExtension,
-        totalCost
-      };
-    });
-
   const handleSave = async () => {
     if (!user || !orgId) return;
 
     setSaveStatus('saving');
     setSaveError(null);
 
-    const normalizedItems = normalizeLineItems(lineItems);
+    const normalizedItems = normalizeLineItems(lineItems, parameters);
     setLineItems(normalizedItems);
 
     const totalsSnapshot = calculateEstimateTotals(
@@ -235,6 +221,12 @@ export default function EstimatePage() {
       parameters,
       project.squareFootage
     );
+
+    const metadataPayload = {
+      ...estimateMetadata,
+      prepared_by: project.preparedBy || null,
+      bid_date: project.date || null
+    };
 
     const payload = {
       org_id: orgId,
@@ -260,7 +252,7 @@ export default function EstimatePage() {
       final_bid: totalsSnapshot.finalBid,
       price_per_sqft: totalsSnapshot.pricePerSqFt || null,
       status: 'draft',
-      estimate_metadata: {},
+      estimate_metadata: metadataPayload,
       updated_at: new Date().toISOString()
     };
 
@@ -469,6 +461,10 @@ export default function EstimatePage() {
                 />
               </div>
             </div>
+          </div>
+
+          <div className="animate-rise-delayed">
+            <ProjectDetails project={project} onChange={setProject} />
           </div>
 
           <div className="glass-panel rounded-3xl p-6 animate-rise-delayed">

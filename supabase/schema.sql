@@ -398,6 +398,47 @@ create policy "walkthrough photos delete for org members" on walkthrough_photos
     )
   );
 
+-- Storage for walkthrough assets
+insert into storage.buckets (id, name, public)
+values ('walkthrough', 'walkthrough', false)
+on conflict (id) do nothing;
+
+drop policy if exists "walkthrough objects select for org members" on storage.objects;
+create policy "walkthrough objects select for org members" on storage.objects
+  for select using (
+    bucket_id = 'walkthrough'
+    and split_part(name, '/', 1) ~ '^org-[0-9a-fA-F-]{36}$'
+    and public.is_org_member(replace(split_part(name, '/', 1), 'org-', '')::uuid)
+  );
+
+drop policy if exists "walkthrough objects insert for org members" on storage.objects;
+create policy "walkthrough objects insert for org members" on storage.objects
+  for insert with check (
+    bucket_id = 'walkthrough'
+    and split_part(name, '/', 1) ~ '^org-[0-9a-fA-F-]{36}$'
+    and public.is_org_member(replace(split_part(name, '/', 1), 'org-', '')::uuid)
+  );
+
+drop policy if exists "walkthrough objects update for org members" on storage.objects;
+create policy "walkthrough objects update for org members" on storage.objects
+  for update using (
+    bucket_id = 'walkthrough'
+    and split_part(name, '/', 1) ~ '^org-[0-9a-fA-F-]{36}$'
+    and public.is_org_member(replace(split_part(name, '/', 1), 'org-', '')::uuid)
+  ) with check (
+    bucket_id = 'walkthrough'
+    and split_part(name, '/', 1) ~ '^org-[0-9a-fA-F-]{36}$'
+    and public.is_org_member(replace(split_part(name, '/', 1), 'org-', '')::uuid)
+  );
+
+drop policy if exists "walkthrough objects delete for org members" on storage.objects;
+create policy "walkthrough objects delete for org members" on storage.objects
+  for delete using (
+    bucket_id = 'walkthrough'
+    and split_part(name, '/', 1) ~ '^org-[0-9a-fA-F-]{36}$'
+    and public.is_org_member(replace(split_part(name, '/', 1), 'org-', '')::uuid)
+  );
+
 -- Vector search RPC
 create or replace function match_pricing_items(
   query_embedding vector(1536),

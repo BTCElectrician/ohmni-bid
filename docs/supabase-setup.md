@@ -6,16 +6,17 @@ apply changes from one place alongside your code.
 ## Required setup
 
 1. Create a Supabase project.
-2. Copy the Postgres connection string from the Supabase dashboard (Database > Connection string).
+2. Open Connect > Connection string in the Supabase dashboard. Keep Type = URI,
+   Source = Primary Database, and choose Session Pooler if you are on an IPv4
+   network.
 3. Set `SUPABASE_DB_URL` locally and apply the schema:
 
 ```bash
-export SUPABASE_DB_URL="postgresql://..."
-bash scripts/apply-supabase-schema.sh
+export SUPABASE_DB_URL='postgresql://...'
+npm run supabase:apply
 ```
 
-4. Create the `walkthrough` storage bucket in Supabase Storage.
-5. Apply storage policies for authenticated users (see your SQL notes or ask me to re-share).
+4. The schema apply now creates the `walkthrough` storage bucket and its policies.
 
 ## Runtime env vars
 
@@ -27,6 +28,9 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=...
 SUPABASE_SERVICE_ROLE_KEY=...
 OPENAI_API_KEY=...
 ```
+
+Supabase labels the keys as publishable/secret in the dashboard. Use publishable
+for `NEXT_PUBLIC_SUPABASE_ANON_KEY` and secret for `SUPABASE_SERVICE_ROLE_KEY`.
 
 That’s it. The schema + policies now live in `supabase/schema.sql`, and the
 application reads from the same source of truth.

@@ -12,9 +12,13 @@ export async function POST(req: Request) {
   const sheet = workbook.addWorksheet('Estimate');
 
   sheet.addRow(['Project', project?.projectName || 'Untitled']);
+  sheet.addRow(['Project Number', project?.projectNumber || '']);
   sheet.addRow(['Location', project?.location || '']);
+  sheet.addRow(['GC / Owner', project?.gcName || '']);
+  sheet.addRow(['Contact', project?.contactName || '']);
   sheet.addRow(['Prepared By', project?.preparedBy || '']);
-  sheet.addRow(['Date', project?.date || new Date().toISOString().slice(0, 10)]);
+  sheet.addRow(['Bid Date', project?.date || new Date().toISOString().slice(0, 10)]);
+  sheet.addRow(['Square Footage', project?.squareFootage || '']);
   sheet.addRow([]);
 
   sheet.addRow([
