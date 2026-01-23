@@ -29,6 +29,7 @@
   - Added ESLint config, excluded legacy from typecheck, and aligned server Supabase cookie handling.
   - Migrated lint script to ESLint CLI to avoid `next lint` deprecation.
 - Commit log (recent on main):
+  - cdca9f7 chore: migrate lint script
   - 4dea944 chore: add lint config and fix typecheck
   - 696e991 docs(status): refresh commit log
   - d57bcac feat: add project details and supabase sync updates
