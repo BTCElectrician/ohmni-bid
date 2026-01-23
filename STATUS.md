@@ -30,6 +30,7 @@
   - Migrated lint script to ESLint CLI to avoid `next lint` deprecation.
   - Applied npm audit fixes (AI SDK v6), updated chat transport to text streaming, and refreshed tool schemas.
 - Commit log (recent on main):
+  - 80bc648 chore: apply audit fixes and update chat
   - cdca9f7 chore: migrate lint script
   - 4dea944 chore: add lint config and fix typecheck
   - 696e991 docs(status): refresh commit log
