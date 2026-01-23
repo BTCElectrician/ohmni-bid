@@ -23,6 +23,7 @@ export function useWorkspaceAuth(): WorkspaceAuthState {
   const [authReady, setAuthReady] = useState(false);
   const [orgLoading, setOrgLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [devBypassAttempted, setDevBypassAttempted] = useState(false);
 
   useEffect(() => {
     if (!hasSupabaseEnv) {
@@ -87,6 +88,44 @@ export function useWorkspaceAuth(): WorkspaceAuthState {
     };
   }, [authReady, sessionUser, supabase]);
 
+  const attemptDevBypass = useCallback(
+    async (email: string) => {
+      if (process.env.NODE_ENV !== 'development' || devBypassAttempted) {
+        return false;
+      }
+
+      setDevBypassAttempted(true);
+
+      const response = await fetch('/api/auth/dev-login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        setError(data.error || 'Dev login failed.');
+        return false;
+      }
+
+      const { data: sessionData, error: sessionError } =
+        await supabase.auth.getSession();
+      if (sessionError) {
+        setError(sessionError.message);
+        return false;
+      }
+      if (!sessionData.session) {
+        setError('Dev login did not return a session.');
+        return false;
+      }
+
+      setSession(sessionData.session);
+      setError(null);
+      return true;
+    },
+    [devBypassAttempted, supabase]
+  );
+
   const signInWithEmail = useCallback(
     async (email: string) => {
       if (!hasSupabaseEnv) {
@@ -103,12 +142,19 @@ export function useWorkspaceAuth(): WorkspaceAuthState {
         options: redirectTo ? { emailRedirectTo: redirectTo } : undefined
       });
       if (signInError) {
+        const message = signInError.message.toLowerCase();
+        if (message.includes('rate limit')) {
+          const bypassed = await attemptDevBypass(email);
+          if (bypassed) {
+            return true;
+          }
+        }
         setError(signInError.message);
         return false;
       }
       return true;
     },
-    [supabase]
+    [attemptDevBypass, supabase]
   );
 
   const signOut = useCallback(async () => {

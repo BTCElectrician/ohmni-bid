@@ -9,3 +9,4 @@ __pycache__/
 *.pyc
 legacy/venv/
 *.tsbuildinfo
+supabase/.temp/

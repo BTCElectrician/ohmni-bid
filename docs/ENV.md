@@ -30,3 +30,7 @@ exporting it in a shell.
 ## Walkthrough Storage
 
 - `WALKTHROUGH_BUCKET` (default: walkthrough)
+
+## Local Auth Bypass (Dev)
+
+- `DEV_LOGIN_EMAIL` (optional; used by `/api/auth/dev-login` if no email is provided)

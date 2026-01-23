@@ -29,6 +29,7 @@
   - Added ESLint config, excluded legacy from typecheck, and aligned server Supabase cookie handling.
   - Migrated lint script to ESLint CLI to avoid `next lint` deprecation.
   - Applied npm audit fixes (AI SDK v6), updated chat transport to text streaming, and refreshed tool schemas.
+  - Added a dev auth bypass endpoint to allow local sign-in when magic link emails are rate-limited.
 - Commit log (recent on main):
   - 80bc648 chore: apply audit fixes and update chat
   - cdca9f7 chore: migrate lint script
