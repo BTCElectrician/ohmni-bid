@@ -28,6 +28,8 @@
   - Clarified Supabase setup/env docs with connection string + key guidance.
   - Added ESLint config, excluded legacy from typecheck, and aligned server Supabase cookie handling.
 - Commit log (ahead of origin/main):
+  - 4dea944 chore: add lint config and fix typecheck
+  - 696e991 docs(status): refresh commit log
   - d57bcac feat: add project details and supabase sync updates
   - 8d3a726 docs(agents): document pricing update workflow
   - 35c91d6 feat(pricing): add extractor/import pipeline with external refs
