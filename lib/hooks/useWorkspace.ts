@@ -57,16 +57,18 @@ export function useWorkspaceAuth(): WorkspaceAuthState {
     };
   }, [supabase]);
 
+  const sessionUser = session?.user ?? null;
+
   useEffect(() => {
     if (!authReady || !hasSupabaseEnv) return;
-    if (!session?.user) {
+    if (!sessionUser) {
       setOrgId(null);
       return;
     }
 
     let active = true;
     setOrgLoading(true);
-    getOrCreateOrgId(supabase, session.user)
+    getOrCreateOrgId(supabase, sessionUser)
       .then(id => {
         if (!active) return;
         setOrgId(id);
@@ -83,7 +85,7 @@ export function useWorkspaceAuth(): WorkspaceAuthState {
     return () => {
       active = false;
     };
-  }, [authReady, session?.user?.id, supabase]);
+  }, [authReady, sessionUser, supabase]);
 
   const signInWithEmail = useCallback(
     async (email: string) => {

@@ -26,6 +26,7 @@
   - Added project details form and persisted prepared-by/bid-date in estimate metadata.
   - Expanded Excel export header with project details fields.
   - Clarified Supabase setup/env docs with connection string + key guidance.
+  - Added ESLint config, excluded legacy from typecheck, and aligned server Supabase cookie handling.
 - Commit log (ahead of origin/main):
   - d57bcac feat: add project details and supabase sync updates
   - 8d3a726 docs(agents): document pricing update workflow

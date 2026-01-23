@@ -86,9 +86,11 @@ export async function POST(req: Request) {
   const { messages, context } = await req.json();
   const model = process.env.OPENAI_CHAT_MODEL || 'gpt-4.1-mini';
   const contextBlock = formatContext(context);
+  // Bridge type mismatch between ai SDK versions.
+  const aiModel = openai(model) as any;
 
   const result = await streamText({
-    model: openai(model),
+    model: aiModel,
     system:
       'You are an estimating assistant. The agent interprets intent, but code computes prices. ' +
       'Always call tools for pricing, validation, and totals. Never guess numbers.' +

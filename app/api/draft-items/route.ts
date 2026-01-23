@@ -49,6 +49,8 @@ export async function POST(req: Request) {
   }
 
   const model = process.env.OPENAI_CHAT_MODEL || 'gpt-4.1-mini';
+  // Bridge type mismatch between ai SDK versions.
+  const aiModel = openai(model) as any;
 
   const prompt = [
     'Transcript or walkthrough notes:',
@@ -74,7 +76,7 @@ export async function POST(req: Request) {
 
   try {
     const result = await generateObject({
-      model: openai(model),
+      model: aiModel,
       temperature: 0.2,
       system:
         'You are an electrical estimator assistant. ' +

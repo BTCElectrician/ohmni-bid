@@ -58,11 +58,7 @@ export default function EstimatePage() {
         )
       }))
     );
-  }, [
-    parameters.laborRate,
-    parameters.materialTaxRate,
-    parameters.overheadProfitRate
-  ]);
+  }, [parameters]);
 
   const totals = useMemo(
     () => calculateEstimateTotals(lineItems, parameters, project.squareFootage),
