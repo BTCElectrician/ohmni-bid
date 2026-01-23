@@ -1,7 +1,8 @@
 'use client';
 
-import { useMemo, useState } from 'react';
-import { useChat } from 'ai/react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { TextStreamChatTransport } from 'ai';
+import { useChat } from '@ai-sdk/react';
 
 import type { Estimate, EstimateParameters, LineItem, ProjectInfo } from '@/lib/estimate/types';
 import { formatCurrency, formatHours } from '@/lib/estimate/utils';
@@ -22,7 +23,7 @@ export function EstimateChat({
   lineItems,
   totals
 }: EstimateChatProps) {
-  const [error, setError] = useState<string | null>(null);
+  const [input, setInput] = useState('');
 
   const context = useMemo(
     () => ({
@@ -39,11 +40,42 @@ export function EstimateChat({
     [project, parameters, totals, lineItems]
   );
 
-  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
-    api: '/api/ai',
-    body: { context },
-    onError: err => setError(err.message)
-  });
+  const contextRef = useRef(context);
+
+  useEffect(() => {
+    contextRef.current = context;
+  }, [context]);
+
+  const transport = useMemo(
+    () =>
+      new TextStreamChatTransport({
+        api: '/api/ai',
+        body: () => ({ context: contextRef.current })
+      }),
+    []
+  );
+
+  const { messages, sendMessage, status, error } = useChat({ transport });
+  const isLoading = status === 'submitted' || status === 'streaming';
+
+  const handleSubmit = async (event?: { preventDefault?: () => void }) => {
+    event?.preventDefault?.();
+    const text = input.trim();
+    if (!text || isLoading) return;
+    setInput('');
+    try {
+      await sendMessage({ text });
+    } catch (err) {
+      setInput(text);
+      console.error(err);
+    }
+  };
+
+  const messageText = (message: (typeof messages)[number]) =>
+    message.parts
+      .filter(part => part.type === 'text')
+      .map(part => part.text)
+      .join('');
 
   return (
     <section className="glass-panel rounded-3xl p-6 animate-rise-delayed">
@@ -84,7 +116,7 @@ export function EstimateChat({
             <div className="text-xs uppercase tracking-wider text-slate-400">
               {message.role === 'user' ? 'You' : 'Assistant'}
             </div>
-            <div className="whitespace-pre-wrap">{message.content}</div>
+            <div className="whitespace-pre-wrap">{messageText(message)}</div>
           </div>
         ))}
       </div>
@@ -92,7 +124,7 @@ export function EstimateChat({
       <form onSubmit={handleSubmit} className="mt-4 flex flex-col gap-3">
         <textarea
           value={input}
-          onChange={handleInputChange}
+          onChange={event => setInput(event.target.value)}
           placeholder="Ask: Validate conduit fill for 8 THHN #12 in 3/4 EMT."
           rows={3}
           className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-500"
@@ -111,7 +143,7 @@ export function EstimateChat({
         </div>
       </form>
 
-      {error ? <p className="mt-2 text-xs text-rose-300">{error}</p> : null}
+      {error ? <p className="mt-2 text-xs text-rose-300">{error.message}</p> : null}
     </section>
   );
 }

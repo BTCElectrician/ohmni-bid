@@ -28,6 +28,7 @@
   - Clarified Supabase setup/env docs with connection string + key guidance.
   - Added ESLint config, excluded legacy from typecheck, and aligned server Supabase cookie handling.
   - Migrated lint script to ESLint CLI to avoid `next lint` deprecation.
+  - Applied npm audit fixes (AI SDK v6), updated chat transport to text streaming, and refreshed tool schemas.
 - Commit log (recent on main):
   - cdca9f7 chore: migrate lint script
   - 4dea944 chore: add lint config and fix typecheck

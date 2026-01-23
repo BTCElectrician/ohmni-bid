@@ -1,5 +1,5 @@
 import { openai } from '@ai-sdk/openai';
-import { streamText, tool } from 'ai';
+import { convertToModelMessages, streamText, tool } from 'ai';
 import { z } from 'zod';
 import {
   calculateEstimateFromItems,
@@ -89,67 +89,75 @@ export async function POST(req: Request) {
   // Bridge type mismatch between ai SDK versions.
   const aiModel = openai(model) as any;
 
+  const tools = {
+    searchCatalog: tool({
+      description: 'Search the pricing catalog using semantic + filter search.',
+      inputSchema: z.object({
+        query: z.string(),
+        category: z.string().optional(),
+        limit: z.number().int().optional()
+      }),
+      execute: async input => searchCatalog(input)
+    }),
+    getPricingItem: tool({
+      description: 'Fetch a pricing item by ID for exact costs.',
+      inputSchema: z.object({
+        id: z.string()
+      }),
+      execute: async ({ id }) => getPricingItemById(id)
+    }),
+    calculateEstimate: tool({
+      description: 'Compute totals for a set of line items using code-first math.',
+      inputSchema: z.object({
+        items: z.array(
+          z.object({
+            category: z.string(),
+            description: z.string(),
+            quantity: z.number(),
+            unitType: z.enum(['E', 'C', 'M', 'Lot']),
+            materialUnitCost: z.number(),
+            laborHoursPerUnit: z.number()
+          })
+        ),
+        parameters: z
+          .object({
+            laborRate: z.number(),
+            materialTaxRate: z.number(),
+            overheadProfitRate: z.number()
+          })
+          .optional()
+      }),
+      execute: async ({ items, parameters }) => {
+        const params = { ...DEFAULT_PARAMETERS, ...parameters };
+        return calculateEstimateFromItems(items, params);
+      }
+    }),
+    validateConduitFill: tool({
+      description: 'Validate conduit fill using sizing tables.',
+      inputSchema: z.object({
+        wireSize: z.string(),
+        conductorCount: z.number().int(),
+        conduitSize: z.string()
+      }),
+      execute: async input => validateConduitFill(input)
+    })
+  };
+
+  const uiMessages = Array.isArray(messages) ? messages : [];
+  const modelMessages = await convertToModelMessages(
+    uiMessages.map(({ id: _id, ...rest }) => rest),
+    { tools }
+  );
+
   const result = await streamText({
     model: aiModel,
     system:
       'You are an estimating assistant. The agent interprets intent, but code computes prices. ' +
       'Always call tools for pricing, validation, and totals. Never guess numbers.' +
       (contextBlock ? `\n\nCurrent estimate context:\n${contextBlock}` : ''),
-    messages,
-    tools: {
-      searchCatalog: tool({
-        description: 'Search the pricing catalog using semantic + filter search.',
-        parameters: z.object({
-          query: z.string(),
-          category: z.string().optional(),
-          limit: z.number().int().optional()
-        }),
-        execute: async input => searchCatalog(input)
-      }),
-      getPricingItem: tool({
-        description: 'Fetch a pricing item by ID for exact costs.',
-        parameters: z.object({
-          id: z.string()
-        }),
-        execute: async ({ id }) => getPricingItemById(id)
-      }),
-      calculateEstimate: tool({
-        description: 'Compute totals for a set of line items using code-first math.',
-        parameters: z.object({
-          items: z.array(
-            z.object({
-              category: z.string(),
-              description: z.string(),
-              quantity: z.number(),
-              unitType: z.enum(['E', 'C', 'M', 'Lot']),
-              materialUnitCost: z.number(),
-              laborHoursPerUnit: z.number()
-            })
-          ),
-          parameters: z
-            .object({
-              laborRate: z.number(),
-              materialTaxRate: z.number(),
-              overheadProfitRate: z.number()
-            })
-            .optional()
-        }),
-        execute: async ({ items, parameters }) => {
-          const params = { ...DEFAULT_PARAMETERS, ...parameters };
-          return calculateEstimateFromItems(items, params);
-        }
-      }),
-      validateConduitFill: tool({
-        description: 'Validate conduit fill using sizing tables.',
-        parameters: z.object({
-          wireSize: z.string(),
-          conductorCount: z.number().int(),
-          conduitSize: z.string()
-        }),
-        execute: async input => validateConduitFill(input)
-      })
-    }
+    messages: modelMessages,
+    tools
   });
 
-  return result.toDataStreamResponse();
+  return result.toTextStreamResponse();
 }
