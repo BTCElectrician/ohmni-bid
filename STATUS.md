@@ -27,6 +27,11 @@
   - Expanded Excel export header with project details fields.
   - Clarified Supabase setup/env docs with connection string + key guidance.
 - Commit log (ahead of origin/main):
+  - d57bcac feat: add project details and supabase sync updates
+  - 8d3a726 docs(agents): document pricing update workflow
+  - 35c91d6 feat(pricing): add extractor/import pipeline with external refs
+  - 80d1f12 docs(ops): add one-brain Supabase setup flow
+  - a5b1560 docs(status): log current commit stack and next steps
   - f68f106 feat(estimate): persist pricing item ids on line items
   - 0c80bbd feat(chat): add estimator chat panel and latest note fetch
   - 307897b feat(embeddings): add backfill script and update docs
