@@ -31,6 +31,7 @@
   - Migrated lint script to ESLint CLI to avoid `next lint` deprecation.
   - Applied npm audit fixes (AI SDK v6), updated chat transport to text streaming, and refreshed tool schemas.
   - Added a dev auth bypass endpoint to allow local sign-in when magic link emails are rate-limited.
+  - Scheduled local price sync email monitor via launchd (daily at 7:00am).
 - Commit log (recent on main):
   - 91b5fce chore(pricing): refresh pricing database
   - 9d93ce1 feat(pricing): add full sync script

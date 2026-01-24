@@ -43,6 +43,14 @@ python3 scripts/pricing/price_sync_monitor.py
 This records checks in `data/sync_history.json` so you can see if the master Excel
 changed since the last sync.
 
+## Optional: Email the monitor summary
+
+```bash
+python3 scripts/pricing/price_sync_email.py
+```
+
+This sends a summary email using `EMAIL_USER`, `EMAIL_PASS`, and `EMAIL_TO`.
+
 ## Env vars used
 
 - `EXCEL_PASSWORD`
