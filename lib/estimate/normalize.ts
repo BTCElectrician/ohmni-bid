@@ -10,14 +10,18 @@ export function normalizeLineItems(
   parameters: EstimateParameters
 ): LineItem[] {
   return items.map(item => {
+    const quantity = toNumber(item.quantity);
+    const materialUnitCost = toNumber(item.materialUnitCost);
+    const laborHoursPerUnit = toNumber(item.laborHoursPerUnit);
+
     const materialExtension = calculateMaterialExtension(
-      item.quantity,
-      item.materialUnitCost,
+      quantity,
+      materialUnitCost,
       item.unitType
     );
     const laborExtension = calculateLaborExtension(
-      item.quantity,
-      item.laborHoursPerUnit,
+      quantity,
+      laborHoursPerUnit,
       item.unitType
     );
     const totalCost = calculateLineItemTotal(
@@ -28,9 +32,17 @@ export function normalizeLineItems(
 
     return {
       ...item,
+      quantity,
+      materialUnitCost,
+      laborHoursPerUnit,
       materialExtension,
       laborExtension,
       totalCost
     };
   });
+}
+
+function toNumber(value: number | null | undefined): number {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : 0;
 }
