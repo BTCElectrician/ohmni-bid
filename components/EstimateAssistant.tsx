@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 
 import type { EstimateCategory, EstimateParameters, LineItem, ProjectInfo, UnitType } from '@/lib/estimate/types';
+import { parseLineItemPaste } from '@/lib/estimate/parseLineItems';
 import { formatCurrency, generateId } from '@/lib/estimate/utils';
 
 export interface DraftLineItem {
@@ -11,6 +12,8 @@ export interface DraftLineItem {
   description: string;
   quantity: number;
   unitType: UnitType;
+  materialUnitCost?: number;
+  laborHoursPerUnit?: number;
   assumptions: string[];
   confidence?: number;
   suggestedItem?: {
@@ -43,6 +46,8 @@ export function EstimateAssistant({
   const [error, setError] = useState<string | null>(null);
   const [noteStatus, setNoteStatus] = useState<'idle' | 'loading'>('idle');
   const [noteError, setNoteError] = useState<string | null>(null);
+  const [pasteText, setPasteText] = useState('');
+  const [pasteError, setPasteError] = useState<string | null>(null);
 
   const lineItemContext = useMemo(
     () =>
@@ -121,6 +126,38 @@ export function EstimateAssistant({
     }
   };
 
+  const handlePasteDrafts = () => {
+    if (!pasteText.trim()) {
+      setPasteError('Paste line items first.');
+      return;
+    }
+
+    const { items, errors } = parseLineItemPaste(pasteText);
+    if (errors.length) {
+      setPasteError(errors.join(' '));
+    } else {
+      setPasteError(null);
+    }
+
+    if (!items.length) {
+      return;
+    }
+
+    const incoming = items.map(item => ({
+      id: generateId(),
+      category: item.category,
+      description: item.description,
+      quantity: item.quantity,
+      unitType: item.unitType,
+      materialUnitCost: item.materialUnitCost,
+      laborHoursPerUnit: item.laborHoursPerUnit,
+      assumptions: []
+    }));
+
+    setDrafts(current => [...current, ...incoming]);
+    setPasteText('');
+  };
+
   const updateDraft = (id: string, patch: Partial<DraftLineItem>) => {
     setDrafts(items =>
       items.map(item => (item.id === id ? { ...item, ...patch } : item))
@@ -168,6 +205,31 @@ export function EstimateAssistant({
         rows={4}
         className="mt-4 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-500"
       />
+
+      <div className="mt-4 rounded-2xl border border-white/10 bg-white/5 p-4">
+        <div className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+          Paste line items
+        </div>
+        <p className="mt-1 text-xs text-slate-400">
+          Format: Category | Description | Qty | Unit | Mat Unit | Labor Hrs
+        </p>
+        <textarea
+          value={pasteText}
+          onChange={event => setPasteText(event.target.value)}
+          placeholder="GENERAL_CONDITIONS | Engineered Permit Drawings | 1 | Lot | 3000 | 40"
+          rows={4}
+          className="mt-3 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-500"
+        />
+        <div className="mt-3 flex flex-wrap items-center gap-3">
+          <button
+            onClick={handlePasteDrafts}
+            className="rounded-lg bg-white/10 px-4 py-2 text-sm font-semibold text-slate-100"
+          >
+            Create drafts from paste
+          </button>
+          {pasteError ? <span className="text-xs text-rose-300">{pasteError}</span> : null}
+        </div>
+      </div>
 
       {questions.length > 0 ? (
         <div className="mt-4 rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-slate-200">
@@ -232,6 +294,42 @@ export function EstimateAssistant({
                   />
                 </div>
               </div>
+
+              {typeof draft.materialUnitCost === 'number' ||
+              typeof draft.laborHoursPerUnit === 'number' ? (
+                <div className="mt-3 grid gap-3 md:grid-cols-2">
+                  <div>
+                    <label className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                      Material Unit
+                    </label>
+                    <input
+                      type="number"
+                      value={draft.materialUnitCost ?? 0}
+                      onChange={event =>
+                        updateDraft(draft.id, {
+                          materialUnitCost: Number(event.target.value || 0)
+                        })
+                      }
+                      className="mt-2 w-full rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-sm text-slate-100"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                      Labor Hrs
+                    </label>
+                    <input
+                      type="number"
+                      value={draft.laborHoursPerUnit ?? 0}
+                      onChange={event =>
+                        updateDraft(draft.id, {
+                          laborHoursPerUnit: Number(event.target.value || 0)
+                        })
+                      }
+                      className="mt-2 w-full rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-sm text-slate-100"
+                    />
+                  </div>
+                </div>
+              ) : null}
 
               <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-slate-300">
                 <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">

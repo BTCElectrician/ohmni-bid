@@ -189,12 +189,16 @@ export default function EstimatePage() {
 
   const handleApplyDrafts = (drafts: DraftLineItem[]) => {
     const newItems = drafts.map(draft => {
+      const materialUnitCost =
+        draft.suggestedItem?.material_cost ?? draft.materialUnitCost ?? 0;
+      const laborHoursPerUnit =
+        draft.suggestedItem?.labor_hours ?? draft.laborHoursPerUnit ?? 0;
       const template = {
         category: draft.category,
         name: draft.description,
-        materialUnitCost: draft.suggestedItem?.material_cost || 0,
+        materialUnitCost,
         unitType: draft.unitType,
-        laborHoursPerUnit: draft.suggestedItem?.labor_hours || 0,
+        laborHoursPerUnit,
         pricingItemId: draft.suggestedItem?.id || null
       };
       return createLineItem(template, draft.quantity || 1, parameters, generateId());
