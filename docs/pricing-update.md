@@ -26,6 +26,15 @@ npm run embeddings:backfill
 
 This keeps semantic search aligned with the latest pricing text.
 
+## Optional: Monitor Excel changes
+
+```bash
+python3 scripts/pricing/price_sync_monitor.py
+```
+
+This records checks in `data/sync_history.json` so you can see if the master Excel
+changed since the last sync.
+
 ## Env vars used
 
 - `EXCEL_PASSWORD`

@@ -79,8 +79,8 @@ Provide a concrete, code-referenced snapshot of the migrated Next.js + Supabase 
   - Computes wire material cost if missing
 - Legacy tooling for pricing sync:
   - Extraction: `legacy/scripts/extract_pricing.py`
-  - Sync monitor: `legacy/scripts/price_sync_monitor.py`
-  - Email notifier: `legacy/scripts/price_sync_email.py`
+- Sync monitor: `scripts/pricing/price_sync_monitor.py`
+- Email notifier: `scripts/pricing/price_sync_email.py`
 - Supplier pricing integration scaffolding (future):
   - `legacy/flask_integration/services/supplier_pricing_service.py`
   - Includes CSV import fallback and supplier adapter stubs (Graybar, WESCO)

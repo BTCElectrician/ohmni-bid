@@ -17,6 +17,12 @@ exporting it in a shell.
 - `EXCEL_PASSWORD` (password for the pricing workbook)
 - `PRICING_XLSX_PATH` (optional override for the Excel workbook path)
 
+## Pricing Monitor Email
+
+- `EMAIL_USER` (Gmail address used to send alerts)
+- `EMAIL_PASS` (Gmail app password)
+- `EMAIL_TO` (recipient address)
+
 ## OpenAI
 
 - `OPENAI_API_KEY`
