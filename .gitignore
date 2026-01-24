@@ -10,3 +10,4 @@ __pycache__/
 legacy/venv/
 *.tsbuildinfo
 supabase/.temp/
+data/sync_history.json
