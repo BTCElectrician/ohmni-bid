@@ -20,6 +20,7 @@
   - Added pricing extraction + import scripts with stable `external_ref` support.
   - Removed legacy client branding references and normalized color token naming.
   - Added new-stack price sync monitor/email scripts and kept wrappers at repo root.
+  - Added one-command pricing sync script for extract/import/backfill + mark synced.
   - Applied Supabase schema to the new project (via pooler connection).
   - Added walkthrough storage bucket + org-based storage policies to the schema.
   - Imported pricing items into Supabase (295 upserts) and completed embeddings backfill.

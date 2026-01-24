@@ -10,6 +10,14 @@ npm run pricing:extract
 
 This reads the Excel workbook and writes `data/pricing_database.json` with stable `externalRef` values.
 
+## Quick sync (one command)
+
+```bash
+scripts/pricing/run_full_sync.sh
+```
+
+Runs extract, import, embeddings backfill, and marks the Excel hash as synced.
+
 ## 2) Import into Supabase
 
 ```bash
