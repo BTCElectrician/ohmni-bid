@@ -142,12 +142,9 @@ export function useWorkspaceAuth(): WorkspaceAuthState {
         options: redirectTo ? { emailRedirectTo: redirectTo } : undefined
       });
       if (signInError) {
-        const message = signInError.message.toLowerCase();
-        if (message.includes('rate limit')) {
-          const bypassed = await attemptDevBypass(email);
-          if (bypassed) {
-            return true;
-          }
+        const bypassed = await attemptDevBypass(email);
+        if (bypassed) {
+          return true;
         }
         setError(signInError.message);
         return false;
