@@ -31,6 +31,8 @@
   - Applied npm audit fixes (AI SDK v6), updated chat transport to text streaming, and refreshed tool schemas.
   - Added a dev auth bypass endpoint to allow local sign-in when magic link emails are rate-limited.
 - Commit log (recent on main):
+  - dfe67b5 feat(pricing): add new-stack sync monitor
+  - a6dab11 feat(auth): add dev bypass for local magic links
   - 80bc648 chore: apply audit fixes and update chat
   - cdca9f7 chore: migrate lint script
   - 4dea944 chore: add lint config and fix typecheck
