@@ -33,6 +33,7 @@
   - Added a dev auth bypass endpoint to allow local sign-in when magic link emails are rate-limited.
   - Scheduled local price sync email monitor via launchd (daily at 7:00am).
 - Commit log (recent on main):
+  - 36bc320 fix(auth): bypass email send errors in dev
   - 1eb237f feat(pricing): add monitor email runner
   - 91b5fce chore(pricing): refresh pricing database
   - 9d93ce1 feat(pricing): add full sync script
