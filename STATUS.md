@@ -36,6 +36,7 @@
   - Upgraded AI SDK dependencies to restore chat/draft endpoints.
   - Hardened walkthrough AI upload error handling and allowed empty transcripts.
 - Commit log (recent on main):
+  - e283666 fix(walkthrough): harden ai uploads
   - d10dce9 fix(ai): repair draft-items schema
   - e1c2043 fix(ai): update openai sdk
   - 4e620f2 feat(estimate): add paste importer
