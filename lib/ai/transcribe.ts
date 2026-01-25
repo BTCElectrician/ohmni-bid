@@ -27,7 +27,7 @@ export async function transcribeAudio(file: File) {
   }
 
   const data = (await response.json()) as { text?: string };
-  if (!data.text) {
+  if (typeof data.text !== 'string') {
     throw new Error('Transcription response missing text');
   }
 

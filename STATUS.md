@@ -34,6 +34,7 @@
   - Added a dev auth bypass endpoint to allow local sign-in when magic link emails are rate-limited.
   - Scheduled local price sync email monitor via launchd (daily at 7:00am).
   - Upgraded AI SDK dependencies to restore chat/draft endpoints.
+  - Hardened walkthrough AI upload error handling and allowed empty transcripts.
 - Commit log (recent on main):
   - d10dce9 fix(ai): repair draft-items schema
   - e1c2043 fix(ai): update openai sdk
