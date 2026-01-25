@@ -35,6 +35,7 @@
   - Scheduled local price sync email monitor via launchd (daily at 7:00am).
   - Upgraded AI SDK dependencies to restore chat/draft endpoints.
 - Commit log (recent on main):
+  - e1c2043 fix(ai): update openai sdk
   - 4e620f2 feat(estimate): add paste importer
   - cdc4e53 fix(estimate): coerce line item numbers
   - 36bc320 fix(auth): bypass email send errors in dev
