@@ -33,6 +33,7 @@
   - Applied npm audit fixes (AI SDK v6), updated chat transport to text streaming, and refreshed tool schemas.
   - Added a dev auth bypass endpoint to allow local sign-in when magic link emails are rate-limited.
   - Scheduled local price sync email monitor via launchd (daily at 7:00am).
+  - Upgraded AI SDK dependencies to restore chat/draft endpoints.
 - Commit log (recent on main):
   - 4e620f2 feat(estimate): add paste importer
   - cdc4e53 fix(estimate): coerce line item numbers

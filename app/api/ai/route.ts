@@ -87,7 +87,7 @@ export async function POST(req: Request) {
   const model = process.env.OPENAI_CHAT_MODEL || 'gpt-4.1-mini';
   const contextBlock = formatContext(context);
   // Bridge type mismatch between ai SDK versions.
-  const aiModel = openai(model) as any;
+  const aiModel = openai.responses(model) as any;
 
   const tools = {
     searchCatalog: tool({
