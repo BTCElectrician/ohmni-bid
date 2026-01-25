@@ -25,13 +25,13 @@ const DraftItemSchema = z.object({
   category: z.enum(CATEGORY_VALUES),
   quantity: z.number(),
   unitType: z.enum(UNIT_VALUES),
-  assumptions: z.array(z.string()).default([]),
-  confidence: z.number().min(0).max(1).optional()
+  assumptions: z.array(z.string()),
+  confidence: z.number().min(0).max(1).nullable()
 });
 
 const DraftResponseSchema = z.object({
-  items: z.array(DraftItemSchema).default([]),
-  questions: z.array(z.string()).default([])
+  items: z.array(DraftItemSchema),
+  questions: z.array(z.string())
 });
 
 const CATEGORY_SET = new Set(CATEGORY_VALUES);
@@ -88,7 +88,9 @@ export async function POST(req: Request) {
     const items = result.object.items.map(item => ({
       ...item,
       category: CATEGORY_SET.has(item.category) ? item.category : 'GENERAL_CONDITIONS',
-      unitType: UNIT_VALUES.includes(item.unitType) ? item.unitType : 'E'
+      unitType: UNIT_VALUES.includes(item.unitType) ? item.unitType : 'E',
+      confidence: typeof item.confidence === 'number' ? item.confidence : undefined,
+      assumptions: item.assumptions || []
     }));
 
     const itemsWithSuggestions = await Promise.all(
