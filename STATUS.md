@@ -39,6 +39,7 @@
   - Documented CLI-first workflow and smoke tests in agent docs.
   - Added category/unit dropdowns and numeric parsing in the estimate grid.
 - Commit log (recent on main):
+  - 284461a docs(agent): refresh workflow notes
   - 4aed66d feat(estimate): tighten grid inputs
   - a42b683 feat(smoke): add cli smoke tests
   - e283666 fix(walkthrough): harden ai uploads
