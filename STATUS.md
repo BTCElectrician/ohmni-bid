@@ -38,6 +38,7 @@
   - Added CLI smoke test script for AI + walkthrough endpoints.
   - Documented CLI-first workflow and smoke tests in agent docs.
   - Added category/unit dropdowns and numeric parsing in the estimate grid.
+  - Built catalog search UI with semantic search API fallback.
 - Commit log (recent on main):
   - 284461a docs(agent): refresh workflow notes
   - 4aed66d feat(estimate): tighten grid inputs
