@@ -38,6 +38,7 @@
   - Added CLI smoke test script for AI + walkthrough endpoints.
   - Added category/unit dropdowns and numeric parsing in the estimate grid.
 - Commit log (recent on main):
+  - 4aed66d feat(estimate): tighten grid inputs
   - a42b683 feat(smoke): add cli smoke tests
   - e283666 fix(walkthrough): harden ai uploads
   - d10dce9 fix(ai): repair draft-items schema
