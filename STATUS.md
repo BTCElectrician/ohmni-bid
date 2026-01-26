@@ -36,6 +36,7 @@
   - Upgraded AI SDK dependencies to restore chat/draft endpoints.
   - Hardened walkthrough AI upload error handling and allowed empty transcripts.
   - Added CLI smoke test script for AI + walkthrough endpoints.
+  - Added category/unit dropdowns and numeric parsing in the estimate grid.
 - Commit log (recent on main):
   - a42b683 feat(smoke): add cli smoke tests
   - e283666 fix(walkthrough): harden ai uploads

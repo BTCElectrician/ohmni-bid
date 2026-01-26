@@ -7,12 +7,13 @@ import type { ColDef, CellValueChangedEvent } from 'ag-grid-community';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
 
-import type { EstimateParameters, LineItem } from '@/lib/estimate/types';
+import type { EstimateParameters, LineItem, UnitType } from '@/lib/estimate/types';
 import {
   calculateLaborExtension,
   calculateLineItemTotal,
   calculateMaterialExtension
 } from '@/lib/estimate/calc';
+import { CATEGORY_ORDER } from '@/lib/estimate/defaults';
 import { formatCurrency } from '@/lib/estimate/utils';
 
 interface EstimateGridProps {
@@ -21,6 +22,12 @@ interface EstimateGridProps {
   onRowDataChange: (items: LineItem[]) => void;
 }
 
+const UNIT_VALUES: UnitType[] = ['E', 'C', 'M', 'Lot'];
+const parseNumber = (value: unknown) => {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : 0;
+};
+
 export function EstimateGrid({
   rowData,
   parameters,
@@ -28,22 +35,44 @@ export function EstimateGrid({
 }: EstimateGridProps) {
   const columnDefs = useMemo<ColDef[]>(
     () => [
-      { field: 'category', headerName: 'Category', editable: true, minWidth: 160 },
+      {
+        field: 'category',
+        headerName: 'Category',
+        editable: true,
+        minWidth: 160,
+        cellEditor: 'agSelectCellEditor',
+        cellEditorParams: { values: CATEGORY_ORDER }
+      },
       { field: 'description', headerName: 'Description', editable: true, flex: 1 },
-      { field: 'quantity', headerName: 'Qty', editable: true, width: 90 },
-      { field: 'unitType', headerName: 'Unit', editable: true, width: 90 },
+      {
+        field: 'quantity',
+        headerName: 'Qty',
+        editable: true,
+        width: 90,
+        valueParser: params => parseNumber(params.newValue)
+      },
+      {
+        field: 'unitType',
+        headerName: 'Unit',
+        editable: true,
+        width: 90,
+        cellEditor: 'agSelectCellEditor',
+        cellEditorParams: { values: UNIT_VALUES }
+      },
       {
         field: 'materialUnitCost',
         headerName: 'Mat Unit',
         editable: true,
         width: 120,
+        valueParser: params => parseNumber(params.newValue),
         valueFormatter: params => formatCurrency(params.value || 0)
       },
       {
         field: 'laborHoursPerUnit',
         headerName: 'Labor Hrs',
         editable: true,
-        width: 110
+        width: 110,
+        valueParser: params => parseNumber(params.newValue)
       },
       {
         field: 'materialExtension',
