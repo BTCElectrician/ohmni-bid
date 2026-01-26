@@ -36,6 +36,7 @@
   - Upgraded AI SDK dependencies to restore chat/draft endpoints.
   - Hardened walkthrough AI upload error handling and allowed empty transcripts.
   - Added CLI smoke test script for AI + walkthrough endpoints.
+  - Documented CLI-first workflow and smoke tests in agent docs.
   - Added category/unit dropdowns and numeric parsing in the estimate grid.
 - Commit log (recent on main):
   - 4aed66d feat(estimate): tighten grid inputs

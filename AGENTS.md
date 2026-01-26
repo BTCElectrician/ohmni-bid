@@ -21,6 +21,13 @@ Agent instructions for this repo.
 - Treat run packets as immutable artifacts; link to them instead of editing their contents.
 - Use each project `STATUS.md` as the agent handoff/progress file and keep it current.
 
+## Agent workflow defaults
+
+- Prefer CLI execution for data changes, smoke tests, and verification. Use UI steps only when blocked by permissions or missing inputs.
+- Use `scripts/smoke/run_smoke_tests.sh` for end-to-end API checks (dev server must be running and `SMOKE_TEST_EMAIL` or `DEV_LOGIN_EMAIL` set).
+- When dependency changes affect runtime, restart the dev server to clear stale module graphs.
+- Document workflow or tooling changes in `STATUS.md` and keep env expectations in `docs/ENV.md`.
+
 ## Repo layout
 
 - New stack lives at the repo root.

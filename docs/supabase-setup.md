@@ -32,5 +32,13 @@ OPENAI_API_KEY=...
 Supabase labels the keys as publishable/secret in the dashboard. Use publishable
 for `NEXT_PUBLIC_SUPABASE_ANON_KEY` and secret for `SUPABASE_SERVICE_ROLE_KEY`.
 
+## CLI smoke test
+
+With the dev server running, set `SMOKE_TEST_EMAIL` (or `DEV_LOGIN_EMAIL`) and run:
+
+```bash
+scripts/smoke/run_smoke_tests.sh
+```
+
 That’s it. The schema + policies now live in `supabase/schema.sql`, and the
 application reads from the same source of truth.
