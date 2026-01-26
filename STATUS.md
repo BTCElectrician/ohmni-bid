@@ -37,6 +37,7 @@
   - Hardened walkthrough AI upload error handling and allowed empty transcripts.
   - Added CLI smoke test script for AI + walkthrough endpoints.
 - Commit log (recent on main):
+  - a42b683 feat(smoke): add cli smoke tests
   - e283666 fix(walkthrough): harden ai uploads
   - d10dce9 fix(ai): repair draft-items schema
   - e1c2043 fix(ai): update openai sdk
