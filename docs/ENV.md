@@ -40,3 +40,7 @@ exporting it in a shell.
 ## Local Auth Bypass (Dev)
 
 - `DEV_LOGIN_EMAIL` (optional; used by `/api/auth/dev-login` if no email is provided)
+
+## Smoke Tests (CLI)
+
+- `SMOKE_TEST_EMAIL` (optional; used by `scripts/smoke/run_smoke_tests.sh`, falls back to `DEV_LOGIN_EMAIL`)

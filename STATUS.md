@@ -35,6 +35,7 @@
   - Scheduled local price sync email monitor via launchd (daily at 7:00am).
   - Upgraded AI SDK dependencies to restore chat/draft endpoints.
   - Hardened walkthrough AI upload error handling and allowed empty transcripts.
+  - Added CLI smoke test script for AI + walkthrough endpoints.
 - Commit log (recent on main):
   - e283666 fix(walkthrough): harden ai uploads
   - d10dce9 fix(ai): repair draft-items schema
