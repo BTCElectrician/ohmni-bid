@@ -1,7 +1,11 @@
 -- Ohmni Bid core schema (Supabase + pgvector)
 
 create extension if not exists pgcrypto;
-create extension if not exists vector;
+create schema if not exists extensions;
+create extension if not exists vector with schema extensions;
+alter extension vector set schema extensions;
+
+set search_path = public, extensions;
 
 -- Organizations (multi-tenant)
 create table if not exists organizations (
@@ -198,12 +202,55 @@ create index if not exists walkthrough_photos_session_idx on walkthrough_photos(
 -- RLS policies
 alter table organizations enable row level security;
 alter table org_members enable row level security;
+alter table pricing_items enable row level security;
 alter table estimates enable row level security;
 alter table estimate_line_items enable row level security;
 alter table proposals enable row level security;
 alter table walkthrough_sessions enable row level security;
 alter table walkthrough_notes enable row level security;
 alter table walkthrough_photos enable row level security;
+
+drop policy if exists "orgs select for members" on organizations;
+drop policy if exists "orgs insert for auth users" on organizations;
+drop policy if exists "orgs update for owners" on organizations;
+drop policy if exists "orgs delete for owners" on organizations;
+
+drop policy if exists "org members select for org members" on org_members;
+drop policy if exists "org members insert for owners or creator" on org_members;
+drop policy if exists "org members update for owners" on org_members;
+drop policy if exists "org members delete for owners" on org_members;
+
+drop policy if exists "estimates select for org members" on estimates;
+drop policy if exists "estimates insert for org members" on estimates;
+drop policy if exists "estimates update for org members" on estimates;
+drop policy if exists "estimates delete for org members" on estimates;
+
+drop policy if exists "pricing items read for authenticated" on pricing_items;
+
+drop policy if exists "line items select for org members" on estimate_line_items;
+drop policy if exists "line items insert for org members" on estimate_line_items;
+drop policy if exists "line items update for org members" on estimate_line_items;
+drop policy if exists "line items delete for org members" on estimate_line_items;
+
+drop policy if exists "proposals select for org members" on proposals;
+drop policy if exists "proposals insert for org members" on proposals;
+drop policy if exists "proposals update for org members" on proposals;
+drop policy if exists "proposals delete for org members" on proposals;
+
+drop policy if exists "walkthrough sessions select for org members" on walkthrough_sessions;
+drop policy if exists "walkthrough sessions insert for org members" on walkthrough_sessions;
+drop policy if exists "walkthrough sessions update for org members" on walkthrough_sessions;
+drop policy if exists "walkthrough sessions delete for org members" on walkthrough_sessions;
+
+drop policy if exists "walkthrough notes select for org members" on walkthrough_notes;
+drop policy if exists "walkthrough notes insert for org members" on walkthrough_notes;
+drop policy if exists "walkthrough notes update for org members" on walkthrough_notes;
+drop policy if exists "walkthrough notes delete for org members" on walkthrough_notes;
+
+drop policy if exists "walkthrough photos select for org members" on walkthrough_photos;
+drop policy if exists "walkthrough photos insert for org members" on walkthrough_photos;
+drop policy if exists "walkthrough photos update for org members" on walkthrough_photos;
+drop policy if exists "walkthrough photos delete for org members" on walkthrough_photos;
 
 create policy "orgs select for members" on organizations
   for select using (is_org_member(id) or created_by = auth.uid());
@@ -244,6 +291,24 @@ create policy "estimates insert for org members" on estimates
 
 create policy "estimates update for org members" on estimates
   for update using (is_org_member(org_id)) with check (is_org_member(org_id));
+
+create policy "pricing items read for authenticated" on pricing_items
+  for select to authenticated using (auth.uid() is not null);
+
+do $$
+begin
+  if exists (
+    select 1 from pg_tables where schemaname = 'public' and tablename = 'profiles'
+  ) then
+    execute 'alter table public.profiles enable row level security';
+    execute 'drop policy if exists "profiles select own" on public.profiles';
+    execute 'drop policy if exists "profiles insert own" on public.profiles';
+    execute 'drop policy if exists "profiles update own" on public.profiles';
+    execute 'create policy "profiles select own" on public.profiles for select using (auth.uid() = id)';
+    execute 'create policy "profiles insert own" on public.profiles for insert with check (auth.uid() = id)';
+    execute 'create policy "profiles update own" on public.profiles for update using (auth.uid() = id) with check (auth.uid() = id)';
+  end if;
+end $$;
 
 create policy "estimates delete for org members" on estimates
   for delete using (is_org_member(org_id));
@@ -459,6 +524,7 @@ returns table (
   similarity float
 )
 language sql stable
+set search_path = public, extensions
 as $$
   select
     pricing_items.id,
