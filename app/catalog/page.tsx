@@ -5,7 +5,9 @@ import Link from 'next/link';
 import { LogOut, Search } from 'lucide-react';
 
 import { AuthCard } from '@/components/AuthCard';
+import { queueCatalogItem } from '@/lib/estimate/catalogQueue';
 import { CATEGORY_ORDER } from '@/lib/estimate/defaults';
+import type { EstimateCategory, UnitType } from '@/lib/estimate/types';
 import { formatCurrency, formatHours } from '@/lib/estimate/utils';
 import { useWorkspaceAuth } from '@/lib/hooks/useWorkspace';
 
@@ -31,6 +33,45 @@ const formatCategoryLabel = (value: string) =>
     .split('_')
     .map(part => part.charAt(0).toUpperCase() + part.slice(1))
     .join(' ');
+
+const normalizeUnitType = (value?: string | null): UnitType => {
+  if (!value) return 'E';
+  const normalized = value.trim().toLowerCase();
+  switch (normalized) {
+    case 'e':
+    case 'ea':
+    case 'each':
+      return 'E';
+    case 'c':
+    case 'per 100':
+    case 'hundred':
+      return 'C';
+    case 'm':
+    case 'per 1000':
+    case 'thousand':
+      return 'M';
+    case 'lot':
+      return 'Lot';
+    default:
+      return 'E';
+  }
+};
+
+const formatUnitLabel = (value?: string | null) => {
+  if (!value) return 'Unit --';
+  switch (value) {
+    case 'E':
+      return 'Unit each';
+    case 'C':
+      return 'Unit per 100';
+    case 'M':
+      return 'Unit per 1000';
+    case 'Lot':
+      return 'Unit lot';
+    default:
+      return `Unit ${value}`;
+  }
+};
 
 export default function CatalogPage() {
   const {
@@ -79,6 +120,20 @@ export default function CatalogPage() {
       setStatus('error');
       setError(err instanceof Error ? err.message : 'Catalog search failed');
     }
+  }, []);
+
+  const handleAddToEstimate = useCallback((item: CatalogItem) => {
+    const queuedCount = queueCatalogItem({
+      id: item.id,
+      pricingItemId: item.id,
+      category: item.category as EstimateCategory,
+      name: item.name,
+      unitType: normalizeUnitType(item.unit_type),
+      materialUnitCost: Number(item.material_cost || 0),
+      laborHoursPerUnit: Number(item.labor_hours || 0),
+      quantity: 1
+    });
+    setNotice(`Added to estimate. ${queuedCount} queued.`);
   }, []);
 
   useEffect(() => {
@@ -244,7 +299,7 @@ export default function CatalogPage() {
                     ) : null}
                     {item.unit_type ? (
                       <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
-                        Unit {item.unit_type}
+                        {formatUnitLabel(item.unit_type)}
                       </span>
                     ) : null}
                   </div>
@@ -273,6 +328,17 @@ export default function CatalogPage() {
                           : '--'}
                       </div>
                     </div>
+                  </div>
+                  <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+                    <button
+                      onClick={() => handleAddToEstimate(item)}
+                      className="inline-flex items-center justify-center rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-xs font-semibold text-slate-100"
+                    >
+                      Add to estimate
+                    </button>
+                    <span className="text-xs text-slate-500">
+                      Pricing shown per unit type (E each, C per 100, M per 1000).
+                    </span>
                   </div>
                 </article>
               );

@@ -11,3 +11,4 @@ legacy/venv/
 *.tsbuildinfo
 supabase/.temp/
 data/sync_history.json
+data/price_sync_monitor.log

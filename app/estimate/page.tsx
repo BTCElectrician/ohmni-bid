@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { AuthCard } from '@/components/AuthCard';
 import { EstimateAssistant, type DraftLineItem } from '@/components/EstimateAssistant';
@@ -14,6 +14,7 @@ import {
   calculateLineItemTotal,
   createLineItem
 } from '@/lib/estimate/calc';
+import { consumeCatalogQueue } from '@/lib/estimate/catalogQueue';
 import { DEFAULT_PARAMETERS } from '@/lib/estimate/defaults';
 import { normalizeLineItems } from '@/lib/estimate/normalize';
 import { EMPTY_LINE_ITEM_TEMPLATE, EMPTY_PROJECT } from '@/lib/estimate/templates';
@@ -63,6 +64,29 @@ export default function EstimatePage() {
   const totals = useMemo(
     () => calculateEstimateTotals(lineItems, parameters, project.squareFootage),
     [lineItems, parameters, project.squareFootage]
+  );
+
+  const applyQueuedCatalogItems = useCallback(
+    (queuedItems: ReturnType<typeof consumeCatalogQueue>) => {
+      if (queuedItems.length === 0) return;
+      const newItems = queuedItems.map(item =>
+        createLineItem(
+          {
+            category: item.category,
+            name: item.name,
+            materialUnitCost: item.materialUnitCost,
+            unitType: item.unitType,
+            laborHoursPerUnit: item.laborHoursPerUnit,
+            pricingItemId: item.pricingItemId ?? item.id ?? null
+          },
+          item.quantity ?? 1,
+          parameters,
+          generateId()
+        )
+      );
+      setLineItems(items => [...items, ...newItems]);
+    },
+    [parameters]
   );
 
   useEffect(() => {
@@ -176,6 +200,26 @@ export default function EstimatePage() {
       active = false;
     };
   }, [user, orgId, hasLoaded, supabase]);
+
+  useEffect(() => {
+    if (!hasLoaded) return;
+    const queuedItems = consumeCatalogQueue();
+    applyQueuedCatalogItems(queuedItems);
+  }, [hasLoaded, applyQueuedCatalogItems]);
+
+  useEffect(() => {
+    if (!hasLoaded) return;
+    const handleQueueCheck = () => {
+      const queuedItems = consumeCatalogQueue();
+      applyQueuedCatalogItems(queuedItems);
+    };
+    window.addEventListener('focus', handleQueueCheck);
+    window.addEventListener('storage', handleQueueCheck);
+    return () => {
+      window.removeEventListener('focus', handleQueueCheck);
+      window.removeEventListener('storage', handleQueueCheck);
+    };
+  }, [hasLoaded, applyQueuedCatalogItems]);
 
   const addRow = () => {
     const lineItem = createLineItem(

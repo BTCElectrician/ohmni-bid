@@ -1,7 +1,7 @@
 # Status
 
 - Phase: implementation
-- Last update: 2026-01-25 9:29pm PT (pushed `a678dea`)
+- Last update: 2026-01-29 9:41pm PT
 - Review: ChatGPT 5.2 Pro response integrated; doc reviewed for completeness/correctness/trade gaps
 - Guardrails: minimal code, maximize SDKs/services, keep files under ~500 lines
 - Product notes: Stripe billing integration planned; spreadsheet UI + Excel export stay in scope
@@ -40,6 +40,7 @@
   - Documented CLI-first workflow and smoke tests in agent docs.
   - Added category/unit dropdowns and numeric parsing in the estimate grid.
   - Built catalog search UI with semantic search API fallback.
+  - Wired catalog add-to-estimate queue between `/catalog` and the estimate grid.
   - Hardened Supabase schema: pricing_items RLS, profiles RLS, vector schema move, fixed match_pricing_items search_path.
 - Commit log (recent on main):
   - 284461a docs(agent): refresh workflow notes
@@ -73,5 +74,6 @@
   - da32c0c Keep Next.js tsconfig updates
   - f92a884 Implement chromium owl theme and walkthrough MVP
 - Next steps:
+  - Provide `DEV_LOGIN_EMAIL` (or set `SMOKE_TEST_EMAIL`) and rerun CLI smoke tests.
   - Set OpenAI env vars for transcription/vision models in deployment.
   - Re-run `npm audit fix` when registry access is available (current ENOTFOUND).
