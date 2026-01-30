@@ -31,7 +31,7 @@ export function AuthCard({
         />
         <button
           onClick={onSubmit}
-          className="w-full rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-slate-900 shadow-[0_12px_20px_rgba(47,180,255,0.25)]"
+          className="btn-primary w-full px-4 py-2 text-sm font-semibold text-slate-900"
         >
           Send sign-in link
         </button>

@@ -46,14 +46,14 @@ export function EstimateHeader({
         <div className="flex flex-wrap gap-3">
           <button
             onClick={onAddRow}
-            className="inline-flex items-center gap-2 rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-slate-900 shadow-[0_12px_20px_rgba(47,180,255,0.25)]"
+            className="btn-primary inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-900"
           >
             <Plus className="h-4 w-4" />
             Add Item
           </button>
           <button
             onClick={onSave}
-            className="inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-slate-100"
+            className="btn-ghost inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-100"
             disabled={saveStatus === 'saving'}
           >
             <Save className="h-4 w-4" />
@@ -61,14 +61,14 @@ export function EstimateHeader({
           </button>
           <button
             onClick={onExport}
-            className="inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-slate-100"
+            className="btn-ghost inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-100"
           >
             <Download className="h-4 w-4" />
             Export Excel
           </button>
           <button
             onClick={onSignOut}
-            className="inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-slate-100"
+            className="btn-ghost inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-100"
           >
             <LogOut className="h-4 w-4" />
             Sign out

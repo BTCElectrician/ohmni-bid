@@ -181,29 +181,32 @@ export default function CatalogPage() {
 
   return (
     <main className="relative min-h-screen overflow-hidden">
-      <div className="pointer-events-none absolute -left-24 top-16 h-72 w-72 rounded-full bg-cyan-400/30 blur-3xl" />
-      <div className="pointer-events-none absolute right-[-120px] top-[-60px] h-96 w-96 rounded-full bg-sky-300/35 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-[-160px] left-1/3 h-96 w-96 rounded-full bg-lime-300/20 blur-[120px]" />
+      <div className="pointer-events-none absolute -left-28 top-24 h-80 w-80 rounded-full bg-[var(--accent)]/25 blur-[140px] animate-float" />
+      <div className="pointer-events-none absolute right-[-140px] top-[-80px] h-[420px] w-[420px] rounded-full bg-[var(--accent-2)]/25 blur-[160px] animate-float" />
+      <div className="pointer-events-none absolute bottom-[-160px] left-1/4 h-[420px] w-[420px] rounded-full bg-[var(--accent-3)]/25 blur-[180px] animate-float" />
       <div className="mx-auto max-w-6xl px-6 py-10">
         <div className="flex flex-col gap-6">
           <div className="glass-panel rounded-3xl p-6 animate-rise">
             <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
               <div>
-                <h1 className="text-2xl font-semibold text-slate-100">Catalog</h1>
-                <p className="mt-1 text-sm text-slate-300">
-                  Search the pricing database for reusable line items.
+                <span className="badge">Pricing Catalog</span>
+                <h1 className="mt-4 text-2xl font-semibold text-slate-100">
+                  Find reusable line items fast.
+                </h1>
+                <p className="mt-2 text-sm text-slate-300">
+                  Semantic search + pricing metadata, always tied back to source.
                 </p>
               </div>
               <div className="flex flex-wrap gap-3">
                 <Link
                   href="/estimate"
-                  className="inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-slate-100"
+                  className="btn-ghost inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-100"
                 >
                   Back to Estimate
                 </Link>
                 <button
                   onClick={signOut}
-                  className="inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-slate-100"
+                  className="btn-ghost inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-100"
                 >
                   <LogOut className="h-4 w-4" />
                   Sign out
@@ -248,7 +251,7 @@ export default function CatalogPage() {
               </div>
               <button
                 type="submit"
-                className="mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-slate-900 shadow-[0_12px_20px_rgba(47,180,255,0.25)]"
+                className="btn-primary mt-6 inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-semibold text-slate-900"
                 disabled={status === 'loading'}
               >
                 <Search className="h-4 w-4" />
@@ -284,21 +287,21 @@ export default function CatalogPage() {
                   className="glass-panel rounded-2xl p-5 animate-rise-delayed"
                 >
                   <div className="flex flex-wrap items-center gap-2 text-xs text-slate-400">
-                    <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
+                    <span className="pill">
                       {formatCategoryLabel(item.category)}
                     </span>
                     {item.subcategory ? (
-                      <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
+                      <span className="pill">
                         {item.subcategory}
                       </span>
                     ) : null}
                     {item.size ? (
-                      <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
+                      <span className="pill">
                         Size {item.size}
                       </span>
                     ) : null}
                     {item.unit_type ? (
-                      <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
+                      <span className="pill">
                         {formatUnitLabel(item.unit_type)}
                       </span>
                     ) : null}
@@ -332,7 +335,7 @@ export default function CatalogPage() {
                   <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
                     <button
                       onClick={() => handleAddToEstimate(item)}
-                      className="inline-flex items-center justify-center rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-xs font-semibold text-slate-100"
+                      className="btn-ghost inline-flex items-center justify-center px-3 py-2 text-xs font-semibold text-slate-100"
                     >
                       Add to estimate
                     </button>

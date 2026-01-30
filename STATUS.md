@@ -41,6 +41,7 @@
   - Added category/unit dropdowns and numeric parsing in the estimate grid.
   - Built catalog search UI with semantic search API fallback.
   - Wired catalog add-to-estimate queue between `/catalog` and the estimate grid.
+  - Refreshed the UI system with new typography, palette, buttons, badges, and animated atmospherics.
   - Hardened Supabase schema: pricing_items RLS, profiles RLS, vector schema move, fixed match_pricing_items search_path.
 - Commit log (recent on main):
   - 284461a docs(agent): refresh workflow notes

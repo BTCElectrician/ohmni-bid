@@ -14,8 +14,11 @@ export function ProjectDetails({ project, onChange }: ProjectDetailsProps) {
   return (
     <div className="glass-panel rounded-3xl p-6">
       <div>
-        <h2 className="text-lg font-semibold text-slate-100">Project Details</h2>
-        <p className="mt-1 text-sm text-slate-300">
+        <span className="badge">Project Details</span>
+        <h2 className="mt-4 text-lg font-semibold text-slate-100">
+          Capture the essentials.
+        </h2>
+        <p className="mt-2 text-sm text-slate-300">
           Capture the essentials for the estimate header and export.
         </p>
       </div>

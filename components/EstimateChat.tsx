@@ -81,25 +81,28 @@ export function EstimateChat({
     <section className="glass-panel rounded-3xl p-6 animate-rise-delayed">
       <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
         <div>
-          <h2 className="text-xl font-semibold text-slate-100">Estimator chat</h2>
-          <p className="text-sm text-slate-300">
-            Ask for takeoff guidance, calculations, or conduit checks. Drafts are applied separately.
+          <span className="badge">Estimator Chat</span>
+          <h2 className="mt-4 text-xl font-semibold text-slate-100">
+            Ask for takeoff guidance or quick checks.
+          </h2>
+          <p className="mt-2 text-sm text-slate-300">
+            Calculations are deterministic; drafts are applied separately.
           </p>
         </div>
       </div>
 
       <div className="mt-4 rounded-2xl border border-white/10 bg-white/5 p-4 text-xs text-slate-300">
         <div className="flex flex-wrap items-center gap-3">
-          <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
+          <span className="pill">
             Items: {lineItems.length}
           </span>
-          <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
+          <span className="pill">
             Material: {formatCurrency(totals.totalMaterial)}
           </span>
-          <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
+          <span className="pill">
             Labor: {formatHours(totals.totalLaborHours)}
           </span>
-          <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
+          <span className="pill">
             Final Bid: {formatCurrency(totals.finalBid)}
           </span>
         </div>
@@ -135,7 +138,7 @@ export function EstimateChat({
           </span>
           <button
             type="submit"
-            className="rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-slate-900 shadow-[0_12px_20px_rgba(47,180,255,0.25)]"
+            className="btn-primary px-4 py-2 text-sm font-semibold text-slate-900"
             disabled={isLoading}
           >
             {isLoading ? 'Sending...' : 'Send'}

@@ -175,22 +175,25 @@ export function EstimateAssistant({
     <section className="glass-panel rounded-3xl p-6 animate-rise-delayed">
       <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <div>
-          <h2 className="text-xl font-semibold text-slate-100">Assistant draft takeoff</h2>
-          <p className="text-sm text-slate-300">
-            Drop in a walkthrough note and review draft line items before applying.
+          <span className="badge">Draft Takeoff</span>
+          <h2 className="mt-4 text-xl font-semibold text-slate-100">
+            Generate draft line items with guardrails.
+          </h2>
+          <p className="mt-2 text-sm text-slate-300">
+            Drop in a walkthrough note and review before applying to the estimate.
           </p>
         </div>
         <div className="flex flex-wrap gap-3">
           <button
             onClick={handleLoadLatestNote}
-            className="inline-flex items-center justify-center rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-slate-100"
+            className="btn-ghost inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-slate-100"
             disabled={noteStatus === 'loading'}
           >
             {noteStatus === 'loading' ? 'Loading...' : 'Use latest walkthrough note'}
           </button>
           <button
             onClick={handleGenerateDrafts}
-            className="inline-flex items-center justify-center rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-slate-900 shadow-[0_12px_20px_rgba(47,180,255,0.25)]"
+            className="btn-primary inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-slate-900"
             disabled={status === 'loading'}
           >
             {status === 'loading' ? 'Generating...' : 'Generate drafts'}
@@ -223,7 +226,7 @@ export function EstimateAssistant({
         <div className="mt-3 flex flex-wrap items-center gap-3">
           <button
             onClick={handlePasteDrafts}
-            className="rounded-lg bg-white/10 px-4 py-2 text-sm font-semibold text-slate-100"
+            className="btn-ghost px-4 py-2 text-sm font-semibold text-slate-100"
           >
             Create drafts from paste
           </button>
@@ -332,11 +335,11 @@ export function EstimateAssistant({
               ) : null}
 
               <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-slate-300">
-                <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
+                <span className="pill text-xs text-slate-300">
                   Category: {draft.category}
                 </span>
                 {typeof draft.confidence === 'number' ? (
-                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
+                  <span className="pill text-xs text-slate-300">
                     Confidence: {(draft.confidence * 100).toFixed(0)}%
                   </span>
                 ) : null}
@@ -370,7 +373,7 @@ export function EstimateAssistant({
           <div className="flex flex-wrap items-center gap-3">
             <button
               onClick={handleApply}
-              className="rounded-lg bg-white/10 px-4 py-2 text-sm font-semibold text-slate-100"
+              className="btn-primary px-4 py-2 text-sm font-semibold text-slate-900"
             >
               Apply drafts to estimate
             </button>
@@ -379,7 +382,7 @@ export function EstimateAssistant({
                 setDrafts([]);
                 setQuestions([]);
               }}
-              className="rounded-lg border border-white/10 px-4 py-2 text-sm text-slate-300"
+              className="btn-ghost px-4 py-2 text-sm text-slate-300"
             >
               Clear drafts
             </button>

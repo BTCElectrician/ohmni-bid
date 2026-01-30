@@ -4,25 +4,46 @@
 
 :root {
   color-scheme: dark;
-  --bg: #0b1118;
-  --bg-secondary: #0f1c28;
-  --panel: rgba(18, 30, 42, 0.88);
-  --panel-strong: rgba(18, 30, 42, 0.96);
-  --ink: #e6f2ff;
-  --ink-muted: #8fa2b5;
-  --accent: #2fb4ff;
-  --accent-2: #69be28;
-  --accent-glow: #a7e8ff;
-  --border: rgba(143, 162, 181, 0.18);
-  --shadow: 0 20px 40px rgba(2, 8, 16, 0.55);
+  --bg: #0b0f14;
+  --bg-secondary: #101a24;
+  --panel: rgba(16, 24, 34, 0.92);
+  --panel-strong: rgba(14, 20, 28, 0.98);
+  --ink: #f2f6ff;
+  --ink-muted: #94a6ba;
+  --accent: #ffb100;
+  --accent-2: #00d1b2;
+  --accent-3: #ff6b6b;
+  --accent-glow: rgba(255, 177, 0, 0.45);
+  --border: rgba(255, 255, 255, 0.08);
+  --shadow: 0 24px 60px rgba(2, 8, 16, 0.55);
+  --shadow-accent: 0 16px 40px rgba(255, 177, 0, 0.25);
 }
 
 body {
-  background: radial-gradient(circle at 15% 10%, rgba(47, 180, 255, 0.2), transparent 55%),
-    radial-gradient(circle at 85% 20%, rgba(105, 190, 40, 0.18), transparent 45%),
-    linear-gradient(140deg, var(--bg) 0%, var(--bg-secondary) 55%, #0b1a24 100%);
+  position: relative;
+  background: radial-gradient(circle at 12% 18%, rgba(255, 177, 0, 0.18), transparent 52%),
+    radial-gradient(circle at 84% 8%, rgba(0, 209, 178, 0.2), transparent 46%),
+    radial-gradient(circle at 30% 90%, rgba(255, 107, 107, 0.16), transparent 44%),
+    linear-gradient(160deg, #0a0f14 0%, var(--bg-secondary) 52%, #0a141a 100%);
   color: var(--ink);
   font-family: var(--font-body), sans-serif;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 140px 140px;
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
 }
 
 @keyframes rise {
@@ -44,11 +65,78 @@ body {
   animation: rise 0.8s ease-out 0.08s both;
 }
 
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-float {
+  animation: float 8s ease-in-out infinite;
+}
+
 .glass-panel {
-  background: var(--panel);
+  background: linear-gradient(180deg, rgba(20, 30, 42, 0.94), rgba(12, 18, 26, 0.94));
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
   backdrop-filter: blur(16px) saturate(125%);
+}
+
+.text-gradient {
+  background: linear-gradient(120deg, #ffffff 0%, #ffe4a6 35%, #7ff3e6 70%, #ffffff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0.3rem 0.9rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.btn-primary {
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+  color: #061017;
+  font-weight: 700;
+  box-shadow: var(--shadow-accent);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 44px rgba(255, 177, 0, 0.35);
+}
+
+.btn-ghost {
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--ink);
+}
+
+.pill {
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.7rem;
+  color: var(--ink-muted);
 }
 
 .ag-theme-quartz {
@@ -57,7 +145,7 @@ body {
   --ag-foreground-color: var(--ink);
   --ag-secondary-foreground-color: var(--ink-muted);
   --ag-border-color: var(--border);
-  --ag-header-background-color: rgba(7, 13, 20, 0.55);
-  --ag-row-hover-color: rgba(47, 180, 255, 0.12);
-  --ag-odd-row-background-color: rgba(9, 16, 24, 0.25);
+  --ag-header-background-color: rgba(10, 15, 22, 0.75);
+  --ag-row-hover-color: rgba(255, 177, 0, 0.12);
+  --ag-odd-row-background-color: rgba(12, 18, 26, 0.35);
 }

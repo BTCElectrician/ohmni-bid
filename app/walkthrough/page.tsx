@@ -188,29 +188,32 @@ export default function WalkthroughPage() {
 
   return (
     <main className="relative min-h-screen overflow-hidden">
-      <div className="pointer-events-none absolute -left-40 top-24 h-80 w-80 rounded-full bg-cyan-400/30 blur-3xl" />
-      <div className="pointer-events-none absolute right-[-160px] top-[-90px] h-96 w-96 rounded-full bg-sky-300/35 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-[-160px] left-1/3 h-96 w-96 rounded-full bg-lime-300/20 blur-[120px]" />
+      <div className="pointer-events-none absolute -left-40 top-24 h-80 w-80 rounded-full bg-[var(--accent)]/25 blur-[140px] animate-float" />
+      <div className="pointer-events-none absolute right-[-160px] top-[-90px] h-96 w-96 rounded-full bg-[var(--accent-2)]/25 blur-[160px] animate-float" />
+      <div className="pointer-events-none absolute bottom-[-160px] left-1/3 h-96 w-96 rounded-full bg-[var(--accent-3)]/25 blur-[180px] animate-float" />
       <div className="mx-auto max-w-5xl px-6 py-10">
         <div className="flex flex-col gap-6">
           <div className="glass-panel rounded-3xl p-6 animate-rise">
             <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
               <div>
-                <h1 className="text-2xl font-semibold text-slate-100">Walkthrough</h1>
-                <p className="mt-1 text-sm text-slate-300">
+                <span className="badge">Walkthrough</span>
+                <h1 className="mt-4 text-2xl font-semibold text-slate-100">
                   Capture notes and photos for a draft takeoff.
+                </h1>
+                <p className="mt-2 text-sm text-slate-300">
+                  Keep field data clean, then apply it when you’re back at the desk.
                 </p>
               </div>
               <div className="flex flex-wrap gap-3">
                 <Link
                   href="/estimate"
-                  className="inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-slate-100"
+                  className="btn-ghost inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-100"
                 >
                   Back to Estimate
                 </Link>
                 <button
                   onClick={signOut}
-                  className="inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-slate-100"
+                  className="btn-ghost inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-100"
                 >
                   <LogOut className="h-4 w-4" />
                   Sign out
@@ -234,7 +237,7 @@ export default function WalkthroughPage() {
             <div className="mt-6 flex flex-wrap items-center gap-3">
               <button
                 onClick={startSession}
-                className="inline-flex items-center gap-2 rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-slate-900 shadow-[0_12px_20px_rgba(47,180,255,0.25)]"
+                className="btn-primary inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-900"
                 disabled={!latestEstimateId || sessionStatus === 'creating'}
               >
                 <Plus className="h-4 w-4" />
