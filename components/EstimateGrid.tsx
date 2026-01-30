@@ -126,8 +126,8 @@ export function EstimateGrid({
 
   return (
     <div
-      className="ag-theme-quartz glass-panel overflow-hidden rounded-2xl"
-      style={{ width: '100%', height: 520 }}
+      className="ag-theme-quartz glass-panel h-[480px] overflow-hidden rounded-2xl sm:h-[520px] lg:h-[560px]"
+      style={{ width: '100%' }}
     >
       <AgGridReact
         rowData={rowData}
@@ -139,7 +139,7 @@ export function EstimateGrid({
         }}
         getRowId={params => params.data.id}
         onCellValueChanged={onCellValueChanged}
-        domLayout="autoHeight"
+        domLayout="normal"
       />
     </div>
   );

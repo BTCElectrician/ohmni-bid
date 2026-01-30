@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Camera, LogOut, Mic, Plus } from 'lucide-react';
 
 import { AuthCard } from '@/components/AuthCard';
+import { WalkthroughRoomMode } from '@/components/WalkthroughRoomMode';
 import { useWorkspaceAuth } from '@/lib/hooks/useWorkspace';
 
 export default function WalkthroughPage() {
@@ -31,6 +32,7 @@ export default function WalkthroughPage() {
   const [photoResult, setPhotoResult] = useState('');
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
+  const hasSession = sessionStatus === 'ready' && Boolean(sessionId);
 
   useEffect(() => {
     if (!user || !orgId) return;
@@ -188,10 +190,10 @@ export default function WalkthroughPage() {
 
   return (
     <main className="relative min-h-screen overflow-hidden">
-      <div className="pointer-events-none absolute -left-40 top-24 h-80 w-80 rounded-full bg-[var(--accent)]/25 blur-[140px] animate-float" />
-      <div className="pointer-events-none absolute right-[-160px] top-[-90px] h-96 w-96 rounded-full bg-[var(--accent-2)]/25 blur-[160px] animate-float" />
-      <div className="pointer-events-none absolute bottom-[-160px] left-1/3 h-96 w-96 rounded-full bg-[var(--accent-3)]/25 blur-[180px] animate-float" />
-      <div className="mx-auto max-w-5xl px-6 py-10">
+      <div className="pointer-events-none absolute -left-28 top-24 h-56 w-56 rounded-full bg-[var(--accent)]/25 blur-[120px] animate-float sm:h-80 sm:w-80 sm:blur-[140px]" />
+      <div className="pointer-events-none absolute right-[-120px] top-[-90px] h-[300px] w-[300px] rounded-full bg-[var(--accent-2)]/25 blur-[140px] animate-float sm:h-96 sm:w-96 sm:blur-[160px]" />
+      <div className="pointer-events-none absolute bottom-[-140px] left-1/3 h-[320px] w-[320px] rounded-full bg-[var(--accent-3)]/25 blur-[160px] animate-float sm:h-96 sm:w-96 sm:blur-[180px]" />
+      <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-10">
         <div className="flex flex-col gap-6">
           <div className="glass-panel rounded-3xl p-6 animate-rise">
             <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
@@ -241,16 +243,28 @@ export default function WalkthroughPage() {
                 disabled={!latestEstimateId || sessionStatus === 'creating'}
               >
                 <Plus className="h-4 w-4" />
-                {sessionStatus === 'creating' ? 'Starting...' : 'Start Walkthrough'}
+                {sessionStatus === 'creating'
+                  ? 'Starting...'
+                  : hasSession
+                    ? 'Session Active'
+                    : 'Start Walkthrough'}
               </button>
               {sessionId ? (
-                <span className="text-xs text-slate-400">Session: {sessionId}</span>
+                <span className="pill text-xs text-slate-300">
+                  Session {sessionId.slice(0, 8)}
+                </span>
               ) : null}
               {sessionError ? (
                 <span className="text-xs text-rose-300">{sessionError}</span>
               ) : null}
             </div>
+            <p className="mt-3 text-xs text-slate-400">
+              Starting a walkthrough opens a session linked to your latest estimate. Use it
+              to attach voice notes and photos.
+            </p>
           </div>
+
+          <WalkthroughRoomMode transcript={transcript} />
 
           <div className="grid gap-6 md:grid-cols-2 animate-rise-delayed">
             <div className="glass-panel rounded-3xl p-6">
@@ -264,7 +278,8 @@ export default function WalkthroughPage() {
               <input
                 type="file"
                 accept="audio/*"
-                className="mt-4 w-full rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-sm text-slate-100"
+                className={`mt-4 w-full rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-sm text-slate-100 ${!hasSession ? 'cursor-not-allowed opacity-60' : ''}`}
+                disabled={!hasSession}
                 onChange={event => {
                   const file = event.target.files?.[0];
                   if (file) {
@@ -293,7 +308,8 @@ export default function WalkthroughPage() {
               <input
                 type="file"
                 accept="image/*"
-                className="mt-4 w-full rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-sm text-slate-100"
+                className={`mt-4 w-full rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-sm text-slate-100 ${!hasSession ? 'cursor-not-allowed opacity-60' : ''}`}
+                disabled={!hasSession}
                 onChange={event => {
                   const file = event.target.files?.[0];
                   if (file) {

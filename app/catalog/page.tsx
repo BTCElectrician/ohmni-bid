@@ -181,10 +181,10 @@ export default function CatalogPage() {
 
   return (
     <main className="relative min-h-screen overflow-hidden">
-      <div className="pointer-events-none absolute -left-28 top-24 h-80 w-80 rounded-full bg-[var(--accent)]/25 blur-[140px] animate-float" />
-      <div className="pointer-events-none absolute right-[-140px] top-[-80px] h-[420px] w-[420px] rounded-full bg-[var(--accent-2)]/25 blur-[160px] animate-float" />
-      <div className="pointer-events-none absolute bottom-[-160px] left-1/4 h-[420px] w-[420px] rounded-full bg-[var(--accent-3)]/25 blur-[180px] animate-float" />
-      <div className="mx-auto max-w-6xl px-6 py-10">
+      <div className="pointer-events-none absolute -left-24 top-24 h-56 w-56 rounded-full bg-[var(--accent)]/25 blur-[120px] animate-float sm:h-80 sm:w-80 sm:blur-[140px]" />
+      <div className="pointer-events-none absolute right-[-120px] top-[-80px] h-[300px] w-[300px] rounded-full bg-[var(--accent-2)]/25 blur-[140px] animate-float sm:h-[420px] sm:w-[420px] sm:blur-[160px]" />
+      <div className="pointer-events-none absolute bottom-[-140px] left-1/4 h-[320px] w-[320px] rounded-full bg-[var(--accent-3)]/25 blur-[160px] animate-float sm:h-[420px] sm:w-[420px] sm:blur-[180px]" />
+      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
         <div className="flex flex-col gap-6">
           <div className="glass-panel rounded-3xl p-6 animate-rise">
             <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">

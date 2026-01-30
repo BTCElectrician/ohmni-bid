@@ -1,7 +1,7 @@
 # Status
 
 - Phase: implementation
-- Last update: 2026-01-29 9:41pm PT
+- Last update: 2026-01-30 10:05am PT
 - Review: ChatGPT 5.2 Pro response integrated; doc reviewed for completeness/correctness/trade gaps
 - Guardrails: minimal code, maximize SDKs/services, keep files under ~500 lines
 - Product notes: Stripe billing integration planned; spreadsheet UI + Excel export stay in scope
@@ -43,7 +43,12 @@
   - Wired catalog add-to-estimate queue between `/catalog` and the estimate grid.
   - Refreshed the UI system with new typography, palette, buttons, badges, and animated atmospherics.
   - Hardened Supabase schema: pricing_items RLS, profiles RLS, vector schema move, fixed match_pricing_items search_path.
+  - Added catalog add-to-estimate queue plus clearer unit labels for pricing context.
+  - Added room-mode walkthrough UI with square footage, device counts, and transcript parsing.
+  - Improved mobile layout polish (responsive atmospherics, grid sizing, input sizing).
 - Commit log (recent on main):
+  - 1c13b26 feat(ui): cinematic design pass across all screens
+  - 1f65a8f feat(catalog): clarify unit labels + queue add-to-estimate
   - 284461a docs(agent): refresh workflow notes
   - 4aed66d feat(estimate): tighten grid inputs
   - a42b683 feat(smoke): add cli smoke tests
@@ -75,6 +80,5 @@
   - da32c0c Keep Next.js tsconfig updates
   - f92a884 Implement chromium owl theme and walkthrough MVP
 - Next steps:
-  - Provide `DEV_LOGIN_EMAIL` (or set `SMOKE_TEST_EMAIL`) and rerun CLI smoke tests.
   - Set OpenAI env vars for transcription/vision models in deployment.
   - Re-run `npm audit fix` when registry access is available (current ENOTFOUND).

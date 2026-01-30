@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { Download, LogOut, Plus, Save } from 'lucide-react';
 
 interface EstimateHeaderProps {
@@ -51,6 +52,12 @@ export function EstimateHeader({
             <Plus className="h-4 w-4" />
             Add Item
           </button>
+          <Link
+            href="/walkthrough"
+            className="btn-ghost inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-100"
+          >
+            Walkthrough
+          </Link>
           <button
             onClick={onSave}
             className="btn-ghost inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-100"

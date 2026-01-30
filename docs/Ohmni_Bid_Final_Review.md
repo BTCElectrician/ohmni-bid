@@ -3,12 +3,19 @@
 ## Purpose
 Provide a concrete, code-referenced snapshot of the migrated Next.js + Supabase scaffold so ChatGPT 5.2 Pro can review architecture, logic, schema, and gaps before implementation resumes.
 
+## Current Notes (2026-01-30)
+- Estimate persistence, auth gating, and org-based RLS are implemented.
+- Catalog search is live (semantic + text) with add-to-estimate queueing.
+- Embeddings backfill script exists and has been run for catalog data.
+- UI refreshed with new typography, palette, and component styling.
+- Historical review content below is preserved as an archival snapshot and may reference prior gaps.
+
 ## Status (from STATUS.md)
 - Phase: implementation
 - Review: ChatGPT 5.2 Pro response integrated; internal review updated for completeness/correctness/trade gaps
 - Guardrails: minimal code, maximize SDKs/services, files under ~500 lines
 - Stripe billing planned; not started
-- Next: apply schema + RLS in Supabase, create storage bucket, set envs, and backfill embeddings
+- Current: schema + RLS applied, storage bucket created, envs documented, embeddings backfill scripted and run
 
 ## Migration Summary
 - Legacy code preserved under `legacy/` (no edits unless requested)
@@ -48,6 +55,7 @@ Provide a concrete, code-referenced snapshot of the migrated Next.js + Supabase 
 - `components/EstimateChat.tsx` provides a tool-calling chat view backed by `/api/ai`, with live estimate context.
 - Draft line items preserve `pricing_item_id` when a catalog suggestion exists and are stored on save.
 - `app/api/export/route.ts` recomputes totals server-side and returns `.xlsx` via ExcelJS.
+- `/catalog` supports semantic + text search and queues items into the estimate grid.
 
 ## AI Tool-Calling Boundary
 - `app/api/ai/route.ts` uses Vercel AI SDK with tools:
@@ -207,8 +215,6 @@ Why:
 ## Known Gaps / Risks to Review
 - Embedding dimension alignment:
   - Default embedding model now targets `text-embedding-3-small` (1536 dims); ensure env overrides do not break this.
-- Storage bucket and RLS policies must be applied in Supabase to match the new schema.
-- No embedding generation/refresh pipeline for `pricing_items`.
 - Stripe billing not implemented.
 - Inngest workflows not implemented.
 
