@@ -177,7 +177,7 @@ export default function WalkthroughPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen">
+      <main className="min-h-safe safe-area">
         <div className="mx-auto max-w-md px-6 py-16">
           <div className="glass-panel rounded-3xl p-10">
             <h1 className="text-xl font-semibold text-slate-100">Loading workspace</h1>
@@ -190,7 +190,7 @@ export default function WalkthroughPage() {
 
   if (!user) {
     return (
-      <main className="min-h-screen">
+      <main className="min-h-safe safe-area">
         <div className="mx-auto max-w-md px-6 py-16">
           <AuthCard
             email={authEmail}
@@ -205,7 +205,7 @@ export default function WalkthroughPage() {
   }
 
   return (
-    <main className="relative min-h-screen overflow-hidden">
+    <main className="relative min-h-safe overflow-hidden">
       <div className="pointer-events-none absolute -left-28 top-24 h-56 w-56 rounded-full bg-[var(--accent)]/25 blur-[120px] animate-float sm:h-80 sm:w-80 sm:blur-[140px]" />
       <div className="pointer-events-none absolute right-[-120px] top-[-90px] h-[300px] w-[300px] rounded-full bg-[var(--accent-2)]/25 blur-[140px] animate-float sm:h-96 sm:w-96 sm:blur-[160px]" />
       <div className="pointer-events-none absolute bottom-[-140px] left-1/3 h-[320px] w-[320px] rounded-full bg-[var(--accent-3)]/25 blur-[160px] animate-float sm:h-96 sm:w-96 sm:blur-[180px]" />
@@ -297,6 +297,7 @@ export default function WalkthroughPage() {
               <input
                 type="file"
                 accept="audio/*"
+                capture="microphone"
                 className={`mt-4 w-full rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-sm text-slate-100 ${!hasSession ? 'cursor-not-allowed opacity-60' : ''}`}
                 disabled={!hasSession}
                 onChange={event => {
@@ -327,6 +328,7 @@ export default function WalkthroughPage() {
               <input
                 type="file"
                 accept="image/*"
+                capture="environment"
                 className={`mt-4 w-full rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-sm text-slate-100 ${!hasSession ? 'cursor-not-allowed opacity-60' : ''}`}
                 disabled={!hasSession}
                 onChange={event => {

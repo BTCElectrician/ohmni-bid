@@ -21,6 +21,12 @@ export const metadata: Metadata = {
   description: 'Agentic electrical estimating system'
 };
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover'
+};
+
 export default function RootLayout({
   children
 }: {

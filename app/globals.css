@@ -46,11 +46,26 @@ body > * {
   z-index: 1;
 }
 
+.min-h-safe {
+  min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
+}
+
+.safe-area {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
 @media (max-width: 768px) {
   input,
   textarea,
   select {
     font-size: 16px;
+  }
+
+  .btn-primary,
+  .btn-ghost {
+    min-height: 44px;
   }
 }
 
