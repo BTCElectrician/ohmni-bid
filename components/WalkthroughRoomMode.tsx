@@ -47,6 +47,11 @@ const createRoom = (index: number): RoomDraft => ({
 interface WalkthroughRoomModeProps {
   transcript: string;
   estimateParameters: EstimateParameters;
+  initialRooms?: Array<{
+    name: string;
+    counts: RoomDraftCounts;
+    notes?: string;
+  }>;
 }
 
 type CatalogItem = {
@@ -83,7 +88,8 @@ const DEVICE_MAP: Record<
 
 export function WalkthroughRoomMode({
   transcript,
-  estimateParameters
+  estimateParameters,
+  initialRooms
 }: WalkthroughRoomModeProps) {
   const [rooms, setRooms] = useState<RoomDraft[]>(() => [createRoom(1)]);
   const [activeRoomId, setActiveRoomId] = useState<string>('');
@@ -99,6 +105,18 @@ export function WalkthroughRoomMode({
       setActiveRoomId(rooms[0].id);
     }
   }, [activeRoomId, rooms]);
+
+  useEffect(() => {
+    if (!initialRooms || initialRooms.length === 0) return;
+    setRooms(
+      initialRooms.map((room, index) => ({
+        id: `room-${index + 1}-${Date.now()}`,
+        name: room.name,
+        notes: room.notes || '',
+        counts: { ...room.counts }
+      }))
+    );
+  }, [initialRooms]);
 
   const activeRoom = useMemo(
     () => rooms.find(room => room.id === activeRoomId) || rooms[0],

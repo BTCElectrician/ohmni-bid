@@ -26,6 +26,12 @@ export default function HomePage() {
               Open Estimate
             </Link>
             <Link
+              href="/starter"
+              className="btn-ghost px-5 py-3 text-sm font-semibold text-slate-100"
+            >
+              Starter Kit
+            </Link>
+            <Link
               href="/walkthrough"
               className="btn-ghost px-5 py-3 text-sm font-semibold text-slate-100"
             >

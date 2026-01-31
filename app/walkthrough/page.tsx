@@ -9,6 +9,8 @@ import { WalkthroughRoomMode } from '@/components/WalkthroughRoomMode';
 import { DEFAULT_PARAMETERS } from '@/lib/estimate/defaults';
 import type { EstimateParameters } from '@/lib/estimate/types';
 import { useWorkspaceAuth } from '@/lib/hooks/useWorkspace';
+import { consumeWalkthroughTemplate } from '@/lib/walkthrough/templateQueue';
+import type { RoomDraftCounts } from '@/lib/walkthrough/types';
 
 export default function WalkthroughPage() {
   const {
@@ -32,6 +34,9 @@ export default function WalkthroughPage() {
   const [estimateParameters, setEstimateParameters] = useState<EstimateParameters>({
     ...DEFAULT_PARAMETERS
   });
+  const [starterRooms, setStarterRooms] = useState<
+    Array<{ name: string; counts: RoomDraftCounts; notes?: string }>
+  >([]);
 
   const [transcript, setTranscript] = useState('');
   const [photoResult, setPhotoResult] = useState('');
@@ -77,6 +82,13 @@ export default function WalkthroughPage() {
       active = false;
     };
   }, [user, orgId, supabase]);
+
+  useEffect(() => {
+    const template = consumeWalkthroughTemplate();
+    if (template?.rooms?.length) {
+      setStarterRooms(template.rooms);
+    }
+  }, []);
 
   const handleEmailSignIn = async () => {
     if (!authEmail) return;
@@ -283,6 +295,7 @@ export default function WalkthroughPage() {
           <WalkthroughRoomMode
             transcript={transcript}
             estimateParameters={estimateParameters}
+            initialRooms={starterRooms}
           />
 
           <div className="grid gap-6 md:grid-cols-2 animate-rise-delayed">
