@@ -11,6 +11,7 @@ import type { EstimateParameters } from '@/lib/estimate/types';
 import { useWorkspaceAuth } from '@/lib/hooks/useWorkspace';
 import { consumeWalkthroughTemplate } from '@/lib/walkthrough/templateQueue';
 import type { RoomDraftCounts } from '@/lib/walkthrough/types';
+import { CodeReferences } from '@/components/CodeReferences';
 
 export default function WalkthroughPage() {
   const {
@@ -360,6 +361,10 @@ export default function WalkthroughPage() {
                 </pre>
               ) : null}
             </div>
+          </div>
+
+          <div className="mt-6">
+            <CodeReferences heading="Code references for walkthrough notes." />
           </div>
 
           {uploadError ? (

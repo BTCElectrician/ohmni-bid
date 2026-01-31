@@ -33,6 +33,11 @@ exporting it in a shell.
 - `EMBEDDINGS_BATCH_SIZE` (default: 40)
 - `EMBEDDINGS_DRY_RUN` (set `1` to skip updates)
 
+## Azure Code Search
+
+- `AZURE_CODE_SEARCH_URL` (Azure Function URL for `nfpa70_ssj`)
+- `AZURE_CODE_SEARCH_KEY` (Function key for Azure Function auth)
+
 ## Walkthrough Storage
 
 - `WALKTHROUGH_BUCKET` (default: walkthrough)

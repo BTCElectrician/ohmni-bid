@@ -14,6 +14,7 @@ import {
   buildCommercialTemplate,
   buildResidentialTemplate
 } from '@/lib/walkthrough/templates';
+import { CodeReferences } from '@/components/CodeReferences';
 import { normalizeUnitType } from '@/lib/estimate/unit';
 import { parseJobDescription } from '@/lib/walkthrough/descriptionParser';
 
@@ -247,6 +248,13 @@ export function WalkthroughStarter() {
         >
           Auto-fill from description
         </button>
+      </div>
+
+      <div className="mt-6">
+        <CodeReferences
+          defaultQuery={description}
+          heading="Pull code references for this job scope."
+        />
       </div>
 
       {jobType === 'residential' ? (

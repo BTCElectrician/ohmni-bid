@@ -49,6 +49,7 @@
   - Added mobile safe-viewport handling, touch target sizing, and capture hints for iOS.
   - Added Starter Kit wizard to generate job templates and prefill walkthrough rooms.
   - Added description-driven auto-fill to create starter kits from a single sentence.
+  - Added Azure Code Search integration with code reference panels.
   - Improved mobile layout polish (responsive atmospherics, grid sizing, input sizing).
 - Commit log (recent on main):
   - 1c13b26 feat(ui): cinematic design pass across all screens
