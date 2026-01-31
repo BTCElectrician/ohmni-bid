@@ -233,8 +233,10 @@ export function WalkthroughRoomMode({
       const match = (payload?.items || [])[0];
       if (match) {
         setPricingCache(current => ({ ...current, [key]: match }));
+        setPricingStatus(null);
+      } else {
+        setPricingStatus(`No pricing match for ${DEVICE_MAP[key].label}.`);
       }
-      setPricingStatus(null);
     } catch (error) {
       setPricingStatus(
         error instanceof Error ? error.message : 'Pricing lookup failed'
