@@ -6,6 +6,8 @@ import { Camera, LogOut, Mic, Plus } from 'lucide-react';
 
 import { AuthCard } from '@/components/AuthCard';
 import { WalkthroughRoomMode } from '@/components/WalkthroughRoomMode';
+import { DEFAULT_PARAMETERS } from '@/lib/estimate/defaults';
+import type { EstimateParameters } from '@/lib/estimate/types';
 import { useWorkspaceAuth } from '@/lib/hooks/useWorkspace';
 
 export default function WalkthroughPage() {
@@ -27,6 +29,9 @@ export default function WalkthroughPage() {
     'idle'
   );
   const [sessionError, setSessionError] = useState<string | null>(null);
+  const [estimateParameters, setEstimateParameters] = useState<EstimateParameters>({
+    ...DEFAULT_PARAMETERS
+  });
 
   const [transcript, setTranscript] = useState('');
   const [photoResult, setPhotoResult] = useState('');
@@ -41,7 +46,7 @@ export default function WalkthroughPage() {
     const loadEstimate = async () => {
       const { data, error } = await supabase
         .from('estimates')
-        .select('id')
+        .select('id, labor_rate, material_tax_rate, overhead_profit_rate')
         .eq('org_id', orgId)
         .order('updated_at', { ascending: false })
         .limit(1)
@@ -53,6 +58,17 @@ export default function WalkthroughPage() {
         return;
       }
       setLatestEstimateId(data?.id || null);
+      if (data) {
+        setEstimateParameters({
+          laborRate: Number(data.labor_rate || DEFAULT_PARAMETERS.laborRate),
+          materialTaxRate: Number(
+            data.material_tax_rate || DEFAULT_PARAMETERS.materialTaxRate
+          ),
+          overheadProfitRate: Number(
+            data.overhead_profit_rate || DEFAULT_PARAMETERS.overheadProfitRate
+          )
+        });
+      }
     };
 
     loadEstimate();
@@ -264,7 +280,10 @@ export default function WalkthroughPage() {
             </p>
           </div>
 
-          <WalkthroughRoomMode transcript={transcript} />
+          <WalkthroughRoomMode
+            transcript={transcript}
+            estimateParameters={estimateParameters}
+          />
 
           <div className="grid gap-6 md:grid-cols-2 animate-rise-delayed">
             <div className="glass-panel rounded-3xl p-6">

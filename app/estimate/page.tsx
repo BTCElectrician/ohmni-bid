@@ -17,6 +17,7 @@ import {
 import { consumeCatalogQueue } from '@/lib/estimate/catalogQueue';
 import { DEFAULT_PARAMETERS } from '@/lib/estimate/defaults';
 import { normalizeLineItems } from '@/lib/estimate/normalize';
+import { consumeRoomQueue } from '@/lib/estimate/roomQueue';
 import { EMPTY_LINE_ITEM_TEMPLATE, EMPTY_PROJECT } from '@/lib/estimate/templates';
 import type { EstimateParameters, LineItem, ProjectInfo } from '@/lib/estimate/types';
 import { generateId } from '@/lib/estimate/utils';
@@ -80,6 +81,29 @@ export default function EstimatePage() {
             pricingItemId: item.pricingItemId ?? item.id ?? null
           },
           item.quantity ?? 1,
+          parameters,
+          generateId()
+        )
+      );
+      setLineItems(items => [...items, ...newItems]);
+    },
+    [parameters]
+  );
+
+  const applyQueuedRoomItems = useCallback(
+    (queuedItems: ReturnType<typeof consumeRoomQueue>) => {
+      if (queuedItems.length === 0) return;
+      const newItems = queuedItems.map(item =>
+        createLineItem(
+          {
+            category: item.category,
+            name: item.name,
+            materialUnitCost: item.materialUnitCost,
+            unitType: item.unitType,
+            laborHoursPerUnit: item.laborHoursPerUnit,
+            pricingItemId: item.pricingItemId ?? null
+          },
+          item.quantity || 1,
           parameters,
           generateId()
         )
@@ -205,6 +229,8 @@ export default function EstimatePage() {
     if (!hasLoaded) return;
     const queuedItems = consumeCatalogQueue();
     applyQueuedCatalogItems(queuedItems);
+    const queuedRoomItems = consumeRoomQueue();
+    applyQueuedRoomItems(queuedRoomItems);
   }, [hasLoaded, applyQueuedCatalogItems]);
 
   useEffect(() => {
@@ -212,6 +238,8 @@ export default function EstimatePage() {
     const handleQueueCheck = () => {
       const queuedItems = consumeCatalogQueue();
       applyQueuedCatalogItems(queuedItems);
+      const queuedRoomItems = consumeRoomQueue();
+      applyQueuedRoomItems(queuedRoomItems);
     };
     window.addEventListener('focus', handleQueueCheck);
     window.addEventListener('storage', handleQueueCheck);
@@ -219,7 +247,7 @@ export default function EstimatePage() {
       window.removeEventListener('focus', handleQueueCheck);
       window.removeEventListener('storage', handleQueueCheck);
     };
-  }, [hasLoaded, applyQueuedCatalogItems]);
+  }, [hasLoaded, applyQueuedCatalogItems, applyQueuedRoomItems]);
 
   const addRow = () => {
     const lineItem = createLineItem(

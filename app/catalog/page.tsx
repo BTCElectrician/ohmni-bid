@@ -7,7 +7,8 @@ import { LogOut, Search } from 'lucide-react';
 import { AuthCard } from '@/components/AuthCard';
 import { queueCatalogItem } from '@/lib/estimate/catalogQueue';
 import { CATEGORY_ORDER } from '@/lib/estimate/defaults';
-import type { EstimateCategory, UnitType } from '@/lib/estimate/types';
+import type { EstimateCategory } from '@/lib/estimate/types';
+import { normalizeUnitType } from '@/lib/estimate/unit';
 import { formatCurrency, formatHours } from '@/lib/estimate/utils';
 import { useWorkspaceAuth } from '@/lib/hooks/useWorkspace';
 
@@ -33,29 +34,6 @@ const formatCategoryLabel = (value: string) =>
     .split('_')
     .map(part => part.charAt(0).toUpperCase() + part.slice(1))
     .join(' ');
-
-const normalizeUnitType = (value?: string | null): UnitType => {
-  if (!value) return 'E';
-  const normalized = value.trim().toLowerCase();
-  switch (normalized) {
-    case 'e':
-    case 'ea':
-    case 'each':
-      return 'E';
-    case 'c':
-    case 'per 100':
-    case 'hundred':
-      return 'C';
-    case 'm':
-    case 'per 1000':
-    case 'thousand':
-      return 'M';
-    case 'lot':
-      return 'Lot';
-    default:
-      return 'E';
-  }
-};
 
 const formatUnitLabel = (value?: string | null) => {
   if (!value) return 'Unit --';
