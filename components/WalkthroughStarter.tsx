@@ -15,6 +15,7 @@ import {
   buildResidentialTemplate
 } from '@/lib/walkthrough/templates';
 import { normalizeUnitType } from '@/lib/estimate/unit';
+import { parseJobDescription } from '@/lib/walkthrough/descriptionParser';
 
 const DEVICE_TO_QUERY: Record<
   keyof import('@/lib/walkthrough/types').RoomDraftCounts,
@@ -46,6 +47,7 @@ export function WalkthroughStarter() {
   const [openAreas, setOpenAreas] = useState(1);
   const [serviceSize, setServiceSize] = useState('200A service');
   const [status, setStatus] = useState<string | null>(null);
+  const [description, setDescription] = useState('');
   const [estimateParameters] = useState<EstimateParameters>({
     ...DEFAULT_PARAMETERS
   });
@@ -160,6 +162,27 @@ export function WalkthroughStarter() {
     }
   };
 
+  const handleAutoFill = () => {
+    if (!description.trim()) return;
+    const parsed = parseJobDescription(description);
+    if (parsed.jobType) setJobType(parsed.jobType);
+    if (typeof parsed.floors === 'number') setFloors(Math.max(1, parsed.floors));
+    if (typeof parsed.includeBasement === 'boolean') {
+      setIncludeBasement(parsed.includeBasement);
+    }
+    if (typeof parsed.bedrooms === 'number') setBedrooms(Math.max(0, parsed.bedrooms));
+    if (typeof parsed.bathrooms === 'number') setBathrooms(Math.max(0, parsed.bathrooms));
+    if (typeof parsed.living === 'number') setLiving(Math.max(0, parsed.living));
+    if (typeof parsed.dining === 'number') setDining(Math.max(0, parsed.dining));
+    if (typeof parsed.kitchen === 'boolean') setKitchen(parsed.kitchen);
+    if (typeof parsed.storefronts === 'number') setStorefronts(Math.max(0, parsed.storefronts));
+    if (typeof parsed.offices === 'number') setOffices(Math.max(0, parsed.offices));
+    if (typeof parsed.restrooms === 'number') setRestrooms(Math.max(0, parsed.restrooms));
+    if (typeof parsed.openAreas === 'number') setOpenAreas(Math.max(0, parsed.openAreas));
+    if (parsed.serviceSize) setServiceSize(parsed.serviceSize);
+    setStatus('Filled from description. Review and build.');
+  };
+
   return (
     <section className="glass-panel rounded-3xl p-6 animate-rise">
       <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
@@ -204,6 +227,25 @@ export function WalkthroughStarter() {
               </div>
             </div>
           </div>
+        </button>
+      </div>
+
+      <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-4">
+        <label className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+          Describe the job (fast fill)
+        </label>
+        <textarea
+          value={description}
+          onChange={event => setDescription(event.target.value)}
+          placeholder="Example: 3 floors, basement, 200A service, 4 bed, 3 bath, kitchen, 2 living rooms."
+          rows={3}
+          className="mt-2 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-500"
+        />
+        <button
+          onClick={handleAutoFill}
+          className="btn-ghost mt-3 px-4 py-2 text-sm font-semibold text-slate-100"
+        >
+          Auto-fill from description
         </button>
       </div>
 
