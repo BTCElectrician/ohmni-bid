@@ -12,8 +12,24 @@ create table if not exists organizations (
   id uuid primary key default gen_random_uuid(),
   name text not null,
   created_by uuid references auth.users(id) on delete set null,
+  stripe_customer_id text,
+  stripe_subscription_id text,
+  subscription_status text,
+  price_id text,
+  current_period_end timestamptz,
+  trial_end timestamptz,
+  billing_email text,
   created_at timestamptz default now()
 );
+
+alter table organizations
+  add column if not exists stripe_customer_id text,
+  add column if not exists stripe_subscription_id text,
+  add column if not exists subscription_status text,
+  add column if not exists price_id text,
+  add column if not exists current_period_end timestamptz,
+  add column if not exists trial_end timestamptz,
+  add column if not exists billing_email text;
 
 create table if not exists org_members (
   org_id uuid references organizations(id) on delete cascade,

@@ -38,6 +38,15 @@ exporting it in a shell.
 - `AZURE_CODE_SEARCH_URL` (Azure Function URL for `nfpa70_ssj`)
 - `AZURE_CODE_SEARCH_KEY` (Function key for Azure Function auth)
 
+## Stripe Billing
+
+- `STRIPE_SECRET_KEY`
+- `STRIPE_WEBHOOK_SECRET`
+- `STRIPE_PRICE_ID`
+- `STRIPE_TRIAL_DAYS` (default: 14)
+- `STRIPE_SUCCESS_URL` (optional override)
+- `STRIPE_CANCEL_URL` (optional override)
+
 ## Walkthrough Storage
 
 - `WALKTHROUGH_BUCKET` (default: walkthrough)

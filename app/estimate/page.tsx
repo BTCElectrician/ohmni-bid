@@ -48,6 +48,8 @@ export default function EstimatePage() {
   const [loadError, setLoadError] = useState<string | null>(null);
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
   const [saveError, setSaveError] = useState<string | null>(null);
+  const [billingStatus, setBillingStatus] = useState<string | null>(null);
+  const [billingLoading, setBillingLoading] = useState(false);
 
   useEffect(() => {
     setLineItems(items =>
@@ -224,6 +226,33 @@ export default function EstimatePage() {
       active = false;
     };
   }, [user, orgId, hasLoaded, supabase]);
+
+  useEffect(() => {
+    if (!user || !orgId) return;
+    let active = true;
+    setBillingLoading(true);
+    supabase
+      .from('organizations')
+      .select('subscription_status')
+      .eq('id', orgId)
+      .maybeSingle()
+      .then(({ data, error }) => {
+        if (!active) return;
+        if (error) {
+          setBillingStatus(null);
+          return;
+        }
+        setBillingStatus(data?.subscription_status || null);
+      })
+      .finally(() => {
+        if (!active) return;
+        setBillingLoading(false);
+      });
+
+    return () => {
+      active = false;
+    };
+  }, [user, orgId, supabase]);
 
   useEffect(() => {
     if (!hasLoaded) return;
@@ -424,6 +453,18 @@ export default function EstimatePage() {
     window.URL.revokeObjectURL(url);
   };
 
+  const handleStartTrial = async () => {
+    const response = await fetch('/api/stripe/checkout', { method: 'POST' });
+    const payload = await response.json();
+    if (!response.ok) {
+      setSaveError(payload?.error || 'Billing setup failed.');
+      return;
+    }
+    if (payload?.url) {
+      window.location.href = payload.url;
+    }
+  };
+
   const handleEmailSignIn = async () => {
     if (!authEmail) return;
     const ok = await signInWithEmail(authEmail);
@@ -481,11 +522,16 @@ export default function EstimatePage() {
               onSave={handleSave}
               onExport={handleExport}
               onSignOut={signOut}
+              onStartTrial={handleStartTrial}
+              billingStatus={billingStatus}
               saveStatus={saveStatus}
               saveError={saveError}
               loadError={loadError}
               estimateLoading={estimateLoading}
             />
+            {billingLoading ? (
+              <p className="mt-3 text-xs text-slate-400">Checking billing...</p>
+            ) : null}
 
             <div className="mt-4 grid gap-4 md:grid-cols-3">
               <div>

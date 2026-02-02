@@ -50,6 +50,7 @@
   - Added Starter Kit wizard to generate job templates and prefill walkthrough rooms.
   - Added description-driven auto-fill to create starter kits from a single sentence.
   - Added Azure Code Search integration with code reference panels.
+  - Added Stripe Checkout subscription flow with billing status stored on orgs.
   - Improved mobile layout polish (responsive atmospherics, grid sizing, input sizing).
 - Commit log (recent on main):
   - 7837450 feat(code-search): wire Azure NFPA references into UI

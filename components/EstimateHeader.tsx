@@ -11,6 +11,8 @@ interface EstimateHeaderProps {
   onSave: () => void;
   onExport: () => void;
   onSignOut: () => void;
+  onStartTrial?: () => void;
+  billingStatus?: string | null;
   saveStatus: 'idle' | 'saving' | 'saved' | 'error';
   saveError?: string | null;
   loadError?: string | null;
@@ -25,11 +27,16 @@ export function EstimateHeader({
   onSave,
   onExport,
   onSignOut,
+  onStartTrial,
+  billingStatus,
   saveStatus,
   saveError,
   loadError,
   estimateLoading
 }: EstimateHeaderProps) {
+  const isActive =
+    billingStatus === 'active' ||
+    billingStatus === 'trialing';
   return (
     <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
       <div className="flex-1">
@@ -52,6 +59,17 @@ export function EstimateHeader({
             <Plus className="h-4 w-4" />
             Add Item
           </button>
+          {!isActive && onStartTrial ? (
+            <button
+              onClick={onStartTrial}
+              className="btn-primary inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-900"
+            >
+              Start trial
+            </button>
+          ) : null}
+          {isActive ? (
+            <span className="pill text-xs text-slate-300">Plan active</span>
+          ) : null}
           <Link
             href="/walkthrough"
             className="btn-ghost inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-100"
