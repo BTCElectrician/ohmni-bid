@@ -1,7 +1,7 @@
 # Status
 
 - Phase: implementation
-- Last update: 2026-01-30 10:05am PT
+- Last update: 2026-02-02 12:15pm CST
 - Review: ChatGPT 5.2 Pro response integrated; doc reviewed for completeness/correctness/trade gaps
 - Guardrails: minimal code, maximize SDKs/services, keep files under ~500 lines
 - Product notes: Stripe billing integration planned; spreadsheet UI + Excel export stay in scope
@@ -52,6 +52,14 @@
   - Added Azure Code Search integration with code reference panels.
   - Improved mobile layout polish (responsive atmospherics, grid sizing, input sizing).
 - Commit log (recent on main):
+  - 7837450 feat(code-search): wire Azure NFPA references into UI
+  - 576a628 feat(starter): description-driven auto-fill
+  - d8a7780 feat(starter): auto-queue template into estimate
+  - 224b4fe feat(starter): starter kit wizard for rapid job kickoff
+  - 3c3df75 fix(mobile): safe viewport + capture hints
+  - 484bb48 fix(walkthrough): handle missing room pricing
+  - fc84fad feat(walkthrough): live room-to-estimate bridge
+  - 575af85 feat(walkthrough): add room-mode capture + transcript parsing
   - 1c13b26 feat(ui): cinematic design pass across all screens
   - 1f65a8f feat(catalog): clarify unit labels + queue add-to-estimate
   - 284461a docs(agent): refresh workflow notes

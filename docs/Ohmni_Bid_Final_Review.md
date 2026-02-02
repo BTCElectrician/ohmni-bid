@@ -227,6 +227,7 @@ Why:
 - Evaluate Gemini Pro trade-specific enhancements for feasibility and sequencing.
 
 ## ChatGPT 5.2 Pro Response (Pasted, 2026-01-14)
+**Historical note:** The response below reflects the 2026-01-14 snapshot. Items called out as "missing" (estimate persistence, auth/RLS, embeddings backfill) are now implemented in the current stack.
 According to a document from **January 14, 2026**, you're *already* much closer than you think: you have a clean Next.js + Supabase scaffold, a pure TypeScript estimator engine, an AI tool-calling boundary, and an XLSX export route. That's the correct "minimum-code" foundation for the voice/photo/chat estimator you're describing.
 
 ## My take on your idea
