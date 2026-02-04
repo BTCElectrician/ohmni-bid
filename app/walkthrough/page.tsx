@@ -311,7 +311,7 @@ export default function WalkthroughPage() {
               <input
                 type="file"
                 accept="audio/*"
-                capture="microphone"
+                capture="user"
                 className={`mt-4 w-full rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-sm text-slate-100 ${!hasSession ? 'cursor-not-allowed opacity-60' : ''}`}
                 disabled={!hasSession}
                 onChange={event => {
