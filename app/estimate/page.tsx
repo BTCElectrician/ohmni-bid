@@ -231,23 +231,25 @@ export default function EstimatePage() {
     if (!user || !orgId) return;
     let active = true;
     setBillingLoading(true);
-    supabase
-      .from('organizations')
-      .select('subscription_status')
-      .eq('id', orgId)
-      .maybeSingle()
-      .then(({ data, error }) => {
+    const loadBilling = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('organizations')
+          .select('subscription_status')
+          .eq('id', orgId)
+          .maybeSingle();
         if (!active) return;
         if (error) {
           setBillingStatus(null);
           return;
         }
         setBillingStatus(data?.subscription_status || null);
-      })
-      .finally(() => {
+      } finally {
         if (!active) return;
         setBillingLoading(false);
-      });
+      }
+    };
+    void loadBilling();
 
     return () => {
       active = false;
@@ -260,7 +262,7 @@ export default function EstimatePage() {
     applyQueuedCatalogItems(queuedItems);
     const queuedRoomItems = consumeRoomQueue();
     applyQueuedRoomItems(queuedRoomItems);
-  }, [hasLoaded, applyQueuedCatalogItems]);
+  }, [hasLoaded, applyQueuedCatalogItems, applyQueuedRoomItems]);
 
   useEffect(() => {
     if (!hasLoaded) return;

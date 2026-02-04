@@ -8,7 +8,7 @@ const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET || '';
 
 const updateOrgFromSubscription = async (
   supabase: ReturnType<typeof getSupabaseAdmin>,
-  subscription: Stripe.Subscription
+  subscription: Stripe.Subscription & { current_period_end?: number | null }
 ) => {
   const orgId = subscription.metadata?.org_id;
   const stripeCustomerId =
@@ -22,9 +22,10 @@ const updateOrgFromSubscription = async (
     stripe_subscription_id: subscription.id,
     subscription_status: subscription.status,
     price_id: priceId,
-    current_period_end: subscription.current_period_end
-      ? new Date(subscription.current_period_end * 1000).toISOString()
-      : null,
+    current_period_end:
+      typeof subscription.current_period_end === 'number'
+        ? new Date(subscription.current_period_end * 1000).toISOString()
+        : null,
     trial_end: subscription.trial_end
       ? new Date(subscription.trial_end * 1000).toISOString()
       : null

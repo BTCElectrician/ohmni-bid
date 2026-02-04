@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ClipboardCopy, Plus } from 'lucide-react';
 
 import { createLineItem } from '@/lib/estimate/calc';
@@ -232,35 +232,38 @@ export function WalkthroughRoomMode({
     });
   }, [activeRoom, pricingCache]);
 
-  const loadPricing = async (key: keyof RoomDraftCounts) => {
-    if (pricingCache[key]) return;
-    setPricingStatus('Loading pricing...');
-    try {
-      const response = await fetch('/api/catalog-search', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          query: DEVICE_MAP[key].query,
-          category: DEVICE_MAP[key].category
-        })
-      });
-      const payload = await response.json();
-      if (!response.ok) {
-        throw new Error(payload?.error || 'Pricing lookup failed');
+  const loadPricing = useCallback(
+    async (key: keyof RoomDraftCounts) => {
+      if (pricingCache[key]) return;
+      setPricingStatus('Loading pricing...');
+      try {
+        const response = await fetch('/api/catalog-search', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            query: DEVICE_MAP[key].query,
+            category: DEVICE_MAP[key].category
+          })
+        });
+        const payload = await response.json();
+        if (!response.ok) {
+          throw new Error(payload?.error || 'Pricing lookup failed');
+        }
+        const match = (payload?.items || [])[0];
+        if (match) {
+          setPricingCache(current => ({ ...current, [key]: match }));
+          setPricingStatus(null);
+        } else {
+          setPricingStatus(`No pricing match for ${DEVICE_MAP[key].label}.`);
+        }
+      } catch (error) {
+        setPricingStatus(
+          error instanceof Error ? error.message : 'Pricing lookup failed'
+        );
       }
-      const match = (payload?.items || [])[0];
-      if (match) {
-        setPricingCache(current => ({ ...current, [key]: match }));
-        setPricingStatus(null);
-      } else {
-        setPricingStatus(`No pricing match for ${DEVICE_MAP[key].label}.`);
-      }
-    } catch (error) {
-      setPricingStatus(
-        error instanceof Error ? error.message : 'Pricing lookup failed'
-      );
-    }
-  };
+    },
+    [pricingCache]
+  );
 
   useEffect(() => {
     if (!activeRoom) return;
@@ -269,7 +272,7 @@ export function WalkthroughRoomMode({
         void loadPricing(key);
       }
     });
-  }, [activeRoom, pricingCache]);
+  }, [activeRoom, pricingCache, loadPricing]);
 
   const buildRoomSummary = (room: RoomDraft) => {
     const parts = [
