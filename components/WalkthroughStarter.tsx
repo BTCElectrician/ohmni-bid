@@ -115,7 +115,7 @@ export function WalkthroughStarter() {
 
       const queuedItems = template.rooms.flatMap(room =>
         deviceKeys
-          .map(key => {
+          .map<RoomQueuedItem | null>(key => {
             const quantity = room.counts[key] || 0;
             if (!quantity) return null;
             const match = pricingMap.get(key);
