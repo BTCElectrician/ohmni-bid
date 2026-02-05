@@ -1,10 +1,11 @@
 # Status
 
 - Phase: implementation
-- Last update: 2026-02-02 12:15pm CST
+- Last update: 2026-02-05 (evening)
 - Review: ChatGPT 5.2 Pro response integrated; doc reviewed for completeness/correctness/trade gaps
 - Guardrails: minimal code, maximize SDKs/services, keep files under ~500 lines
 - Product notes: Stripe billing integration planned; spreadsheet UI + Excel export stay in scope
+- Deployment: Vercel production live at `https://ohmni-bid.vercel.app` (CLI deploy + env sync complete)
 - Review packet: `docs/Ohmni_Bid_Final_Review.md` updated with external response + agent review notes
 - Build progress:
   - Standardized embeddings default to `text-embedding-3-small`.
@@ -52,7 +53,14 @@
   - Added Azure Code Search integration with code reference panels.
   - Added Stripe Checkout subscription flow with billing status stored on orgs.
   - Improved mobile layout polish (responsive atmospherics, grid sizing, input sizing).
+  - Fixed build blockers (hooks deps, Stripe webhook typing, capture attribute typing).
+  - Resolved starter kit queue typing and walkthrough capture typing.
+  - Synced `.env` to Vercel (production + preview) as sensitive env vars.
 - Commit log (recent on main):
+  - 8f59441 fix: tighten starter queue typing
+  - 9145a6f fix: correct audio capture attribute
+  - a236e96 chore: trigger vercel rebuild
+  - 59aee8b fix: resolve build blockers
   - 7837450 feat(code-search): wire Azure NFPA references into UI
   - 576a628 feat(starter): description-driven auto-fill
   - d8a7780 feat(starter): auto-queue template into estimate
@@ -94,5 +102,7 @@
   - da32c0c Keep Next.js tsconfig updates
   - f92a884 Implement chromium owl theme and walkthrough MVP
 - Next steps:
-  - Set OpenAI env vars for transcription/vision models in deployment.
+  - Supabase: enable Email auth SMTP + set Site URL/Redirect URL to `https://ohmni-bid.vercel.app` and `/estimate`.
+  - Stripe: create product/price + webhook; set `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_PRICE_ID` in Vercel.
+  - Rotate Vercel API token used during deploy (was pasted in chat).
   - Re-run `npm audit fix` when registry access is available (current ENOTFOUND).
